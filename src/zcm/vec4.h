@@ -27,6 +27,9 @@ namespace zcm
             w(_w)
         {}
 
+        float& operator[](const uint8_t val);
+        const float& operator[](const uint8_t val) const;
+
         float x;
         float y;
         float z;

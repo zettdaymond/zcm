@@ -1,5 +1,6 @@
 #include "vec2.h"
 
+#include <assert.h>
 
 zcm::vec2 zcm::operator +(const zcm::vec2& first, const zcm::vec2& second)
 {
@@ -46,4 +47,28 @@ zcm::vec2 zcm::operator /(const float scalar, const zcm::vec2& vec)
 {
     return vec2{ scalar / vec.x,
                  scalar / vec.y };
+}
+
+float&zcm::vec2::operator[](const uint8_t val)
+{
+    assert(val < 3);
+
+    if (val == 0) {
+        return x;
+    }
+    else {
+        return y;
+    }
+}
+
+const float&zcm::vec2::operator[](const uint8_t val) const
+{
+    assert(val < 3);
+
+    if (val == 0) {
+        return x;
+    }
+    else {
+        return y;
+    }
 }

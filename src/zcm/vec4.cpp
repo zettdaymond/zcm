@@ -1,4 +1,5 @@
 #include "vec4.h"
+#include <cassert>
 
 
 zcm::vec4 zcm::operator +(const zcm::vec4& first, const zcm::vec4& second)
@@ -60,4 +61,38 @@ zcm::vec4 zcm::operator /(const float scalar, const zcm::vec4& vec)
              scalar / vec.y,
              scalar / vec.z,
              scalar / vec.w };
+}
+
+float&zcm::vec4::operator[](const uint8_t val)
+{
+    assert(val < 4);
+    if (val == 0) {
+        return x;
+    }
+    else if (val == 1) {
+        return y;
+    }
+    else if (val == 2) {
+        return z;
+    }
+    else {
+        return w;
+    }
+}
+
+const float&zcm::vec4::operator[](const uint8_t val) const
+{
+    assert(val < 4);
+    if (val == 0) {
+        return x;
+    }
+    else if (val == 1) {
+        return y;
+    }
+    else if (val == 2) {
+        return z;
+    }
+    else {
+        return w;
+    }
 }
