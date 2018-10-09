@@ -119,10 +119,17 @@ TEST(vec4, vector_per_component_multiplication)
 
 TEST(vec4, vector_access)
 {
-    ASSERT_FLOAT_EQ(first[0],   2.0);
-    ASSERT_FLOAT_EQ(first[1],   4.33);
-    ASSERT_FLOAT_EQ(first[2],  -5.56);
-    ASSERT_FLOAT_EQ(first[3],  6.121);
+    auto result = first;
+
+    result[0] = 1.0f;
+    result[1] = 1.0f;
+    result[2] = 1.0f;
+    result[3] = 1.0f;
+
+    ASSERT_FLOAT_EQ(result[0], 1.0f);
+    ASSERT_FLOAT_EQ(result[1], 1.0f);
+    ASSERT_FLOAT_EQ(result[2], 1.0f);
+    ASSERT_FLOAT_EQ(result[3], 1.0f);
 }
 
 TEST(vec4, vector_const_access)
@@ -135,9 +142,9 @@ TEST(vec4, vector_const_access)
     ASSERT_FLOAT_EQ(result[3],  6.121);
 }
 
-////
-//// Vector operations
-////
+//
+// Vector operations
+//
 
 TEST(vec4, vector_dot)
 {
@@ -171,4 +178,4 @@ TEST(vec4, vector_normalize)
     ASSERT_FLOAT_EQ(result.w,  0.6412002312f);
 }
 
-////TODO: test - faceforward, reflect, refract
+//TODO: test - faceforward, reflect, refract

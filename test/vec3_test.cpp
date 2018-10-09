@@ -108,9 +108,15 @@ TEST(vec3, vector_per_component_multiplication)
 
 TEST(vec3, vector_access)
 {
-    ASSERT_FLOAT_EQ(first[0],  2.0);
-    ASSERT_FLOAT_EQ(first[1],  4.33);
-    ASSERT_FLOAT_EQ(first[2],  -5.56);
+    auto result = first;
+
+    result[0] = 1.0f;
+    result[1] = 1.0f;
+    result[2] = 1.0f;
+
+    ASSERT_FLOAT_EQ(result[0], 1.0f);
+    ASSERT_FLOAT_EQ(result[1], 1.0f);
+    ASSERT_FLOAT_EQ(result[2], 1.0f);
 }
 
 TEST(vec3, vector_const_access)
