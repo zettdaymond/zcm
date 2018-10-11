@@ -1,7 +1,15 @@
 cmake_minimum_required(VERSION 3.11.2)
 
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+option(
+    HUNTER_NO_TOOLCHAIN_ID_RECALCULATION
+    "No Toolchain-ID recalculation"
+    ON
+)
 
+option(ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
+option(ENABLE_TESTS "Build tests" ON)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
 include("cmake/HunterGate.cmake")
 
 HunterGate(
@@ -10,8 +18,6 @@ HunterGate(
 )
 
 project(zcm)
-
-option(ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
 
 find_program(CCACHE_FOUND ccache)
 message(STATUS "CCACHE STATUS : ${CCACHE_FOUND}")
@@ -35,5 +41,12 @@ if(CODE_COVERAGE_ENABLED)
 endif()
 
 add_subdirectory(src)
-add_subdirectory(test)
-add_subdirectory(bench)
+
+if(ENABLE_TESTS)
+    add_subdirectory(test)
+endif()
+
+#add_subdirectory(bench)
+add_subdirectory(tools)
+
+export(PACKAGE ${PROJECT_NAME})
