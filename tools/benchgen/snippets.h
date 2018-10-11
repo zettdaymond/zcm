@@ -198,6 +198,98 @@ const std::string snippents[] = {
     "}\n",
 
 
+    //---------------------------------------------------------------------------------------------------
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = a + b / 3.25f - mat4(1.6f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    //Temporary =>
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat4(1.0f);\n"
+    "auto b = mat4(5.0f);\n"
+    "auto c = (transpose(a + b) / 3.25f - mat4(1.6f)) * mat4(2.56f);\n"
+    "}\n",
+
+    //-------------------------------------------------------------------------------------------------------------------
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = mat3(5.0f);\n"
+    "auto c = a + b / 3.25f - mat3(1.6f);\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+    //Teporary =>
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+    "{\n"
+    "auto a = mat3(1.0f);\n"
+    "auto b = transpose(mat3(5.0f));\n"
+    "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
+    "}\n",
+
+
+
 };
 
 /*

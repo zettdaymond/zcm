@@ -33,6 +33,7 @@ constexpr auto cppPreabule = R"(
 
 #include "zcm/mat3.h"
 #include "zcm/mat4.h"
+#include "zcm/matrix.h"
 
 #include "zcm/geometric.h"
 #include "zcm/exponential.h"
@@ -43,12 +44,15 @@ using namespace zcm;
 
 #else
 
+#define GLM_FORCE_PURE
+
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
 
-#include "glm/mat3.h"
-#include "glm/mat4.h"
+#include "glm/mat3x3.hpp"
+#include "glm/mat4x4.hpp"
+#include "glm/matrix.hpp"
 
 #include "glm/geometric.hpp"
 #include "glm/exponential.hpp"
