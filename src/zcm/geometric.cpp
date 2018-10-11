@@ -1,5 +1,5 @@
 #include "geometric.h"
-
+#include "common.h"
 #include "exponential.h"
 #include "vec2.h"
 #include "vec3.h"
@@ -36,52 +36,19 @@ zcm::vec3 zcm::cross(const zcm::vec3& first, const zcm::vec3& second)
 
 //------------------------------------------------------------------------------------------
 
-float zcm::normalize(const float)
-{
-    //FIXME: shall we implement this??
-    return 1.0;
-}
-
 zcm::vec2 zcm::normalize(const zcm::vec2& vec)
 {
-    // Calculate the magnitude of the vector
-    auto magnitude = zcm::sqrt((vec.x * vec.x) + (vec.y * vec.y));
-
-    //FIXME: If this is valid???
-    if(magnitude == 0.0f) {
-        return {0.0f};
-    }
-
-    //TODO: rewrite with fastInverseSqrt() from Q3.
-    return vec / magnitude;
+    return vec * inversesqrt(dot(vec, vec));
 }
 
 zcm::vec3 zcm::normalize(const zcm::vec3& vec)
 {
-    // Calculate the magnitude of the vector
-    auto magnitude = zcm::sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
-
-    //FIXME: If this is valid???
-    if(magnitude == 0.0f) {
-        return {0.0f};
-    }
-
-    //TODO: rewrite with fastInverseSqrt() from Q3.
-    return vec / magnitude;
+    return vec * inversesqrt(dot(vec, vec));
 }
 
 zcm::vec4 zcm::normalize(const zcm::vec4& vec)
 {
-    // Calculate the magnitude of the vector
-    auto magnitude = zcm::sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z) + (vec.w * vec.w));
-
-    //FIXME: If this is valid???
-    if(magnitude == 0.0f) {
-        return {0.0f};
-    }
-
-    //TODO: rewrite with fastInverseSqrt() from Q3.
-    return vec / magnitude;
+    return vec * inversesqrt(dot(vec, vec));
 }
 
 
@@ -89,8 +56,7 @@ zcm::vec4 zcm::normalize(const zcm::vec4& vec)
 
 float zcm::distance(const float first, const float second)
 {
-    //FIXME: implement
-    //return abs(first - second);
+    return abs(first - second);
 }
 
 float zcm::distance(const zcm::vec2& first, const zcm::vec2& second)

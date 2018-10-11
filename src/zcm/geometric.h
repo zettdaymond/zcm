@@ -28,7 +28,6 @@ namespace zcm
 
     vec3  cross(const vec3& first, const vec3& second);
 
-    float normalize(const float first);
     vec2  normalize(const vec2& first);
     vec3  normalize(const vec3& first);
     vec4  normalize(const vec4& first);
