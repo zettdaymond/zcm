@@ -20,7 +20,7 @@ const std::string snippents[] = {
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = vec3(5.454f, 6.44f, 1.41f);\n"
     "auto c = dot(a,b);\n"
-    "auto d = clamp(a, b, c);\n"
+    "auto d = clamp(a, b, vec3(c));\n"
     "auto e = min(max(a, b), c);\n"
     "}\n",
 
@@ -40,9 +40,9 @@ const std::string snippents[] = {
     "{\n"
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = length(vec3(5.454f, 6.44f, 1.41f));\n"
-    "auto c = distance(a,b);\n"
-    "auto d = reflect(a, c);\n"
-    "auto r = refract(a, c, 0.343f);\n"
+    "auto c = distance(a,vec3(b));\n" //TODO: why zcm is compiled????? //Because zcm has implicit constructor to vec3 from 1 float
+    "auto d = reflect(a, vec3(c));\n"
+    "auto r = refract(a, vec3(c), 0.343f);\n"
     "}\n",
 
     "{\n"
@@ -54,37 +54,37 @@ const std::string snippents[] = {
     "{\n"
     "auto a = abs(vec3(1.124f, -65.465f, 0.124f));\n"
     "auto b = inversesqrt(vec3(5.454f, 6.44f, 1.41f));\n"
-    "auto c = trunc(a,b);\n"
+    "auto c = trunc(a);\n"
     "}\n",
 
     "{\n"
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = sqrt(vec3(5.454f, 6.44f, 1.41f));\n"
-    "auto c = floor(a,b);\n"
+    "auto c = floor(a);\n"
     "}\n",
 
     "{\n"
     "auto a = abs(vec3(1.124f, 65.465f, -0.124f));\n"
     "auto b = pow(vec3(5.454f, 6.44f, 1.41f), a);\n"
-    "auto c = round(a,b);\n"
+    "auto c = round(a);\n"
     "}\n",
 
     "{\n"
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = vec3(5.454f, 6.44f, 1.41f);\n"
-    "auto c = ceil(a,b);\n"
+    "auto c = ceil(a);\n"
     "}\n",
 
     "{\n"
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = vec3(5.454f, 6.44f, 1.41f);\n"
-    "auto c = roundEven(floor(a,b));\n"
+    "auto c = roundEven(floor(a));\n"
     "}\n",
 
     "{\n"
     "auto a = vec3(1.124f, 65.465f, 0.124f);\n"
     "auto b = vec3(5.454f, 6.44f, 1.41f);\n"
-    "auto c = trunc(a,b);\n"
+    "auto c = trunc(a);\n"
     "}\n",
 
     "{\n"
@@ -129,7 +129,7 @@ const std::string snippents[] = {
 
     "{\n"
     "auto a = vec4(1.124f, 65.465f, 0.124f, 123.14f);\n"
-    "auto b = vec4(5.454f, 6.44f, 1.41f, 0.4ff);\n"
+    "auto b = vec4(5.454f, 6.44f, 1.41f, 0.4f);\n"
     "auto c = a+b-a/0.262f*(b*1.1f);\n"
     "auto d = faceforward(a, b, c);\n"
     "}\n",
@@ -137,9 +137,9 @@ const std::string snippents[] = {
     "{\n"
     "auto a = vec4(1.124f, 65.465f, 0.124f, 0.1114f);\n"
     "auto b = length(vec4(5.454f, 6.44f, 1.41f, 0.1114f));\n"
-    "auto c = distance(a,b);\n"
-    "auto d = reflect(a, c);\n"
-    "auto r = refract(a, c, 0.343f);\n"
+    "auto c = distance(a,vec4(b));\n"
+    "auto d = reflect(a, vec4(c));\n"
+    "auto r = refract(a, vec4(c), 0.343f);\n"
     "}\n",
 
     "{\n"
@@ -151,26 +151,26 @@ const std::string snippents[] = {
     "{\n"
     "auto a = abs(vec4(1.124f, 615.465f, 0.124f, 0.1114f));\n"
     "auto b = vec4(5.454f, 6.44f, 1.413f, 1.1114f);\n"
-    "auto c = trunc(a,b);\n"
+    "auto c = trunc(a);\n"
     "}\n",
 
     "{\n"
     "auto a = abs(vec4(1.124f, 615.465f, 0.124f, 0.1114f));\n"
     "auto b = inversesqrt(vec4(5.454f, 6.44f, 1.413f, 1.1114f));\n"
-    "auto c = roundEven(floor(a,b));\n"
+    "auto c = roundEven(floor(a));\n"
     "}\n",
 
 
     "{\n"
     "auto a = sqrt(vec4(1.124f, 615.465f, 0.124f, 0.1114f));\n"
     "auto b = pow(vec4(5.454f, 6.44f, 1.413f, 1.1114f), a);\n"
-    "auto c = round(a,b);\n"
+    "auto c = round(a);\n"
     "}\n",
 
     "{\n"
     "auto a = log2(vec4(1.124f, 615.465f, 0.124f, 0.1114f));\n"
     "auto b = log(vec4(5.454f, 6.44f, 1.413f, 1.1114f));\n"
-    "auto c = ceil(a,b);\n"
+    "auto c = ceil(a);\n"
     "}\n",
 
     "{\n"

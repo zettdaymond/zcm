@@ -183,6 +183,28 @@ zcm::vec4 zcm::atan(const zcm::vec4& y, const zcm::vec4& x)
 
 //---------------------------------------------------------------------------------------------------
 
+float zcm::atan(const float y_over_x)
+{
+    return detail::applyOp(y_over_x,atanf);
+}
+
+zcm::vec2 zcm::atan(const zcm::vec2& y_over_x)
+{
+    return detail::applyOp(y_over_x,atanf);
+}
+
+zcm::vec3 zcm::atan(const zcm::vec3& y_over_x)
+{
+    return detail::applyOp(y_over_x,atanf);
+}
+
+zcm::vec4 zcm::atan(const zcm::vec4& y_over_x)
+{
+    return detail::applyOp(y_over_x,atanf);
+}
+
+//---------------------------------------------------------------------------------------------------
+
 
 float zcm::atanh(const float x)
 {

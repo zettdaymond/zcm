@@ -20,7 +20,7 @@
 namespace fs = std::filesystem;
 
 constexpr auto filecount = 100u;
-constexpr auto funccount = 10u;
+constexpr auto funccount = 100u;
 
 constexpr auto cppPreabule = R"(
 #include "{}"
@@ -30,7 +30,14 @@ constexpr auto cppPreabule = R"(
 #include "zcm/vec2.h"
 #include "zcm/vec3.h"
 #include "zcm/vec4.h"
+
+#include "zcm/mat3.h"
+#include "zcm/mat4.h"
+
 #include "zcm/geometric.h"
+#include "zcm/exponential.h"
+#include "zcm/common.h"
+#include "zcm/angle_and_trigonometry.h"
 
 using namespace zcm;
 
@@ -39,7 +46,14 @@ using namespace zcm;
 #include "glm/vec2.hpp"
 #include "glm/vec3.hpp"
 #include "glm/vec4.hpp"
+
+#include "glm/mat3.h"
+#include "glm/mat4.h"
+
 #include "glm/geometric.hpp"
+#include "glm/exponential.hpp"
+#include "glm/common.hpp"
+#include "glm/trigonometric.hpp"
 
 using namespace glm;
 
