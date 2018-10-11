@@ -40,6 +40,7 @@ namespace zcm
     vec3 operator -(const vec3& first, const vec3& second);
     vec3 operator -(const vec3& first);
     vec3 operator *(const vec3& first, const vec3& second);
+    vec3 operator /(const vec3& first, const vec3& second);
 
     vec3 operator *(const vec3& vec, const float scalar);
     vec3 operator /(const vec3& vec, const float scalar);

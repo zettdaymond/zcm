@@ -86,9 +86,15 @@ namespace zcm
     vec4  sign (const vec4& x);
 
 
-    //TODO: genType 	smoothstep (genType const &edge0, genType const &edge1, genType const &x)
+    float smoothstep (const float edge0, const float edge1, const float x);
+    vec2  smoothstep (const vec2& edge0, const vec2& edge1, const vec2& x);
+    vec3  smoothstep (const vec3& edge0, const vec3& edge1, const vec3& x);
+    vec4  smoothstep (const vec4& edge0, const vec4& edge1, const vec4& x);
 
-    //TODO: genType 	step (genType const &edge, genType const &x)
+    float step (const float& edge, const float & x);
+//    vec2  step (const vec2& edge, const vec2 & x);
+//    vec3  step (const vec3& edge, const vec3 & x);
+//    vec4  step (const vec4& edge, const vec4 & x);
 
     float trunc (const float x);
     vec2  trunc (const vec2& x);

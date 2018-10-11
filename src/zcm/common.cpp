@@ -284,3 +284,59 @@ zcm::vec4 zcm::trunc(const zcm::vec4& x)
 {
     return { zcm::trunc(x.x), zcm::trunc(x.y), zcm::trunc(x.z), zcm::trunc(x.w) };
 }
+
+//-----------------------------------------------------------------------------------------------------
+
+float zcm::smoothstep(const float edge0, const float edge1, const float x)
+{
+    float const tmp(clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f));
+    return tmp * tmp * (3.f - 2.f * tmp);
+}
+
+zcm::vec2 zcm::smoothstep(const zcm::vec2& edge0, const zcm::vec2& edge1, const zcm::vec2& x)
+{
+    vec2 const tmp(clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f));
+    return tmp * tmp * (3.f - 2.f * tmp);
+}
+
+zcm::vec3 zcm::smoothstep(const zcm::vec3& edge0, const zcm::vec3& edge1, const zcm::vec3& x)
+{
+    vec3 const tmp(clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f));
+    return tmp * tmp * (3.f - 2.f * tmp);
+}
+
+
+zcm::vec4 zcm::smoothstep(const zcm::vec4& edge0, const zcm::vec4& edge1, const zcm::vec4& x)
+{
+    vec4 const tmp(clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f));
+    return tmp * tmp * (3.f - 2.f * tmp);
+}
+
+//-----------------------------------------------------------------------------------------------------
+
+float zcm::step(const float& edge, const float& x)
+{
+    if (x < edge) {
+        return 0.0f;
+    }
+    else {
+        return 1.0f;
+    }
+}
+
+//zcm::vec2 zcm::step(const zcm::vec2& edge, const zcm::vec2& x)
+//{
+//    return mix(vec2(1.0f), vec2(0.0f), lessThan(x, edge));
+//}
+
+//zcm::vec3 zcm::step(const zcm::vec3& edge, const zcm::vec3& x)
+//{
+//    return mix(vec3(1.0f), vec3(0.0f), lessThan(x, edge));
+//}
+
+//zcm::vec4 zcm::step(const zcm::vec4& edge, const zcm::vec4& x)
+//{
+//    return mix(vec4(1.0f), vec4(0.0f), lessThan(x, edge));
+//}
+
+//-----------------------------------------------------------------------------------------------------

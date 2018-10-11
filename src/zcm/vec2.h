@@ -38,6 +38,7 @@ namespace zcm
     vec2 operator -(const vec2& first, const vec2& second);
     vec2 operator -(const vec2& first);
     vec2 operator *(const vec2& first, const vec2& second);
+    vec2 operator /(const vec2& first, const vec2& second);
 
     vec2 operator *(const vec2& vec, const float scalar);
     vec2 operator /(const vec2& vec, const float scalar);

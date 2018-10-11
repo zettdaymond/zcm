@@ -86,3 +86,8 @@ const float&zcm::vec3::operator[](const uint8_t val) const
         return z;
     }
 }
+
+zcm::vec3 zcm::operator /(const zcm::vec3& first, const zcm::vec3& second)
+{
+    return {first.x / second.x, first.y / second.y, first.z / second.z};
+}

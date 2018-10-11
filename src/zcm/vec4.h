@@ -44,6 +44,7 @@ namespace zcm
     vec4 operator -(const vec4& first, const vec4& second);
     vec4 operator -(const vec4& first);
     vec4 operator *(const vec4& first, const vec4& second);
+    vec4 operator /(const vec4& first, const vec4& second);
 
     vec4 operator *(const vec4& vec, const float scalar);
     vec4 operator /(const vec4& vec, const float scalar);

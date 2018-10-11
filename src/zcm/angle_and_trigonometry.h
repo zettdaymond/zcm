@@ -36,7 +36,6 @@ namespace zcm
     vec3  asinh (const vec3& x);
     vec4  asinh (const vec4& x);
 
-    //TODO: atan
     float atan (const float y, const float x);
     vec2  atan (const vec2& y, const vec2& x);
     vec3  atan (const vec3& y, const vec3& x);
