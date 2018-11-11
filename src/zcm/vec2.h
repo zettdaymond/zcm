@@ -1,38 +1,19 @@
 #pragma once
 
-
-#include <stdint.h>
-#include <type_traits>
-
-
 namespace zcm
 {
-
     struct vec2
     {
-        vec2() = default;
-        ~vec2() = default;
+        vec2();
+        vec2(float value);
+        vec2(float x, float y);
 
-        vec2(float value) :
-            x(value),
-            y(value)
-        {}
-
-        vec2(float _x, float _y) :
-            x(_x),
-            y(_y)
-        {}
-
-        float& operator[](const uint8_t val);
-        const float& operator[](const uint8_t val) const;
+        float& operator[](unsigned val);
+        const float& operator[](unsigned val) const;
 
         float x;
         float y;
     };
-
-
-    static_assert (std::is_pod<vec2>::value);
-
 
     vec2 operator +(const vec2& first, const vec2& second);
     vec2 operator -(const vec2& first, const vec2& second);

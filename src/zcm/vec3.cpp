@@ -1,7 +1,18 @@
+#include <cassert>
+#include <type_traits>
 #include "vec3.h"
 #include "common.h"
 
-#include <cassert>
+static_assert(std::is_standard_layout<zcm::vec3>::value, "");
+
+
+zcm::vec3::vec3() : x(0.0f), y(0.0f), z(0.0f) { }
+zcm::vec3::vec3(float value) : x(value), y(value), z(value) { }
+zcm::vec3::vec3(float _x, float _y, float _z) :
+    x(_x),
+    y(_y),
+    z(_z) 
+{}
 
 zcm::vec3 zcm::operator +(const zcm::vec3& first, const zcm::vec3& second)
 {
@@ -57,7 +68,7 @@ zcm::vec3 zcm::operator /(const float scalar, const zcm::vec3& vec)
              scalar / vec.z };
 }
 
-float&zcm::vec3::operator[](const uint8_t val)
+float&zcm::vec3::operator[](unsigned val)
 {
     assert(val < 3);
 
@@ -72,7 +83,7 @@ float&zcm::vec3::operator[](const uint8_t val)
     }
 }
 
-const float&zcm::vec3::operator[](const uint8_t val) const
+const float&zcm::vec3::operator[](unsigned val) const
 {
     assert(val < 3);
 

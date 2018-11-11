@@ -1,4 +1,24 @@
+#include <cassert>
+#include <type_traits>
 #include "mat3.h"
+
+static_assert (std::is_standard_layout<zcm::mat3>::value);
+
+zcm::mat3::mat3() :
+    col0(1.0f, 0.0f, 0.0f),
+    col1(0.0f, 1.0f, 0.0f),
+    col2(0.0f, 0.0f, 1.0f)
+{} 
+zcm::mat3::mat3(float value) :
+    col0(value, 0.0f, 0.0f),
+    col1(0.0f, value, 0.0f),
+    col2(0.0f, 0.0f, value)
+{}
+zcm::mat3::mat3(const vec3& _col0,  const vec3& _col1, const vec3& _col2) :
+    col0(_col0),
+    col1(_col1),
+    col2(_col2)
+{}
 
 zcm::mat3 zcm::operator +(const zcm::mat3& first, const zcm::mat3& second)
 {
@@ -102,7 +122,7 @@ zcm::mat3 zcm::operator /(const float scalar, const zcm::mat3& mat)
              scalar / mat.col2 };
 }
 
-zcm::vec3&zcm::mat3::operator[](const uint8_t pos)
+zcm::vec3& zcm::mat3::operator[](unsigned pos)
 {
     assert(pos < 3);
     if(pos == 0) {
@@ -116,7 +136,7 @@ zcm::vec3&zcm::mat3::operator[](const uint8_t pos)
     }
 }
 
-const zcm::vec3&zcm::mat3::operator[](const uint8_t pos) const
+const zcm::vec3& zcm::mat3::operator[](unsigned pos) const
 {
     assert(pos < 3);
     if(pos == 0) {

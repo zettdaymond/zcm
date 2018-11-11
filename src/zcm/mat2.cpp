@@ -1,8 +1,23 @@
+#include <cassert>
+#include <type_traits>
 #include "mat2.h"
-#include "cassert"
 
+static_assert(std::is_standard_layout<zcm::mat2>::value, "");
 
-zcm::vec2&zcm::mat2::operator[](const uint8_t pos)
+zcm::mat2::mat2(float value) :
+    col0(value, 0.0f),
+    col1(0.0f, value)
+{}
+zcm::mat2::mat2(float a00, float a01, float a10, float a11) :
+    col0{a00, a10},
+    col1{a01, a11}
+{}
+zcm::mat2::mat2(zcm::vec2 _col0, zcm::vec2 _col1) :
+    col0{_col0},
+    col1{_col1}
+{}
+
+zcm::vec2& zcm::mat2::operator[](unsigned pos)
 {
     assert(pos < 2);
     if(pos == 0) {
@@ -13,7 +28,7 @@ zcm::vec2&zcm::mat2::operator[](const uint8_t pos)
     }
 }
 
-const zcm::vec2&zcm::mat2::operator[](const uint8_t pos) const
+const zcm::vec2& zcm::mat2::operator[](unsigned pos) const
 {
     assert(pos < 2);
     if(pos == 0) {

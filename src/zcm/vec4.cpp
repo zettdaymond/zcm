@@ -1,6 +1,22 @@
-#include "vec4.h"
 #include <cassert>
+#include <type_traits>
+#include "vec4.h"
 
+static_assert(std::is_standard_layout<zcm::vec4>::value, "");
+
+zcm::vec4::vec4() : x(0.0f), y(0.0f), z(0.0f), w(0.0f) {}
+zcm::vec4::vec4(float value) :
+    x(value),
+    y(value),
+    z(value),
+    w(value)
+{}
+zcm::vec4::vec4(float _x, float _y, float _z, float _w) :
+    x(_x),
+    y(_y),
+    z(_z),
+    w(_w)
+{}
 
 zcm::vec4 zcm::operator +(const zcm::vec4& first, const zcm::vec4& second)
 {
@@ -63,7 +79,7 @@ zcm::vec4 zcm::operator /(const float scalar, const zcm::vec4& vec)
              scalar / vec.w };
 }
 
-float&zcm::vec4::operator[](const uint8_t val)
+float&zcm::vec4::operator[](unsigned val)
 {
     assert(val < 4);
     if (val == 0) {
@@ -80,7 +96,7 @@ float&zcm::vec4::operator[](const uint8_t val)
     }
 }
 
-const float&zcm::vec4::operator[](const uint8_t val) const
+const float&zcm::vec4::operator[](unsigned val) const
 {
     assert(val < 4);
     if (val == 0) {

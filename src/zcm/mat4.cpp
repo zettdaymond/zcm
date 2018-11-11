@@ -1,4 +1,27 @@
+#include <type_traits>
+#include <cassert>
 #include "mat4.h"
+
+static_assert(std::is_standard_layout<zcm::mat4>::value, "");
+
+zcm::mat4::mat4() :
+    col0(1.0f, 0.0f, 0.0f, 0.0f),
+    col1(0.0f, 1.0f, 0.0f, 0.0f),
+    col2(0.0f, 0.0f, 1.0f, 0.0f),
+    col3(0.0f, 0.0f, 0.0f, 1.0f)
+{}
+zcm::mat4::mat4(float value) :
+    col0(value, 0.0f, 0.0f, 0.0f),
+    col1(0.0f, value, 0.0f, 0.0f),
+    col2(0.0f, 0.0f, value, 0.0f),
+    col3(0.0f, 0.0f, 0.0f, value)
+{}
+zcm::mat4::mat4(const vec4& _col0,  const vec4& _col1, const vec4& _col2, const vec4& _col3) :
+    col0(_col0),
+    col1(_col1),
+    col2(_col2),
+    col3(_col3)
+{}
 
 zcm::mat4 zcm::operator +(const zcm::mat4& first, const zcm::mat4& second)
 {
@@ -76,7 +99,7 @@ zcm::mat4 zcm::operator /(const float scalar, const zcm::mat4& mat)
              scalar / mat[3] };
 }
 
-zcm::vec4&zcm::mat4::operator[](const uint8_t pos)
+zcm::vec4& zcm::mat4::operator[](unsigned pos)
 {
     assert(pos < 4);
     if(pos == 0) {
@@ -93,7 +116,7 @@ zcm::vec4&zcm::mat4::operator[](const uint8_t pos)
     }
 }
 
-const zcm::vec4&zcm::mat4::operator[](const uint8_t pos) const
+const zcm::vec4& zcm::mat4::operator[](unsigned pos) const
 {
     assert(pos < 4);
     if(pos == 0) {
