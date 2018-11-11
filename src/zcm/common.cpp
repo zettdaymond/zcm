@@ -1,7 +1,7 @@
 #include "common.h"
 
 //FIXME: Do not use stl or libc
-#include <math.h>
+#include <cmath>
 
 #include "vec2.h"
 #include "vec3.h"
@@ -215,7 +215,7 @@ zcm::vec4 zcm::round(const zcm::vec4& x)
 
 float zcm::roundEven(const float x)
 {
-    return roundevenf(x);
+    return std::nearbyint(x * 0.5f) * 2.0f;
 }
 
 zcm::vec2 zcm::roundEven(const zcm::vec2& x)
