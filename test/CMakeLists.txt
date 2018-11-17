@@ -1,17 +1,29 @@
-hunter_add_package(GTest)
-find_package(GTest CONFIG REQUIRED)
-
-FILE(GLOB_RECURSE zcm_test_SRCs
-    "*.h"
-    "*.cpp"
-    "*.hpp"
+add_subdirectory("${PROJECT_SOURCE_DIR}/third_party/gtest" "third_party/gtest")
+mark_as_advanced(BUILD_GMOCK BUILD_GTEST gmock_build_tests gtest_build_samples gtest_build_tests
+                 gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols
 )
 
-add_executable(zcm_test ${zcm_test_SRCs})
+set_target_properties(gtest PROPERTIES FOLDER third_party)
+set_target_properties(gtest_main PROPERTIES FOLDER third_party)
+set_target_properties(gmock PROPERTIES FOLDER third_party)
+set_target_properties(gmock_main PROPERTIES FOLDER third_party)
 
+macro(package_add_test TESTNAME)
+    add_executable(${TESTNAME} ${ARGN})
+    target_link_libraries(${TESTNAME} gtest gmock gtest_main)
+    add_test(${TESTNAME} ${TESTNAME})
+    set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
+endmacro()
+
+package_add_test(zcm_test 
+    geometric_test.cpp 
+    vec2_test.cpp 
+    vec2_test.cpp
+    vec2_test.cpp
+)
 
 target_link_libraries(zcm_test zcm::zcm)
-target_link_libraries(zcm_test GTest::main) # GTest::gtest will be linked automatically
+
 
 if(CODE_COVERAGE_ENABLED)
     set(COVERAGE_EXCLUDES "/usr/include/\\*;*/Install/*;*gtest*")

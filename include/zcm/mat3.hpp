@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vec3.h"
+#include <zcm/vec3.hpp>
 
 namespace zcm
 {

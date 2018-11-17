@@ -1,7 +1,7 @@
 #include <cassert>
 #include <type_traits>
-#include "vec3.h"
-#include "common.h"
+#include <zcm/vec3.hpp>
+#include <zcm/common.hpp>
 
 static_assert(std::is_standard_layout<zcm::vec3>::value, "");
 

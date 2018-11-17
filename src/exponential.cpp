@@ -1,10 +1,8 @@
-#include "exponential.h"
-
-#include "cmath"
-
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
+#include <cmath>
+#include <zcm/exponential.hpp>
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 
 
 float zcm::sqrt(const float x)

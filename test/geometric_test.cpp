@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 
-#include "zcm/vec2.h"
-#include "zcm/vec3.h"
-#include "zcm/vec4.h"
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 
-#include "zcm/geometric.h"
+#include <zcm/geometric.hpp>
 
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
-#include "glm/geometric.hpp"
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/geometric.hpp>
 
 using namespace zcm;
 

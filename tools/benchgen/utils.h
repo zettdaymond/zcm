@@ -23,7 +23,7 @@ const std::string funcInvocationTemplate =
 inline void removeExistedFile(const fs::path& headerFilePath)
 {
     if ( fs::exists(headerFilePath) ) {
-        fmt::print("file {} is already exists and will be eraced...\n", headerFilePath.c_str());
+        fmt::print("file {} is already exists and will be eraced...\n", headerFilePath.string());
         fs::remove(headerFilePath);
     }
 }

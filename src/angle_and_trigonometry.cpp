@@ -1,11 +1,8 @@
-#include "angle_and_trigonometry.h"
-
-#include "cmath"
-
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
-
+#include <cmath>
+#include <zcm/angle_and_trigonometry.hpp>
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 #include "detail/utils.hpp"
 
 namespace zcm

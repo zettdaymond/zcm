@@ -1,6 +1,6 @@
 #include <cassert>
 #include <type_traits>
-#include "vec4.h"
+#include <zcm/vec4.hpp>
 
 static_assert(std::is_standard_layout<zcm::vec4>::value, "");
 

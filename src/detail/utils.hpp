@@ -1,8 +1,8 @@
 #pragma once
 
-#include "zcm/vec2.h"
-#include "zcm/vec3.h"
-#include "zcm/vec4.h"
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 
 namespace zcm {
 

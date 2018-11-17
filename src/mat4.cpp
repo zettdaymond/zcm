@@ -1,6 +1,6 @@
 #include <type_traits>
 #include <cassert>
-#include "mat4.h"
+#include <zcm/mat4.hpp>
 
 static_assert(std::is_standard_layout<zcm::mat4>::value, "");
 

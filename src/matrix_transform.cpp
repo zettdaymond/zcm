@@ -1,9 +1,8 @@
-#include "matrix_transform.h"
-
-#include "geometric.h"
-#include "angle_and_trigonometry.h"
-#include "vec3.h"
-#include "mat4.h"
+#include <zcm/matrix_transform.hpp>
+#include <zcm/geometric.hpp>
+#include <zcm/angle_and_trigonometry.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/mat4.hpp>
 
 zcm::mat4 zcm::translate(const zcm::mat4& m, const zcm::vec3& v)
 {

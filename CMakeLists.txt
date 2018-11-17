@@ -1,52 +1,64 @@
 cmake_minimum_required(VERSION 3.11.2)
-
-option(
-    HUNTER_NO_TOOLCHAIN_ID_RECALCULATION
-    "No Toolchain-ID recalculation"
-    ON
-)
-
-option(ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
-option(ENABLE_TESTS "Build tests" ON)
-
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-include("cmake/HunterGate.cmake")
-
-HunterGate(
-    URL "https://github.com/ruslo/hunter/archive/v0.23.31.tar.gz"
-    SHA1 "3d94b8522541c4c8eaac606f4c47d09322a8019c"
-)
-
 project(zcm)
 
-find_program(CCACHE_FOUND ccache)
-message(STATUS "CCACHE STATUS : ${CCACHE_FOUND}")
+option(ZCM_ENABLE_TESTS "Build tests" ON)
+option(ZCM_ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
+option(ZCM_GENERATE_BENCHMARK "Generate benchmark code" OFF)
 
-if(CCACHE_FOUND)
-    set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
-endif(CCACHE_FOUND)
 
 # CHeck that we may enable code coverage
-if(ENABLE_COVERAGE_IN_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
+if(ZCM_ENABLE_COVERAGE_IN_DEBUG AND CMAKE_COMPILER_IS_GNUCXX)
     if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         message(STATUS "[#] Code coverage is enabled")
-        set(CODE_COVERAGE_ENABLED ON)
+        set(ZCM_CODE_COVERAGE_ENABLED ON)
     endif()
 endif()
 
-
-if(CODE_COVERAGE_ENABLED)
+if(ZCM_CODE_COVERAGE_ENABLED)
     include("cmake/CodeCoverage.cmake")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -fprofile-arcs -ftest-coverage")
 endif()
 
-add_subdirectory(src)
 
-if(ENABLE_TESTS)
+#--- ZCM library sources ---
+
+add_library(zcm
+    src/angle_and_trigonometry.cpp
+    src/common.cpp
+    src/exponential.cpp
+    src/geometric.cpp
+    src/mat2.cpp
+    src/mat3.cpp
+    src/mat4.cpp
+    src/matrix.cpp
+    src/matrix_transform.cpp
+    src/quat.cpp
+    src/vec2.cpp
+    src/vec3.cpp
+    src/vec4.cpp
+)
+
+add_library(zcm::zcm ALIAS zcm)
+target_include_directories(zcm PUBLIC include)
+set_target_properties(zcm
+    PROPERTIES
+        CXX_STANDARD 11
+        CXX_STANDARD_REQUIRED ON
+        CXX_EXTENSIONS OFF
+)
+
+#-------------------
+
+
+if(ZCM_ENABLE_TESTS)
+    enable_testing()
     add_subdirectory(test)
 endif()
 
-#add_subdirectory(bench)
-add_subdirectory(tools)
+
+if(ZCM_GENERATE_BENCHMARK)
+    add_subdirectory(third_party/fmt)
+    add_subdirectory(tools)
+endif()
 
 export(PACKAGE ${PROJECT_NAME})

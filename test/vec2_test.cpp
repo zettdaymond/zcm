@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "zcm/vec2.h"
-#include "zcm/geometric.h"
+#include <zcm/vec2.hpp>
+#include <zcm/geometric.hpp>
 
 using namespace zcm;
 

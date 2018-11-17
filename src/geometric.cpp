@@ -1,9 +1,9 @@
-#include "geometric.h"
-#include "common.h"
-#include "exponential.h"
-#include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
+#include <zcm/geometric.hpp>
+#include <zcm/common.hpp>
+#include <zcm/exponential.hpp>
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 
 float zcm::dot(const float first, const float second)
 {

@@ -1,8 +1,7 @@
-#include "matrix.h"
-
-#include "mat2.h"
-#include "mat3.h"
-#include "mat4.h"
+#include <zcm/matrix.hpp>
+#include <zcm/mat2.hpp>
+#include <zcm/mat3.hpp>
+#include <zcm/mat4.hpp>
 
 zcm::mat2 zcm::matrixCompMult(const zcm::mat2& x, const zcm::mat2& y)
 {

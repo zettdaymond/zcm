@@ -1,8 +1,8 @@
-#include "iostream"
-#include "filesystem"
-#include "string"
+#include <iostream>
+#include <filesystem>
+#include <string>
 #include <ctime>
-#include "fmt/format.h"
+#include <fmt/format.h>
 
 
 /**
@@ -27,18 +27,18 @@ constexpr auto cppPreabule = R"(
 
 #ifndef GLM_VARIANT
 
-#include "zcm/vec2.h"
-#include "zcm/vec3.h"
-#include "zcm/vec4.h"
+#include <zcm/vec2.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec4.hpp>
 
-#include "zcm/mat3.h"
-#include "zcm/mat4.h"
-#include "zcm/matrix.h"
+#include <zcm/mat3.hpp>
+#include <zcm/mat4.hpp>
+#include <zcm/matrix.hpp>
 
-#include "zcm/geometric.h"
-#include "zcm/exponential.h"
-#include "zcm/common.h"
-#include "zcm/angle_and_trigonometry.h"
+#include <zcm/geometric.hpp>
+#include <zcm/exponential.hpp>
+#include <zcm/common.hpp>
+#include <zcm/angle_and_trigonometry.hpp>
 
 using namespace zcm;
 
@@ -46,18 +46,18 @@ using namespace zcm;
 
 #define GLM_FORCE_PURE
 
-#include "glm/vec2.hpp"
-#include "glm/vec3.hpp"
-#include "glm/vec4.hpp"
+#include <glm/vec2.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
 
-#include "glm/mat3x3.hpp"
-#include "glm/mat4x4.hpp"
-#include "glm/matrix.hpp"
+#include <glm/mat3x3.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/matrix.hpp>
 
-#include "glm/geometric.hpp"
-#include "glm/exponential.hpp"
-#include "glm/common.hpp"
-#include "glm/trigonometric.hpp"
+#include <glm/geometric.hpp>
+#include <glm/exponential.hpp>
+#include <glm/common.hpp>
+#include <glm/trigonometric.hpp>
 
 using namespace glm;
 
@@ -131,13 +131,13 @@ int main(int argc, char *argv[])
 
         {
             auto glmBuildPath = directoryPath / "glm-build.sh";
-            auto glmBuildSource = std::string("#!/bin/bash\n time g++ -DGLM_VARIANT=1 -I /usr/include/ ") + " main.cpp " + cppFiles.str() + "-lgcov && rm a.out\n";
+            auto glmBuildSource = std::string("#!/bin/sh\n/usr/bin/time -v -- g++ -DGLM_VARIANT=1") + " main.cpp " + cppFiles.str() + "-o /dev/null\n";
             writeToFile(glmBuildPath, glmBuildSource);
         }
 
         {
             auto zcmBuildPath = directoryPath / "zcm-build.sh";
-            auto zcmBuildSource = std::string("#!/bin/bash\n time g++ ") + " main.cpp " + cppFiles.str() + "-I ../pr/zcm/src/ -L $ZCM_LIBRARY_PATH -l$ZCM_LIBRARY_NAME -lgcov && rm a.out\n";
+            auto zcmBuildSource = std::string("#!/bin/sh\n/usr/bin/time -v -- g++ ") + " main.cpp " + cppFiles.str() + "-I \"$ZCM_INCLUDE_PATH\" -L \"$ZCM_LIBRARY_PATH\" -l$ZCM_LIBRARY_NAME -o /dev/null\n";
             writeToFile(zcmBuildPath, zcmBuildSource);
         }
     }
