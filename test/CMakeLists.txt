@@ -15,11 +15,12 @@ macro(package_add_test TESTNAME)
     set_target_properties(${TESTNAME} PROPERTIES FOLDER tests)
 endmacro()
 
-package_add_test(zcm_test 
-    geometric_test.cpp 
-    vec2_test.cpp 
+package_add_test(zcm_test
+    geometric_test.cpp
     vec2_test.cpp
-    vec2_test.cpp
+    vec3_test.cpp
+    vec4_test.cpp
+    quat_test.cpp
 )
 
 target_link_libraries(zcm_test zcm::zcm)

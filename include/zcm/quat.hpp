@@ -9,17 +9,17 @@ namespace zcm
     struct quat
     {
         quat();
-        quat(float x, float y, float z, float w);
-
+        quat(float w, float x, float y, float z);
         quat(float s, vec3 v);
+        quat(vec3 v, float s);
 
-        /// Create a quaternion from two normalized axis
+        /// Build a unit quaternion representing the rotation from u to v.
         /// @see http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors
+        /// The input vectors need not be normalised.
         quat(vec3 u, vec3 v);
 
-
         float& operator[](unsigned val);
-        const float& operator[](unsigned val) const;
+        float operator[](unsigned val) const;
 
         float x;
         float y;
@@ -33,15 +33,9 @@ namespace zcm
     quat operator -(const quat& a);
     quat operator *(const quat& a, const quat& b);
 
-    vec3 operator *(const quat& q, const vec3& v);
-    vec3 operator *(const vec3& v, const quat& q);
+    quat operator *(const quat& q, float s);
+    quat operator *(float s, const quat& q);
+    quat operator /(float s, const quat& q);
+    quat operator /(const quat& q, float s);
 
-    vec4 operator *(const quat& q, const vec4& v);
-    vec4 operator *(const vec4& v, const quat& q);
-
-
-    quat operator *(const quat& q, const float s);
-    quat operator *(const float s, const quat& q);
-    quat operator /(const float s, const quat& q);
-    
 }

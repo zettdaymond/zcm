@@ -33,6 +33,7 @@ add_library(zcm
     src/matrix.cpp
     src/matrix_transform.cpp
     src/quat.cpp
+    src/quaternion.cpp
     src/vec2.cpp
     src/vec3.cpp
     src/vec4.cpp

@@ -5,11 +5,13 @@ namespace zcm
     class vec2;
     class vec3;
     class vec4;
+    class quat;
 
     float dot(const float first, const float second);
     float dot(const vec2& first, const vec2& second);
     float dot(const vec3& first, const vec3& second);
     float dot(const vec4& first, const vec4& second);
+    float dot(const quat& first, const quat& second);
 
     float distance(const float first, const float second);
     float distance(const vec2& first, const vec2& second);
@@ -20,6 +22,13 @@ namespace zcm
     float length(const vec2& first);
     float length(const vec3& first);
     float length(const vec4& first);
+    float length(const quat& first);
+
+    float length2(const float first);
+    float length2(const vec2& first);
+    float length2(const vec3& first);
+    float length2(const vec4& first);
+    float length2(const quat& first);
 
     float faceforward(const float N, const float I, const float Nref);
     vec2  faceforward(const vec2& N, const vec2& I, const vec2& Nref);
@@ -31,6 +40,7 @@ namespace zcm
     vec2  normalize(const vec2& first);
     vec3  normalize(const vec3& first);
     vec4  normalize(const vec4& first);
+    quat  normalize(const quat& first);
 
     float reflect (const float I, const float N);
     vec2  reflect (const vec2 &I, const vec2& N);
@@ -41,4 +51,14 @@ namespace zcm
     vec2  refract (const vec2 &I, const vec2& N, float eta);
     vec3  refract (const vec3 &I, const vec3& N, float eta);
     vec4  refract (const vec4 &I, const vec4& N, float eta);
+
+    /* Requires the input to be non-zero.
+     * Doesn’t require the input to be normalized.
+     * Doesn’t normalise the output. */
+    vec3 orthogonal(vec3 v);
+
+    /* Requires the input to be normalized.
+     * Doesn’t normalise the output. */
+    vec3 orthogonal_branchless(vec3 v);
+
 }

@@ -3,12 +3,15 @@
 #include <zcm/vec2.hpp>
 #include <zcm/vec3.hpp>
 #include <zcm/vec4.hpp>
-
+#include <zcm/quat.hpp>
 #include <zcm/geometric.hpp>
 
+#define GLM_FORCE_PURE
 #include <glm/vec2.hpp>
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/norm.hpp>
 #include <glm/geometric.hpp>
 
 using namespace zcm;
@@ -40,6 +43,8 @@ TEST(geometric, dot)
 
     ASSERT_FLOAT_EQ(dot(vec4(a1, a2, a3, a4), vec4(b1, b2, b3, b4)),
                     glm::dot(glm::vec4(a1, a2, a3, a4),glm::vec4(b1, b2, b3, b4)));
+    ASSERT_FLOAT_EQ(dot(quat(a1, a2, a3, a4), quat(b1, b2, b3, b4)),
+                    glm::dot(glm::quat(a1, a2, a3, a4),glm::quat(b1, b2, b3, b4)));
 }
 
 TEST(geometric, distance)
@@ -68,6 +73,21 @@ TEST(geometric, length)
 
     ASSERT_FLOAT_EQ(length(vec4(a1, a2, a3, a4)),
                     glm::length(glm::vec4(a1, a2, a3, a4)));
+    ASSERT_FLOAT_EQ(length(quat(a1, a2, a3, a4)),
+                    glm::length(glm::quat(a1, a2, a3, a4)));
+
+    ASSERT_FLOAT_EQ(length2(a1),   glm::length2(a1));
+
+    ASSERT_FLOAT_EQ(length2(vec2(a1, a2)),
+                    glm::length2(glm::vec2(a1, a2)));
+
+    ASSERT_FLOAT_EQ(length2(vec3(a1, a2, a3)),
+                    glm::length2(glm::vec3(a1, a2, a3)));
+
+    ASSERT_FLOAT_EQ(length2(vec4(a1, a2, a3, a4)),
+                    glm::length2(glm::vec4(a1, a2, a3, a4)));
+    ASSERT_FLOAT_EQ(length2(quat(a1, a2, a3, a4)),
+                    glm::length2(glm::quat(a1, a2, a3, a4)));
 }
 
 TEST(geometric, normalize)
@@ -92,6 +112,16 @@ TEST(geometric, normalize)
     {
         auto zcmVal = normalize(vec4(a1, a2, a3, a4));
         auto glmVal = glm::normalize(glm::vec4(a1, a2, a3, a4));
+
+        ASSERT_FLOAT_EQ(zcmVal.x, glmVal.x);
+        ASSERT_FLOAT_EQ(zcmVal.y, glmVal.y);
+        ASSERT_FLOAT_EQ(zcmVal.z, glmVal.z);
+        ASSERT_FLOAT_EQ(zcmVal.w, glmVal.w);
+    }
+
+    {
+        auto zcmVal = normalize(quat(a1, a2, a3, a4));
+        auto glmVal = glm::normalize(glm::quat(a1, a2, a3, a4));
 
         ASSERT_FLOAT_EQ(zcmVal.x, glmVal.x);
         ASSERT_FLOAT_EQ(zcmVal.y, glmVal.y);

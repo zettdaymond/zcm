@@ -1,9 +1,11 @@
 #include <zcm/geometric.hpp>
+#include <limits>
 #include <zcm/common.hpp>
 #include <zcm/exponential.hpp>
 #include <zcm/vec2.hpp>
 #include <zcm/vec3.hpp>
 #include <zcm/vec4.hpp>
+#include <zcm/quat.hpp>
 
 float zcm::dot(const float first, const float second)
 {
@@ -24,6 +26,12 @@ float zcm::dot(const zcm::vec4& first, const zcm::vec4& second)
 {
     return first.x * second.x + first.y * second.y + first.z * second.z + first.w * second.w;
 }
+
+float zcm::dot(const zcm::quat & first, const zcm::quat & second)
+{
+	return first.x * second.x + first.y * second.y + first.z * second.z + first.w * second.w;
+}
+
 
 //------------------------------------------------------------------------------------------
 
@@ -49,6 +57,11 @@ zcm::vec3 zcm::normalize(const zcm::vec3& vec)
 zcm::vec4 zcm::normalize(const zcm::vec4& vec)
 {
     return vec * inversesqrt(dot(vec, vec));
+}
+\
+zcm::quat zcm::normalize(const zcm::quat & q)
+{
+    return q / length(q);
 }
 
 
@@ -208,5 +221,47 @@ float zcm::length(const zcm::vec4& first)
     return sqrt(first.x * first.x + first.y * first.y + first.z * first.z + first.w * first.w);
 }
 
+float zcm::length(const zcm::quat & first)
+{
+    return sqrt(first.x * first.x + first.y * first.y + first.z * first.z + first.w * first.w);
+}
+
+float zcm::length2(const float first)
+{
+    return dot(first, first);
+}
+
+float zcm::length2(const zcm::vec2 &first)
+{
+    return dot(first, first);
+}
+
+float zcm::length2(const zcm::vec3 &first)
+{
+    return dot(first, first);
+}
+
+float zcm::length2(const zcm::vec4 &first)
+{
+    return dot(first, first);
+}
+
+float zcm::length2(const zcm::quat &first)
+{
+    return dot(first, first);
+}
 
 //------------------------------------------------------------------------------------------
+
+zcm::vec3 zcm::orthogonal(zcm::vec3 v)
+{
+    return abs(v.x) > abs(v.z) ? vec3(-v.y, v.x, 0.0f)
+                               : vec3(0.0f, -v.z, v.y);
+
+}
+
+zcm::vec3 zcm::orthogonal_branchless(zcm::vec3 v)
+{
+    float k = fract(abs(v.x) + 0.5f);
+    return vec3(-v.y, v.x - k * v.z, k * v.y);
+}
