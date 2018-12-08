@@ -71,9 +71,8 @@ float& zcm::quat::operator[](unsigned val)
         return y;
     case 2:
         return z;
-    case 3:
-        return w;
     }
+    return w;
 }
 
 float zcm::quat::operator[](unsigned val) const
@@ -86,9 +85,8 @@ float zcm::quat::operator[](unsigned val) const
         return y;
     case 2:
         return z;
-    case 3:
-        return w;
     }
+    return w;
 }
 
 zcm::quat zcm::operator +(const zcm::quat &a, const zcm::quat &b)
