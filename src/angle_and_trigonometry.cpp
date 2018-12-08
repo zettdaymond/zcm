@@ -22,7 +22,7 @@ namespace zcm
 }
 
 
-float zcm::cos(const float angle)
+float zcm::cos(float angle)
 {
     return detail::applyOp(angle,cosf);
 }
@@ -67,7 +67,7 @@ zcm::vec4 zcm::sin(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::acos(const float x)
+float zcm::acos(float x)
 {
     return detail::applyOp(x,acosf);
 }
@@ -90,7 +90,7 @@ zcm::vec4 zcm::acos(const zcm::vec4& x)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::acosh(const float x)
+float zcm::acosh(float x)
 {
     return detail::applyOp(x,acoshf);
 }
@@ -114,7 +114,7 @@ zcm::vec4 zcm::acosh(const zcm::vec4& x)
 
 
 
-float zcm::asin(const float x)
+float zcm::asin(float x)
 {
     return detail::applyOp(x,asinf);
 }
@@ -136,7 +136,7 @@ zcm::vec4 zcm::asin(const zcm::vec4& x)
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::asinh(const float x)
+float zcm::asinh(float x)
 {
     return detail::applyOp(x,asinhf);
 }
@@ -158,7 +158,7 @@ zcm::vec4 zcm::asinh(const zcm::vec4& x)
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::atan(const float y, const float x)
+float zcm::atan(float y, float x)
 {
     return atan2f(y,x);
 }
@@ -180,7 +180,7 @@ zcm::vec4 zcm::atan(const zcm::vec4& y, const zcm::vec4& x)
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::atan(const float y_over_x)
+float zcm::atan(float y_over_x)
 {
     return detail::applyOp(y_over_x,atanf);
 }
@@ -203,7 +203,7 @@ zcm::vec4 zcm::atan(const zcm::vec4& y_over_x)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::atanh(const float x)
+float zcm::atanh(float x)
 {
     return detail::applyOp(x,atanhf);
 }
@@ -227,7 +227,7 @@ zcm::vec4 zcm::atanh(const zcm::vec4& x)
 
 
 
-float zcm::cosh(const float angle)
+float zcm::cosh(float angle)
 {
     return detail::applyOp(angle,coshf);
 }
@@ -249,7 +249,7 @@ zcm::vec4 zcm::cosh(const zcm::vec4& angle)
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::degrees(const float radians)
+float zcm::degrees(float radians)
 {
     return detail::applyOp(radians, detail::degreesf);
 }
@@ -271,7 +271,7 @@ zcm::vec4 zcm::degrees(const zcm::vec4& radians)
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::radians(const float degrees)
+float zcm::radians(float degrees)
 {
     return detail::applyOp(degrees, detail::radiansf);
 }
@@ -294,7 +294,7 @@ zcm::vec4 zcm::radians(const zcm::vec4& degrees)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::sinh(const float angle)
+float zcm::sinh(float angle)
 {
     return detail::applyOp(angle, sinhf);
 }
@@ -318,7 +318,7 @@ zcm::vec4 zcm::sinh(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::tan(const float angle)
+float zcm::tan(float angle)
 {
     return detail::applyOp(angle, tanf);
 }
@@ -342,7 +342,7 @@ zcm::vec4 zcm::tan(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::tanh(const float angle)
+float zcm::tanh(float angle)
 {
     return detail::applyOp(angle, tanhf);
 }

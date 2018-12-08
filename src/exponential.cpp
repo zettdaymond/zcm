@@ -6,7 +6,7 @@
 #include <zcm/quat.hpp>
 
 
-float zcm::sqrt(const float x)
+float zcm::sqrt(float x)
 {
     return sqrtf(x);
 }
@@ -35,7 +35,7 @@ zcm::quat zcm::sqrt(const zcm::quat &x)
 //-----------------------------------------------------------------------------------------------------
 
 
-float zcm::pow(const float x, const float y)
+float zcm::pow(float x, float y)
 {
     return powf(x,y);
 }
@@ -64,7 +64,7 @@ zcm::quat zcm::pow(const zcm::quat &x, float y)
 //-----------------------------------------------------------------------------------------------------
 
 
-float zcm::log(const float x)
+float zcm::log(float x)
 {
     return logf(x);
 }
@@ -94,7 +94,7 @@ zcm::quat zcm::log(const zcm::quat &x)
 //-----------------------------------------------------------------------------------------------------
 
 
-float zcm::log2(const float x)
+float zcm::log2(float x)
 {
     return log2f(x);
 }
@@ -123,7 +123,8 @@ zcm::quat zcm::log2(const zcm::quat &x)
 
 //-----------------------------------------------------------------------------------------------------
 
-float zcm::inversesqrt(const float x)
+
+float zcm::inversesqrt(float x)
 {
     return 1.0f / zcm::sqrt(x);
 }
@@ -151,7 +152,8 @@ zcm::quat zcm::inversesqrt(const zcm::quat &x)
 
 //-----------------------------------------------------------------------------------------------------
 
-float zcm::exp(const float x)
+
+float zcm::exp(float x)
 {
     return expf(x);
 }
@@ -179,7 +181,8 @@ zcm::quat zcm::exp(const zcm::quat &x)
 
 //-----------------------------------------------------------------------------------------------------
 
-float zcm::exp2(const float x)
+
+float zcm::exp2(float x)
 {
     return expf(x);
 }

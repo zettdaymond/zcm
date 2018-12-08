@@ -5,18 +5,18 @@
 
 zcm::mat2 zcm::matrixCompMult(const zcm::mat2& x, const zcm::mat2& y)
 {
-    return { x.col0 * y.col0, x.col1 * y.col1 };
+    return { x[0] * y[0], x[1] * y[1] };
 }
 
 
 zcm::mat3 zcm::matrixCompMult(const zcm::mat3& x, const zcm::mat3& y)
 {
-    return { x.col0 * y.col0, x.col1 * y.col1, x.col2 * y.col2 };
+    return { x[0] * y[0], x[1] * y[1], x[2] * y[2] };
 }
 
 zcm::mat4 zcm::matrixCompMult(const zcm::mat4& x, const zcm::mat4& y)
 {
-    return { x.col0 * y.col0, x.col1 * y.col1, x.col2 * y.col2, x.col3 * y.col3 };
+    return { x[0] * y[0], x[1] * y[1], x[2] * y[2], x[3] * y[3] };
 }
 
 zcm::mat2 zcm::transpose(const zcm::mat2& m)

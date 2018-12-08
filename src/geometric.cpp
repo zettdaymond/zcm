@@ -7,7 +7,8 @@
 #include <zcm/vec4.hpp>
 #include <zcm/quat.hpp>
 
-float zcm::dot(const float first, const float second)
+
+float zcm::dot(float first, float second)
 {
     return first * second;
 }
@@ -35,6 +36,7 @@ float zcm::dot(const zcm::quat & first, const zcm::quat & second)
 
 //------------------------------------------------------------------------------------------
 
+
 zcm::vec3 zcm::cross(const zcm::vec3& first, const zcm::vec3& second)
 {
     return vec3{ first.y * second.z - first.z * second.y,
@@ -43,6 +45,7 @@ zcm::vec3 zcm::cross(const zcm::vec3& first, const zcm::vec3& second)
 }
 
 //------------------------------------------------------------------------------------------
+
 
 zcm::vec2 zcm::normalize(const zcm::vec2& vec)
 {
@@ -67,7 +70,8 @@ zcm::quat zcm::normalize(const zcm::quat & q)
 
 //------------------------------------------------------------------------------------------
 
-float zcm::distance(const float first, const float second)
+
+float zcm::distance(float first, float second)
 {
     return abs(first - second);
 }
@@ -87,9 +91,11 @@ float zcm::distance(const zcm::vec4& first, const zcm::vec4& second)
     return length(first - second);
 }
 
+
 //------------------------------------------------------------------------------------------
 
-float zcm::faceforward(const float N, const float I, const float Nref)
+
+float zcm::faceforward(float N, float I, float Nref)
 {
     if (dot(Nref, I) < 0.0) {
         return N;
@@ -129,9 +135,11 @@ zcm::vec4 zcm::faceforward(const vec4& N, const vec4& I, const vec4& Nref)
     }
 }
 
+
 //------------------------------------------------------------------------------------------
 
-float zcm::reflect(const float I, const float N)
+
+float zcm::reflect(float I, float N)
 {
     return I - 2.0 * dot(N, I) * N;
 }
@@ -151,9 +159,11 @@ zcm::vec4 zcm::reflect(const zcm::vec4& I, const zcm::vec4& N)
     return I - 2.0 * dot(N, I) * N;
 }
 
+
 //------------------------------------------------------------------------------------------
 
-float zcm::refract(const float I, const float N, float eta)
+
+float zcm::refract(float I, float N, float eta)
 {
     auto k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
     if (k < 0.0){
@@ -197,9 +207,11 @@ zcm::vec4 zcm::refract(const zcm::vec4& I, const zcm::vec4& N, float eta)
     }
 }
 
+
 //------------------------------------------------------------------------------------------
 
-float zcm::length(const float first)
+
+float zcm::length(float first)
 {
     return first;
 }
@@ -226,7 +238,11 @@ float zcm::length(const zcm::quat & first)
     return sqrt(first.x * first.x + first.y * first.y + first.z * first.z + first.w * first.w);
 }
 
-float zcm::length2(const float first)
+
+//------------------------------------------------------------------------------------------
+
+
+float zcm::length2(float first)
 {
     return dot(first, first);
 }
@@ -251,16 +267,18 @@ float zcm::length2(const zcm::quat &first)
     return dot(first, first);
 }
 
+
 //------------------------------------------------------------------------------------------
 
-zcm::vec3 zcm::orthogonal(zcm::vec3 v)
+
+zcm::vec3 zcm::orthogonal(const vec3 &v)
 {
     return abs(v.x) > abs(v.z) ? vec3(-v.y, v.x, 0.0f)
                                : vec3(0.0f, -v.z, v.y);
 
 }
 
-zcm::vec3 zcm::orthogonal_branchless(zcm::vec3 v)
+zcm::vec3 zcm::orthogonal_branchless(const vec3 &v)
 {
     float k = fract(abs(v.x) + 0.5f);
     return vec3(-v.y, v.x - k * v.z, k * v.y);
