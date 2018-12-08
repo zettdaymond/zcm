@@ -1,59 +1,75 @@
 #include <cassert>
 #include <type_traits>
 #include <zcm/mat3.hpp>
+#include <zcm/mat2.hpp>
 
-static_assert (std::is_standard_layout<zcm::mat3>::value);
 
-zcm::mat3::mat3() :
-    col0(1.0f, 0.0f, 0.0f),
-    col1(0.0f, 1.0f, 0.0f),
-    col2(0.0f, 0.0f, 1.0f)
-{} 
-zcm::mat3::mat3(float value) :
-    col0(value, 0.0f, 0.0f),
-    col1(0.0f, value, 0.0f),
-    col2(0.0f, 0.0f, value)
+static_assert (std::is_standard_layout<zcm::mat3>::value, "");
+
+zcm::mat3::mat3() : mat3(1.0f)
 {}
-zcm::mat3::mat3(const vec3& _col0,  const vec3& _col1, const vec3& _col2) :
-    col0(_col0),
-    col1(_col1),
-    col2(_col2)
-{}
+
+zcm::mat3::mat3(float value)
+{
+    _columns[0] = vec3(value, 0.0f, 0.0f);
+    _columns[1] = vec3(0.0f, value, 0.0f);
+    _columns[2] = vec3(0.0f, 0.0f, value);
+}
+
+zcm::mat3::mat3(const zcm::mat2 &m2)
+{
+    _columns[0] = vec3(m2[0].x, m2[0].y, 0.0f);
+    _columns[1] = vec3(m2[1].x, m2[1].y, 0.0f);
+    _columns[2] = vec3(m2[2].x, m2[2].y, 1.0f);
+}
+
+zcm::mat3::operator mat2() const
+{
+    return mat2{_columns[0].x, _columns[0].y, _columns[1].x, _columns[1].y};
+}
+
+
+zcm::mat3::mat3(const vec3& c0,  const vec3& c1, const vec3& c2)
+{
+    _columns[0] = c0;
+    _columns[1] = c1;
+    _columns[2] = c2;
+}
 
 zcm::mat3 zcm::operator +(const zcm::mat3& first, const zcm::mat3& second)
 {
-    return { first.col0 + second.col0,
-             first.col1 + second.col1,
-             first.col2 + second.col2 };
+    return { first[0] + second[0],
+             first[1] + second[1],
+             first[2] + second[2] };
 }
 
 zcm::mat3 zcm::operator -(const zcm::mat3& first, const zcm::mat3& second)
 {
-    return { first.col0 - second.col0,
-             first.col1 - second.col1,
-             first.col2 - second.col2 };
+    return { first[0] - second[0],
+             first[1] - second[1],
+             first[2] - second[2] };
 }
 
 zcm::mat3 zcm::operator -(const zcm::mat3& first)
 {
-    return { - first.col0,
-             - first.col1,
-             - first.col2 };
+    return { - first[0],
+             - first[1],
+             - first[2] };
 }
 
 //zcm::mat3 zcm::operator *(const zcm::mat3& first, const zcm::mat3& second)
 //{
-//    auto a00 = first.col0.x * second.col0.x + first.col1.x * second.col0.y + first.col2.x * second.col0.z;
-//    auto a01 = first.col0.x * second.col1.x + first.col1.x * second.col1.y + first.col2.x * second.col1.z;
-//    auto a02 = first.col0.x * second.col2.x + first.col1.x * second.col2.y + first.col2.x * second.col2.z;
+//    auto a00 = first[0].x * second[0].x + first[1].x * second[0].y + first[2].x * second[0].z;
+//    auto a01 = first[0].x * second[1].x + first[1].x * second[1].y + first[2].x * second[1].z;
+//    auto a02 = first[0].x * second[2].x + first[1].x * second[2].y + first[2].x * second[2].z;
 
-//    auto a10 = first.col0.y * second.col0.x + first.col1.y * second.col0.y + first.col2.y * second.col0.z;
-//    auto a11 = first.col0.y * second.col1.x + first.col1.y * second.col1.y + first.col2.y * second.col1.z;
-//    auto a12 = first.col0.y * second.col2.x + first.col1.y * second.col2.y + first.col2.y * second.col2.z;
+//    auto a10 = first[0].y * second[0].x + first[1].y * second[0].y + first[2].y * second[0].z;
+//    auto a11 = first[0].y * second[1].x + first[1].y * second[1].y + first[2].y * second[1].z;
+//    auto a12 = first[0].y * second[2].x + first[1].y * second[2].y + first[2].y * second[2].z;
 
-//    auto a20 = first.col0.z * second.col0.x + first.col1.z * second.col0.y + first.col2.z * second.col0.z;
-//    auto a21 = first.col0.z * second.col1.x + first.col1.z * second.col1.y + first.col2.z * second.col1.z;
-//    auto a22 = first.col0.z * second.col2.x + first.col1.z * second.col2.y + first.col2.z * second.col2.z;
+//    auto a20 = first[0].z * second[0].x + first[1].z * second[0].y + first[2].z * second[0].z;
+//    auto a21 = first[0].z * second[1].x + first[1].z * second[1].y + first[2].z * second[1].z;
+//    auto a22 = first[0].z * second[2].x + first[1].z * second[2].y + first[2].z * second[2].z;
 
 //    return mat3{ vec3{a00, a10, a20}, vec3{a01, a11, a21}, vec3{a02, a12, a22}};
 //}
@@ -94,58 +110,43 @@ zcm::mat3 zcm::operator *(const zcm::mat3& m1, const zcm::mat3& m2)
 }
 
 
-zcm::mat3 zcm::operator *(const zcm::mat3& mat, const float scalar)
+zcm::mat3 zcm::operator *(const zcm::mat3& mat, float scalar)
 {
-    return { mat.col0 * scalar,
-             mat.col1 * scalar,
-             mat.col2 * scalar };
+    return { mat[0] * scalar,
+             mat[1] * scalar,
+             mat[2] * scalar };
 }
 
-zcm::mat3 zcm::operator /(const zcm::mat3& mat, const float scalar)
+zcm::mat3 zcm::operator /(const zcm::mat3& mat, float scalar)
 {
-    return { mat.col0 / scalar,
-             mat.col1 / scalar,
-             mat.col2 / scalar };
+    return { mat[0] / scalar,
+             mat[1] / scalar,
+             mat[2] / scalar };
 }
 
-zcm::mat3 zcm::operator *(const float scalar, const zcm::mat3& mat)
+zcm::mat3 zcm::operator *(float scalar, const mat3 &mat)
 {
-    return { scalar * mat.col0,
-             scalar * mat.col1,
-             scalar * mat.col2 };
+    return { scalar * mat[0],
+             scalar * mat[1],
+             scalar * mat[2] };
 }
 
-zcm::mat3 zcm::operator /(const float scalar, const zcm::mat3& mat)
+zcm::mat3 zcm::operator /(float scalar, const mat3 &mat)
 {
-    return { scalar / mat.col0,
-             scalar / mat.col1,
-             scalar / mat.col2 };
+    return { scalar / mat[0],
+             scalar / mat[1],
+             scalar / mat[2] };
 }
 
 zcm::vec3& zcm::mat3::operator[](unsigned pos)
 {
     assert(pos < 3);
-    if(pos == 0) {
-        return col0;
-    }
-    else if (pos == 1) {
-        return col1;
-    }
-    else {
-        return col2;
-    }
+    return _columns[pos];
 }
 
 const zcm::vec3& zcm::mat3::operator[](unsigned pos) const
 {
     assert(pos < 3);
-    if(pos == 0) {
-        return col0;
-    }
-    else if (pos == 1) {
-        return col1;
-    }
-    else {
-        return col2;
-    }
+    return _columns[pos];
 }
+

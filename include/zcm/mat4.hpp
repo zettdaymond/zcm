@@ -4,20 +4,23 @@
 
 namespace zcm
 {
+    struct mat3;
+
     struct mat4
     {
         mat4();
-        mat4(float value);
-        mat4(const vec4& _col0,  const vec4& _col1, const vec4& _col2, const vec4& _col3);
+        explicit mat4(float value);
+        explicit mat4(const mat3& m);
+
+        mat4(const vec4& c0,  const vec4& c1, const vec4& c2, const vec4& c3);
 
         vec4& operator[](unsigned pos);
         const vec4& operator[](unsigned pos) const;
 
+        explicit operator mat3() const;
+
     //private:
-        vec4 col0;
-        vec4 col1;
-        vec4 col2;
-        vec4 col3;
+        vec4 _columns[4];
     };
 
     mat4 operator +(const mat4& first, const mat4& second);
@@ -25,10 +28,10 @@ namespace zcm
     mat4 operator -(const mat4& first);
     mat4 operator *(const mat4& first, const mat4& second);
 
-    mat4 operator *(const mat4& mat, const float scalar);
-    mat4 operator /(const mat4& mat, const float scalar);
+    mat4 operator *(const mat4& mat, float scalar);
+    mat4 operator /(const mat4& mat, float scalar);
 
-    mat4 operator *(const float scalar, const mat4& mat);
-    mat4 operator /(const float scalar, const mat4& mat);
+    mat4 operator *(float scalar, const mat4& mat);
+    mat4 operator /(float scalar, const mat4& mat);
 
 }

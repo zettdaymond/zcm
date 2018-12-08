@@ -22,4 +22,8 @@ namespace zcm {
     mat2 inverse(const mat2& m);
     mat3 inverse(const mat3& m);
     mat4 inverse(const mat4& m);
+
+    mat2 inverseTranspose(const mat2& m);
+    mat3 inverseTranspose(const mat3& m);
+    mat4 inverseTranspose(const mat4& m);
 }

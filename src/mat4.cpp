@@ -1,27 +1,45 @@
 #include <type_traits>
 #include <cassert>
 #include <zcm/mat4.hpp>
+#include <zcm/mat3.hpp>
+
 
 static_assert(std::is_standard_layout<zcm::mat4>::value, "");
 
-zcm::mat4::mat4() :
-    col0(1.0f, 0.0f, 0.0f, 0.0f),
-    col1(0.0f, 1.0f, 0.0f, 0.0f),
-    col2(0.0f, 0.0f, 1.0f, 0.0f),
-    col3(0.0f, 0.0f, 0.0f, 1.0f)
+zcm::mat4::mat4() : mat4(1.0f)
 {}
-zcm::mat4::mat4(float value) :
-    col0(value, 0.0f, 0.0f, 0.0f),
-    col1(0.0f, value, 0.0f, 0.0f),
-    col2(0.0f, 0.0f, value, 0.0f),
-    col3(0.0f, 0.0f, 0.0f, value)
-{}
-zcm::mat4::mat4(const vec4& _col0,  const vec4& _col1, const vec4& _col2, const vec4& _col3) :
-    col0(_col0),
-    col1(_col1),
-    col2(_col2),
-    col3(_col3)
-{}
+
+zcm::mat4::mat4(float value)
+{
+    _columns[0] = vec4(value, 0.0f, 0.0f, 0.0f);
+    _columns[1] = vec4(0.0f, value, 0.0f, 0.0f);
+    _columns[2] = vec4(0.0f, 0.0f, value, 0.0f);
+    _columns[3] = vec4(0.0f, 0.0f, 0.0f, value);
+}
+
+zcm::mat4::mat4(const vec4& c0,  const vec4& c1, const vec4& c2, const vec4& c3)
+{
+    _columns[0] = c0;
+    _columns[1] = c1;
+    _columns[2] = c2;
+    _columns[3] = c3;
+}
+
+zcm::mat4::mat4(const zcm::mat3 &m)
+{
+    _columns[0] = vec4(m[0], 0.0f);
+    _columns[1] = vec4(m[1], 0.0f);
+    _columns[2] = vec4(m[2], 0.0f);
+    _columns[3] = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
+zcm::mat4::operator mat3() const
+{
+    return mat3{vec3{_columns[0].x, _columns[0].y, _columns[0].z},
+                vec3{_columns[1].x, _columns[1].y, _columns[1].z},
+                vec3{_columns[2].x, _columns[2].y, _columns[2].z}};
+}
+
 
 zcm::mat4 zcm::operator +(const zcm::mat4& first, const zcm::mat4& second)
 {
@@ -67,7 +85,7 @@ zcm::mat4 zcm::operator *(const zcm::mat4& m1, const zcm::mat4& m2)
     return Result;
 }
 
-zcm::mat4 zcm::operator *(const zcm::mat4& mat, const float scalar)
+zcm::mat4 zcm::operator *(const zcm::mat4& mat, float scalar)
 {
     return { mat[0] * scalar,
              mat[1] * scalar,
@@ -75,7 +93,7 @@ zcm::mat4 zcm::operator *(const zcm::mat4& mat, const float scalar)
              mat[3] * scalar };
 }
 
-zcm::mat4 zcm::operator /(const zcm::mat4& mat, const float scalar)
+zcm::mat4 zcm::operator /(const zcm::mat4& mat, float scalar)
 {
     return { mat[0] / scalar,
              mat[1] / scalar,
@@ -83,7 +101,7 @@ zcm::mat4 zcm::operator /(const zcm::mat4& mat, const float scalar)
              mat[3] / scalar };
 }
 
-zcm::mat4 zcm::operator *(const float scalar, const zcm::mat4& mat)
+zcm::mat4 zcm::operator *(float scalar, const zcm::mat4& mat)
 {
     return { scalar * mat[0],
              scalar * mat[1],
@@ -91,7 +109,7 @@ zcm::mat4 zcm::operator *(const float scalar, const zcm::mat4& mat)
              scalar * mat[3] };
 }
 
-zcm::mat4 zcm::operator /(const float scalar, const zcm::mat4& mat)
+zcm::mat4 zcm::operator /(float scalar, const zcm::mat4& mat)
 {
     return { scalar / mat[0],
              scalar / mat[1],
@@ -102,33 +120,12 @@ zcm::mat4 zcm::operator /(const float scalar, const zcm::mat4& mat)
 zcm::vec4& zcm::mat4::operator[](unsigned pos)
 {
     assert(pos < 4);
-    if(pos == 0) {
-        return col0;
-    }
-    else if (pos == 1) {
-        return col1;
-    }
-    else if (pos == 2){
-        return col2;
-    }
-    else {
-        return col3;
-    }
+    return _columns[pos];
 }
 
 const zcm::vec4& zcm::mat4::operator[](unsigned pos) const
 {
     assert(pos < 4);
-    if(pos == 0) {
-        return col0;
-    }
-    else if (pos == 1) {
-        return col1;
-    }
-    else if (pos == 2){
-        return col2;
-    }
-    else {
-        return col3;
-    }
+    return _columns[pos];
 }
+
