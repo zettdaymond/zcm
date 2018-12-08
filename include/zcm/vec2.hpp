@@ -9,7 +9,7 @@ namespace zcm
         vec2(float x, float y);
 
         float& operator[](unsigned val);
-        const float& operator[](unsigned val) const;
+        float operator[](unsigned val) const;
 
         float x;
         float y;

@@ -3,14 +3,18 @@
 namespace zcm
 {
 
+    struct vec2;
     struct vec3
     {
         vec3();
         vec3(float value);
         vec3(float x, float y, float z);
 
+        vec3(vec2 xy, float z);
+        vec3(float x, vec2 yz);
+
         float& operator[](unsigned val);
-        const float& operator[](unsigned val) const;
+        float operator[](unsigned val) const;
 
         float x;
         float y;

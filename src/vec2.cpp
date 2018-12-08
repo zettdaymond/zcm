@@ -2,11 +2,21 @@
 #include <type_traits>
 #include <zcm/vec2.hpp>
 
+
 static_assert (std::is_standard_layout<zcm::vec2>::value, "");
 
-zcm::vec2::vec2() : x(0.0f), y(0.0f) {}
-zcm::vec2::vec2(float value) : x(value), y(value) { }
-zcm::vec2::vec2(float _x, float _y) : x(_x), y(_y) { }
+zcm::vec2::vec2() :
+    vec2(0.0f)
+{}
+zcm::vec2::vec2(float value) :
+    x(value),
+    y(value)
+{}
+
+zcm::vec2::vec2(float _x, float _y) :
+    x(_x),
+    y(_y)
+{}
 
 zcm::vec2 zcm::operator +(const zcm::vec2& first, const zcm::vec2& second)
 {
@@ -67,7 +77,7 @@ float&zcm::vec2::operator[](unsigned val)
     }
 }
 
-const float&zcm::vec2::operator[](unsigned val) const
+float zcm::vec2::operator[](unsigned val) const
 {
     assert(val < 3);
 

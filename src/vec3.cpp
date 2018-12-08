@@ -1,17 +1,38 @@
 #include <cassert>
 #include <type_traits>
 #include <zcm/vec3.hpp>
+#include <zcm/vec2.hpp>
 #include <zcm/common.hpp>
+
 
 static_assert(std::is_standard_layout<zcm::vec3>::value, "");
 
+zcm::vec3::vec3() :
+    vec3(0.0f)
+{}
 
-zcm::vec3::vec3() : x(0.0f), y(0.0f), z(0.0f) { }
-zcm::vec3::vec3(float value) : x(value), y(value), z(value) { }
+zcm::vec3::vec3(float value) :
+    x(value),
+    y(value),
+    z(value)
+{}
+
 zcm::vec3::vec3(float _x, float _y, float _z) :
     x(_x),
     y(_y),
-    z(_z) 
+    z(_z)
+{}
+
+zcm::vec3::vec3(zcm::vec2 xy, float _z):
+    x(xy.x),
+    y(xy.y),
+    z(_z)
+{}
+
+zcm::vec3::vec3(float _x, zcm::vec2 yz) :
+    x(_x),
+    y(yz.x),
+    z(yz.y)
 {}
 
 zcm::vec3 zcm::operator +(const zcm::vec3& first, const zcm::vec3& second)
@@ -68,7 +89,7 @@ zcm::vec3 zcm::operator /(const float scalar, const zcm::vec3& vec)
              scalar / vec.z };
 }
 
-float&zcm::vec3::operator[](unsigned val)
+float& zcm::vec3::operator[](unsigned val)
 {
     assert(val < 3);
 
@@ -83,7 +104,7 @@ float&zcm::vec3::operator[](unsigned val)
     }
 }
 
-const float&zcm::vec3::operator[](unsigned val) const
+float zcm::vec3::operator[](unsigned val) const
 {
     assert(val < 3);
 
