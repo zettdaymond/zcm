@@ -53,6 +53,7 @@ set_target_properties(zcm
 
 if(ZCM_ENABLE_TESTS)
     enable_testing()
+    add_definitions(-DGLM_ENABLE_EXPERIMENTAL=1 -DGLM_GTX_norm=1)
     add_subdirectory(test)
 endif()
 

@@ -4,6 +4,7 @@
 #include <zcm/exponential.hpp>
 #include <zcm/geometric.hpp>
 #include <zcm/quat.hpp>
+#include <zcm/common.hpp>
 #include <zcm/geometric.hpp>
 
 static_assert(std::is_standard_layout<zcm::quat>::value, "");
@@ -48,7 +49,7 @@ zcm::quat::quat(zcm::vec3 u, zcm::vec3 v)
          * around an arbitrary orthogonal axis. Axis normalisation
          * can happen later, when we normalise the quaternion. */
         real_part = 0.0f;
-        w = abs(u.x) > abs(u.z) ? vec3(-u.y, u.x, 0.f)
+        w = zcm::abs(u.x) > zcm::abs(u.z) ? vec3(-u.y, u.x, 0.f)
                                 : vec3(0.f, -u.z, u.y);
     }
     else
@@ -115,7 +116,7 @@ zcm::quat zcm::operator *(const zcm::quat& q1, const zcm::quat& q2)
     float yy = (q1.w - q1.y) * (q2.w + q2.z);
     float zz = (q1.w + q1.y) * (q2.w - q2.z);
     float xx = ww + yy + zz;
-    float qq = 0.5 * (xx + (q1.z - q1.x) * (q2.x - q2.y));
+    float qq = 0.5f * (xx + (q1.z - q1.x) * (q2.x - q2.y));
 
     float w = qq - ww + (q1.z - q1.y) * (q2.y - q2.z);
     float x = qq - xx + (q1.x + q1.w) * (q2.x + q2.w);

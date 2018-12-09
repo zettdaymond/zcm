@@ -20,7 +20,7 @@ package_add_test(zcm_test
     vec2_test.cpp
     vec3_test.cpp
     vec4_test.cpp
-    quat_test.cpp
+    # quat_test.cpp
 )
 
 target_link_libraries(zcm_test zcm::zcm)

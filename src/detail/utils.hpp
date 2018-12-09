@@ -16,19 +16,19 @@ namespace zcm {
         }
 
         template<class Op>
-        constexpr vec2 applyOp(const vec2& v, const Op& op)
+        vec2 applyOp(const vec2& v, const Op& op)
         {
             return { op(v.x), op(v.y) };
         }
 
         template<class Op>
-        constexpr vec3 applyOp(const vec3& v, const Op& op)
+        vec3 applyOp(const vec3& v, const Op& op)
         {
             return { op(v.x), op(v.y), op(v.z) };
         }
 
         template<class Op>
-        constexpr vec4 applyOp(const vec4& v, const Op& op)
+        vec4 applyOp(const vec4& v, const Op& op)
         {
             return { op(v.x), op(v.y), op(v.z), op(v.w) };
         }
