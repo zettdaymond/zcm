@@ -2,6 +2,9 @@
 
 namespace zcm
 {
+    class bvec2;
+    class bvec3;
+    class bvec4;
     class vec2;
     class vec3;
     class vec4;
@@ -10,6 +13,14 @@ namespace zcm
     vec2  abs (const vec2& x);
     vec3  abs (const vec3& x);
     vec4  abs (const vec4& x);
+
+    bool  all (const bvec2& x);
+    bool  all (const bvec3& x);
+    bool  all (const bvec4& x);
+
+    bool  any (const bvec2& x);
+    bool  any (const bvec3& x);
+    bool  any (const bvec4& x);
 
     float ceil (float x);
     vec2  ceil (const vec2& x);
@@ -21,9 +32,10 @@ namespace zcm
     vec3  clamp (const vec3& x, const vec3& minVal, const vec3& maxVal);
     vec4  clamp (const vec4& x, const vec4& minVal, const vec4& maxVal);
 
-
     //TODO: genIType 	floatBitsToInt (genType const &value);
     //TODO: genUType 	floatBitsToUint (genType const &value)
+    //TODO: genType 	intBitsToFloat (genIType const &value)
+    //TODO: genType 	uintBitsToFloat (genUType const &value);
 
     float floor (float x);
     vec2  floor (const vec2& x);
@@ -41,14 +53,17 @@ namespace zcm
     vec4  fract (const vec4& x);
 
     //TODO: genType 	frexp (genType const &x, genIType &exp)
-
-    //TODO: genType 	intBitsToFloat (genIType const &value)
-
-    //TODO: genType::bool_type 	isinf (genType const &x)
-
-    //TODO: genType::bool_type 	isnan (genType const &x)
-
     //TODO: genType 	ldexp (genType const &x, genIType const &exp)
+
+    bool  isinf (float x);
+    bvec2 isinf (const vec2& x);
+    bvec3 isinf (const vec3& x);
+    bvec4 isinf (const vec4& x);
+
+    bool  isnan (float x);
+    bvec2 isnan (const vec2& x);
+    bvec3 isnan (const vec3& x);
+    bvec4 isnan (const vec4& x);
 
     float max (float x, float y);
     vec2  max (const vec2& x, const vec2& y);
@@ -104,6 +119,47 @@ namespace zcm
     vec3  trunc (const vec3& x);
     vec4  trunc (const vec4& x);
 
-    //TODO: genType 	uintBitsToFloat (genUType const &value);
+
+    // relational functions
+
+    bvec2 lessThan (const vec2& x, const vec2& y);
+    bvec3 lessThan (const vec3& x, const vec3& y);
+    bvec4 lessThan (const vec4& x, const vec4& y);
+
+    bvec2 lessThanEqual (const vec2& x, const vec2& y);
+    bvec3 lessThanEqual (const vec3& x, const vec3& y);
+    bvec4 lessThanEqual (const vec4& x, const vec4& y);
+
+    bvec2 greaterThan (const vec2& x, const vec2& y);
+    bvec3 greaterThan (const vec3& x, const vec3& y);
+    bvec4 greaterThan (const vec4& x, const vec4& y);
+
+    bvec2 greaterThanEqual (const vec2& x, const vec2& y);
+    bvec3 greaterThanEqual (const vec3& x, const vec3& y);
+    bvec4 greaterThanEqual (const vec4& x, const vec4& y);
+
+    bvec2 equal (const bvec2& x, const bvec2& y);
+    bvec3 equal (const bvec3& x, const bvec3& y);
+    bvec4 equal (const bvec4& x, const bvec4& y);
+
+    bvec2 equal (const vec2& x, const vec2& y);
+    bvec3 equal (const vec3& x, const vec3& y);
+    bvec4 equal (const vec4& x, const vec4& y);
+
+    bvec2 notEqual (const bvec2& x, const bvec2& y);
+    bvec3 notEqual (const bvec3& x, const bvec3& y);
+    bvec4 notEqual (const bvec4& x, const bvec4& y);
+
+    bvec2 notEqual (const vec2& x, const vec2& y);
+    bvec3 notEqual (const vec3& x, const vec3& y);
+    bvec4 notEqual (const vec4& x, const vec4& y);
+
+    // simd extension
+    float select (bool t, float x, float y);
+    vec2  select (bvec2 t, vec2 x, vec2 y);
+    vec3  select (bvec3 t, vec3 x, vec3 y);
+    vec4  select (bvec4 t, vec4 x, vec4 y);
+
+
 
 }

@@ -7,6 +7,9 @@
 #include <zcm/vec2.hpp>
 #include <zcm/vec3.hpp>
 #include <zcm/vec4.hpp>
+#include <zcm/bvec2.hpp>
+#include <zcm/bvec3.hpp>
+#include <zcm/bvec4.hpp>
 
 
 float zcm::abs(float x)
@@ -413,4 +416,265 @@ zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, const zcm::vec3 &t)
 zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::vec4 &t)
 {
     return vec4{mix(x.x, y.x, t.x), mix(x.y, y.y, t.y), mix(x.z, y.z, t.z), mix(x.w, y.w, t.w)};
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+bool zcm::isinf(float x)
+{
+    return std::isinf(x);
+}
+
+zcm::bvec2 zcm::isinf(const zcm::vec2 &x)
+{
+    return { isinf(x.x), isinf(x.y) };
+}
+
+zcm::bvec3 zcm::isinf(const zcm::vec3 &x)
+{
+    return { isinf(x.x), isinf(x.y), isinf(x.z) };
+}
+
+zcm::bvec4 zcm::isinf(const zcm::vec4 &x)
+{
+    return { isinf(x.x), isinf(x.y), isinf(x.z), isinf(x.w) };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+bool zcm::isnan(float x)
+{
+    return std::isnan(x);
+}
+
+zcm::bvec2 zcm::isnan(const zcm::vec2 &x)
+{
+    return { isnan(x.x), isnan(x.y) };
+}
+
+zcm::bvec3 zcm::isnan(const zcm::vec3 &x)
+{
+    return { isnan(x.x), isnan(x.y), isnan(x.z) };
+}
+
+zcm::bvec4 zcm::isnan(const zcm::vec4 &x)
+{
+    return { isnan(x.x), isnan(x.y), isnan(x.z), isnan(x.w) };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::lessThan(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x < y.x, x.y < y.y };
+}
+
+zcm::bvec3 zcm::lessThan(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x < y.x, x.y < y.y, x.z < y.z };
+}
+
+zcm::bvec4 zcm::lessThan(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x < y.x, x.y < y.y, x.z < y.z, x.w < y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::lessThanEqual(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x <= y.x, x.y <= y.y };
+}
+
+zcm::bvec3 zcm::lessThanEqual(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x <= y.x, x.y <= y.y, x.z <= y.z };
+}
+
+zcm::bvec4 zcm::lessThanEqual(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x <= y.x, x.y <= y.y, x.z <= y.z, x.w <= y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::greaterThan(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x > y.x, x.y > y.y };
+}
+
+zcm::bvec3 zcm::greaterThan(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x > y.x, x.y > y.y, x.z > y.z };
+}
+
+zcm::bvec4 zcm::greaterThan(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x > y.x, x.y > y.y, x.z > y.z, x.w > y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::greaterThanEqual(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x >= y.x, x.y >= y.y };
+}
+
+zcm::bvec3 zcm::greaterThanEqual(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x >= y.x, x.y >= y.y, x.z >= y.z };
+}
+
+zcm::bvec4 zcm::greaterThanEqual(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x >= y.x, x.y >= y.y, x.z >= y.z, x.w >= y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::equal(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x == y.x, x.y == y.y };
+}
+
+zcm::bvec3 zcm::equal(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x == y.x, x.y == y.y, x.z == y.z };
+}
+
+zcm::bvec4 zcm::equal(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::equal(const zcm::bvec2 &x, const zcm::bvec2 &y)
+{
+    return { x.x == y.x, x.y == y.y };
+}
+
+zcm::bvec3 zcm::equal(const zcm::bvec3 &x, const zcm::bvec3 &y)
+{
+    return { x.x == y.x, x.y == y.y, x.z == y.z };
+}
+
+zcm::bvec4 zcm::equal(const zcm::bvec4 &x, const zcm::bvec4 &y)
+{
+    return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::notEqual(const zcm::vec2 &x, const zcm::vec2 &y)
+{
+    return { x.x != y.x, x.y != y.y };
+}
+
+zcm::bvec3 zcm::notEqual(const zcm::vec3 &x, const zcm::vec3 &y)
+{
+    return { x.x != y.x, x.y != y.y, x.z != y.z };
+}
+
+zcm::bvec4 zcm::notEqual(const zcm::vec4 &x, const zcm::vec4 &y)
+{
+    return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+zcm::bvec2 zcm::notEqual(const zcm::bvec2 &x, const zcm::bvec2 &y)
+{
+    return { x.x != y.x, x.y != y.y };
+}
+
+zcm::bvec3 zcm::notEqual(const zcm::bvec3 &x, const zcm::bvec3 &y)
+{
+    return { x.x != y.x, x.y != y.y, x.z != y.z };
+}
+
+zcm::bvec4 zcm::notEqual(const zcm::bvec4 &x, const zcm::bvec4 &y)
+{
+    return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+bool zcm::all(const zcm::bvec2 &x)
+{
+    return x.x && x.y;
+}
+
+bool zcm::all(const zcm::bvec3 &x)
+{
+    return x.x && x.y && x.z;
+}
+
+bool zcm::all(const zcm::bvec4 &x)
+{
+    return x.x && x.y && x.z && x.w;
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+bool zcm::any(const zcm::bvec2 &x)
+{
+    return x.x || x.y;
+}
+
+bool zcm::any(const zcm::bvec3 &x)
+{
+    return  x.x || x.y || x.z;
+}
+
+bool zcm::any(const zcm::bvec4 &x)
+{
+    return x.x || x.y || x.z || x.w;
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+float zcm::select(bool t, float x, float y)
+{
+    return t ? x : y;
+}
+
+zcm::vec2 zcm::select(zcm::bvec2 t, zcm::vec2 x, zcm::vec2 y)
+{
+    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y) };
+}
+
+zcm::vec3 zcm::select(zcm::bvec3 t, zcm::vec3 x, zcm::vec3 y)
+{
+    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y), select(t.z, x.z, y.z) };
+}
+
+zcm::vec4 zcm::select(zcm::bvec4 t, zcm::vec4 x, zcm::vec4 y)
+{
+    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y), select(t.z, x.z, y.z), select(t.w, x.w, y.w) };
 }
