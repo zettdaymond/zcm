@@ -37,6 +37,9 @@ add_library(zcm
     src/vec2.cpp
     src/vec3.cpp
     src/vec4.cpp
+    src/bvec2.cpp
+    src/bvec3.cpp
+    src/bvec4.cpp
 )
 
 add_library(zcm::zcm ALIAS zcm)

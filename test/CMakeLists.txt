@@ -17,6 +17,9 @@ endmacro()
 
 package_add_test(zcm_test
     geometric_test.cpp
+    bvec2_test.cpp
+    bvec3_test.cpp
+    bvec4_test.cpp
     vec2_test.cpp
     vec3_test.cpp
     vec4_test.cpp
