@@ -13,11 +13,27 @@ namespace zcm
 
         float x;
         float y;
+
+        void operator +=(const vec2& other);
+        void operator -=(const vec2& other);
+        void operator *=(const vec2& other);
+        void operator /=(const vec2& other);
+
+        void operator +=(float scalar);
+        void operator -=(float scalar);
+        void operator *=(float scalar);
+        void operator /=(float scalar);
+
     };
+
+    bool operator==(const vec2& first, const vec2& second);
+    bool operator!=(const vec2& first, const vec2& second);
+
+    vec2 operator +(const vec2& first);
+    vec2 operator -(const vec2& first);
 
     vec2 operator +(const vec2& first, const vec2& second);
     vec2 operator -(const vec2& first, const vec2& second);
-    vec2 operator -(const vec2& first);
     vec2 operator *(const vec2& first, const vec2& second);
     vec2 operator /(const vec2& first, const vec2& second);
 

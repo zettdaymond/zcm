@@ -16,6 +16,14 @@ namespace zcm
         bool& operator[](unsigned val);
         bool operator[](unsigned val) const;
 
+        void operator &=(bool scalar);
+        void operator |=(bool scalar);
+        void operator ^=(bool scalar);
+
+        void operator &=(bvec3 other);
+        void operator |=(bvec3 other);
+        void operator ^=(bvec3 other);
+
         bool x;
         bool y;
         bool z;

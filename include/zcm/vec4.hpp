@@ -21,15 +21,30 @@ namespace zcm
         float& operator[](unsigned val);
         float operator[](unsigned val) const;
 
+        void operator +=(const vec4& other);
+        void operator -=(const vec4& other);
+        void operator *=(const vec4& other);
+        void operator /=(const vec4& other);
+
+        void operator +=(float scalar);
+        void operator -=(float scalar);
+        void operator *=(float scalar);
+        void operator /=(float scalar);
+
         float x;
         float y;
         float z;
         float w;
     };
 
+    bool operator==(const vec4& first, const vec4& second);
+    bool operator!=(const vec4& first, const vec4& second);
+
+    vec4 operator -(const vec4& first);
+    vec4 operator +(const vec4& first);
+
     vec4 operator +(const vec4& first, const vec4& second);
     vec4 operator -(const vec4& first, const vec4& second);
-    vec4 operator -(const vec4& first);
     vec4 operator *(const vec4& first, const vec4& second);
     vec4 operator /(const vec4& first, const vec4& second);
 

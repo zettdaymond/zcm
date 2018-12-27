@@ -37,42 +37,24 @@ zcm::vec3::vec3(float _x, zcm::vec2 yz) :
 
 zcm::vec3 zcm::operator +(const zcm::vec3& first, const zcm::vec3& second)
 {
-    return vec3{ first.x + second.x,
-                 first.y + second.y,
-                 first.z + second.z };
+    return { first.x + second.x,
+             first.y + second.y,
+             first.z + second.z };
 }
 
 zcm::vec3 zcm::operator -(const zcm::vec3& first, const vec3& second)
 {
-    return vec3{ first.x - second.x,
-                 first.y - second.y,
-                 first.z - second.z };
+    return { first.x - second.x,
+             first.y - second.y,
+             first.z - second.z };
 }
 
-zcm::vec3 zcm::operator -(const zcm::vec3& first)
-{
-    return vec3{ -first.x,
-                 -first.y,
-                 -first.z};
-}
-
-zcm::vec3 zcm::operator *(const zcm::vec3& vec, const float scalar)
-{
-    return vec3{ vec.x * scalar,
-                 vec.y * scalar,
-                 vec.z * scalar };
-}
-
-zcm::vec3 zcm::operator /(const zcm::vec3& vec, const float scalar)
-{
-    return vec3{ vec.x / scalar,
-                 vec.y / scalar,
-                 vec.z / scalar };
-}
 
 zcm::vec3 zcm::operator *(const zcm::vec3& first, const zcm::vec3& second)
 {
-    return {first.x * second.x, first.y * second.y, first.z * second.z};
+    return { first.x * second.x,
+             first.y * second.y,
+             first.z * second.z };
 }
 
 zcm::vec3 zcm::operator *(const float scalar, const zcm::vec3& vec)
@@ -88,6 +70,111 @@ zcm::vec3 zcm::operator /(const float scalar, const zcm::vec3& vec)
              scalar / vec.y,
              scalar / vec.z };
 }
+
+zcm::vec3 zcm::operator /(const zcm::vec3& first, const zcm::vec3& second)
+{
+    return { first.x / second.x,
+             first.y / second.y,
+             first.z / second.z };
+}
+
+
+zcm::vec3 zcm::operator *(const zcm::vec3& vec, const float scalar)
+{
+    return { vec.x * scalar,
+             vec.y * scalar,
+             vec.z * scalar };
+}
+
+zcm::vec3 zcm::operator /(const zcm::vec3& vec, const float scalar)
+{
+    return { vec.x / scalar,
+             vec.y / scalar,
+             vec.z / scalar };
+}
+
+
+zcm::vec3 zcm::operator -(const zcm::vec3& first)
+{
+    return { -first.x,
+                -first.y,
+                -first.z };
+}
+
+zcm::vec3 zcm::operator +(const zcm::vec3 &first)
+{
+    return { +first.x,
+                +first.y,
+                +first.z };
+}
+
+
+void zcm::vec3::operator +=(const zcm::vec3 &other)
+{
+    x += other.x;
+    y += other.y;
+    z += other.z;
+}
+
+void zcm::vec3::operator -=(const zcm::vec3 &other)
+{
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+}
+
+void zcm::vec3::operator *=(const zcm::vec3 &other)
+{
+    x *= other.x;
+    y *= other.y;
+    z *= other.z;
+}
+
+void zcm::vec3::operator /=(const zcm::vec3 &other)
+{
+    x /= other.x;
+    y /= other.y;
+    z /= other.z;
+}
+
+void zcm::vec3::operator +=(float scalar)
+{
+    x += scalar;
+    y += scalar;
+    z += scalar;
+}
+
+void zcm::vec3::operator -=(float scalar)
+{
+    x -= scalar;
+    y -= scalar;
+    z -= scalar;
+}
+
+void zcm::vec3::operator *=(float scalar)
+{
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+}
+
+void zcm::vec3::operator /=(float scalar)
+{
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
+}
+
+bool zcm::operator==(const zcm::vec3 &first, const zcm::vec3 &second)
+{
+    return first.x == second.x && first.y == second.y && first.z == second.z;
+}
+
+bool zcm::operator!=(const zcm::vec3 &first, const zcm::vec3 &second)
+{
+    return !(first == second);
+}
+
 
 float& zcm::vec3::operator[](unsigned val)
 {
@@ -119,7 +206,3 @@ float zcm::vec3::operator[](unsigned val) const
     }
 }
 
-zcm::vec3 zcm::operator /(const zcm::vec3& first, const zcm::vec3& second)
-{
-    return {first.x / second.x, first.y / second.y, first.z / second.z};
-}

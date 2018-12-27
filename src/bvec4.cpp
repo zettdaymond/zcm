@@ -4,8 +4,6 @@
 #include <zcm/bvec3.hpp>
 #include <zcm/bvec2.hpp>
 
-#define BXOR(X, Y) (!(X) != !(Y))
-
 static_assert(std::is_standard_layout<zcm::bvec4>::value, "");
 
 zcm::bvec4::bvec4() :
@@ -70,54 +68,84 @@ zcm::bvec4::bvec4(bool _x, bool _y, zcm::bvec2 zw) :
 
 zcm::bvec4 zcm::operator &&(bvec4 first, bvec4 second)
 {
-    return { first.x && second.x, first.y && second.y, first.z && second.z, first.w && second.w};
+    return { first.x && second.x,
+             first.y && second.y,
+             first.z && second.z,
+             first.w && second.w};
 }
 
 zcm::bvec4 zcm::operator &&(bvec4 vec, bool scalar)
 {
-    return { vec.x && scalar, vec.y && scalar, vec.z && scalar, vec.w && scalar };
+    return { vec.x && scalar,
+             vec.y && scalar,
+             vec.z && scalar,
+             vec.w && scalar };
 }
 
 zcm::bvec4 zcm::operator &&(bool scalar, bvec4 vec)
 {
-    return { vec.x && scalar, vec.y && scalar, vec.z && scalar, vec.w && scalar };
+    return { vec.x && scalar,
+             vec.y && scalar,
+             vec.z && scalar,
+             vec.w && scalar };
 }
 
 
 zcm::bvec4 zcm::operator ||(bvec4 first, bvec4 second)
 {
-    return { first.x || second.x, first.y || second.y, first.z || second.z, first.w || second.w };
+    return { first.x || second.x,
+             first.y || second.y,
+             first.z || second.z,
+             first.w || second.w };
 }
 
 zcm::bvec4 zcm::operator ||(bvec4 vec, const bool scalar)
 {
-    return { vec.x || scalar, vec.y || scalar, vec.z || scalar, vec.w || scalar };
+    return { vec.x || scalar,
+             vec.y || scalar,
+             vec.z || scalar,
+             vec.w || scalar };
 }
 
 zcm::bvec4 zcm::operator ||(const bool scalar, bvec4 vec)
 {
-    return { vec.x || scalar, vec.y || scalar, vec.z || scalar, vec.w || scalar };
+    return { vec.x || scalar,
+             vec.y || scalar,
+             vec.z || scalar,
+             vec.w || scalar };
 }
 
 
 zcm::bvec4 zcm::operator ^(bvec4 first, bvec4 second)
 {
-    return {BXOR(first.x, second.x), BXOR(first.y , second.y), BXOR(first.z , second.z), BXOR(first.w , second.w) };
+    return { bool(first.x ^ second.x),
+             bool(first.y ^ second.y),
+             bool(first.z ^ second.z),
+             bool(first.w ^ second.w) };
 }
 
 zcm::bvec4 zcm::operator ^(zcm::bvec4 first, bool scalar)
 {
-    return {BXOR(first.x, scalar), BXOR(first.y , scalar), BXOR(first.z , scalar), BXOR(first.w , scalar) };
+    return { bool(first.x ^ scalar),
+             bool(first.y ^ scalar),
+             bool(first.z ^ scalar),
+             bool(first.w ^ scalar) };
 }
 
 zcm::bvec4 zcm::operator ^(bool scalar, zcm::bvec4 first)
 {
-    return {BXOR(first.x, scalar), BXOR(first.y , scalar), BXOR(first.z , scalar), BXOR(first.w , scalar) };
+    return { bool(first.x ^ scalar),
+             bool(first.y ^ scalar),
+             bool(first.z ^ scalar),
+             bool(first.w ^ scalar) };
 }
 
 zcm::bvec4 zcm::operator !(bvec4 first)
 {
-    return { !first.x, !first.y, !first.z, !first.w };
+    return { !first.x,
+             !first.y,
+             !first.z,
+             !first.w };
 }
 
 bool zcm::operator ==(zcm::bvec4 first, zcm::bvec4 second)
@@ -128,6 +156,54 @@ bool zcm::operator ==(zcm::bvec4 first, zcm::bvec4 second)
 bool zcm::operator !=(zcm::bvec4 first, zcm::bvec4 second)
 {
     return !(first == second);
+}
+
+void zcm::bvec4::operator &=(bool scalar)
+{
+    x &= scalar;
+    y &= scalar;
+    z &= scalar;
+    w &= scalar;
+}
+
+void zcm::bvec4::operator |=(bool scalar)
+{
+    x |= scalar;
+    y |= scalar;
+    z |= scalar;
+    w |= scalar;
+}
+
+void zcm::bvec4::operator ^=(bool scalar)
+{
+    x ^= scalar;
+    y ^= scalar;
+    z ^= scalar;
+    w ^= scalar;
+}
+
+void zcm::bvec4::operator &=(zcm::bvec4 other)
+{
+    x &= other.x;
+    y &= other.y;
+    z &= other.z;
+    w &= other.w;
+}
+
+void zcm::bvec4::operator |=(zcm::bvec4 other)
+{
+    x |= other.x;
+    y |= other.y;
+    z |= other.z;
+    w |= other.w;
+}
+
+void zcm::bvec4::operator ^=(zcm::bvec4 other)
+{
+    x ^= other.x;
+    y ^= other.y;
+    z ^= other.z;
+    w ^= other.w;
 }
 
 
