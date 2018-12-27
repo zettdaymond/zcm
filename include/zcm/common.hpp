@@ -104,6 +104,11 @@ namespace zcm
     vec3  mix (const vec3& x, const vec3& y, const vec3 &t);
     vec4  mix (const vec4& x, const vec4& y, const vec4 &t);
 
+    float mix (float x, float y, bool t);
+    vec2  mix (const vec2& x, const vec2& y, const bvec2& t);
+    vec3  mix (const vec3& x, const vec3& y, const bvec3 &t);
+    vec4  mix (const vec4& x, const vec4& y, const bvec4 &t);
+
     float step (float edge, float x);
     vec2  step (const vec2& edge, const vec2 & x);
     vec3  step (const vec3& edge, const vec3 & x);
@@ -154,11 +159,7 @@ namespace zcm
     bvec3 notEqual (const vec3& x, const vec3& y);
     bvec4 notEqual (const vec4& x, const vec4& y);
 
-    // simd extension
-    float select (bool t, float x, float y);
-    vec2  select (bvec2 t, vec2 x, vec2 y);
-    vec3  select (bvec3 t, vec3 x, vec3 y);
-    vec4  select (bvec4 t, vec4 x, vec4 y);
+
 
 
 

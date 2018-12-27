@@ -115,17 +115,17 @@ float zcm::fma(float a, float b, float c)
 
 zcm::vec2 zcm::fma(const zcm::vec2 &a, const zcm::vec2 &b, const zcm::vec2 &c)
 {
-    return vec2{fma(a.x, b.x, c.x), fma(a.y, b.y, c.y)};
+    return {fma(a.x, b.x, c.x), fma(a.y, b.y, c.y)};
 }
 
 zcm::vec3 zcm::fma(const zcm::vec3 &a, const zcm::vec3 &b, const zcm::vec3 &c)
 {
-    return vec3{fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z)};
+    return {fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z)};
 }
 
 zcm::vec4 zcm::fma(const zcm::vec4 &a, const zcm::vec4 &b, const zcm::vec4 &c)
 {
-    return vec4{fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z), fma(a.w, b.w, c.w)};
+    return {fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z), fma(a.w, b.w, c.w)};
 }
 
 
@@ -158,7 +158,7 @@ zcm::vec4 zcm::fract(const zcm::vec4& x)
 
 float zcm::max(float x, float y)
 {
-    return std::max(x, y);
+    return x < y ? y : x; // glsl spec (returns x if y is NAN)
 }
 
 zcm::vec2 zcm::max(const zcm::vec2& x, const zcm::vec2& y)
@@ -182,7 +182,7 @@ zcm::vec4 zcm::max(const zcm::vec4& x, const zcm::vec4& y)
 
 float zcm::min(float x, float y)
 {
-    return std::min(x,y);
+    return y < x ? y : x; // glsl spec (returns x if y is NAN)
 }
 
 zcm::vec2 zcm::min(const zcm::vec2& x, const zcm::vec2& y)
@@ -381,17 +381,17 @@ float zcm::step(float edge, float x)
 
 zcm::vec2 zcm::step(const zcm::vec2 &edge, const zcm::vec2 & t)
 {
-    return vec2(step(edge.x, t.x), step(edge.y, t.y));
+    return { step(edge.x, t.x), step(edge.y, t.y) };
 }
 
 zcm::vec3 zcm::step(const zcm::vec3 &edge, const zcm::vec3 & t)
 {
-    return vec3(step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z));
+    return { step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z) };
 }
 
 zcm::vec4 zcm::step(const zcm::vec4 &edge, const zcm::vec4 & t)
 {
-    return vec4(step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z), step(edge.w, t.w));
+    return { step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z), step(edge.w, t.w) };
 }
 
 
@@ -405,17 +405,53 @@ float zcm::mix(float x, float y, float t)
 
 zcm::vec2 zcm::mix(const zcm::vec2 &x, const zcm::vec2 &y, const zcm::vec2 &t)
 {
-    return vec2{mix(x.x, y.x, t.x), mix(x.y, y.y, t.y)};
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y) };
 }
 
 zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, const zcm::vec3 &t)
 {
-    return vec3{mix(x.x, y.x, t.x), mix(x.y, y.y, t.y), mix(x.z, y.z, t.z)};
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y),
+             mix(x.z, y.z, t.z) };
 }
 
 zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::vec4 &t)
 {
-    return vec4{mix(x.x, y.x, t.x), mix(x.y, y.y, t.y), mix(x.z, y.z, t.z), mix(x.w, y.w, t.w)};
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y),
+             mix(x.z, y.z, t.z),
+             mix(x.w, y.w, t.w) };
+}
+
+
+//-----------------------------------------------------------------------------------------------------
+
+
+float zcm::mix(float x, float y, bool t)
+{
+    return t ? y : x;
+}
+
+zcm::vec2 zcm::mix(const zcm::vec2 &x, const zcm::vec2 &y, const zcm::bvec2 &t)
+{
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y) };
+}
+
+zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, const zcm::bvec3 &t)
+{
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y),
+             mix(x.z, y.z, t.z) };
+}
+
+zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::bvec4 &t)
+{
+    return { mix(x.x, y.x, t.x),
+             mix(x.y, y.y, t.y),
+             mix(x.z, y.z, t.z),
+             mix(x.w, y.w, t.w) };
 }
 
 
@@ -653,28 +689,4 @@ bool zcm::any(const zcm::bvec3 &x)
 bool zcm::any(const zcm::bvec4 &x)
 {
     return x.x || x.y || x.z || x.w;
-}
-
-
-//-----------------------------------------------------------------------------------------------------
-
-
-float zcm::select(bool t, float x, float y)
-{
-    return t ? x : y;
-}
-
-zcm::vec2 zcm::select(zcm::bvec2 t, zcm::vec2 x, zcm::vec2 y)
-{
-    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y) };
-}
-
-zcm::vec3 zcm::select(zcm::bvec3 t, zcm::vec3 x, zcm::vec3 y)
-{
-    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y), select(t.z, x.z, y.z) };
-}
-
-zcm::vec4 zcm::select(zcm::bvec4 t, zcm::vec4 x, zcm::vec4 y)
-{
-    return { select(t.x, x.x, y.x),  select(t.y, x.y, y.y), select(t.z, x.z, y.z), select(t.w, x.w, y.w) };
 }
