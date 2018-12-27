@@ -25,6 +25,7 @@ endif()
 add_library(zcm
     src/angle_and_trigonometry.cpp
     src/common.cpp
+    src/color_space.cpp
     src/exponential.cpp
     src/geometric.cpp
     src/mat2.cpp
@@ -34,12 +35,14 @@ add_library(zcm
     src/matrix_transform.cpp
     src/quat.cpp
     src/quaternion.cpp
+    src/type_ptr.cpp
     src/vec2.cpp
     src/vec3.cpp
     src/vec4.cpp
     src/bvec2.cpp
     src/bvec3.cpp
     src/bvec4.cpp
+    src/hash.cpp
 )
 
 add_library(zcm::zcm ALIAS zcm)

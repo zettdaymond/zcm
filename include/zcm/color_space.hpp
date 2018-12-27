@@ -1,0 +1,27 @@
+#pragma once
+
+namespace zcm {
+
+	struct vec3;
+	struct vec4;
+
+	/// Convert a linear color to sRGB color using a standard gamma correction.
+	/// IEC 61966-2-1:1999 specification https://www.w3.org/Graphics/Color/srgb
+	vec3 convertLinearToSRGB(vec3 colorLinear);
+	vec4 convertLinearToSRGB(vec4 colorLinear);
+
+	/// Convert a linear color to sRGB color using a custom gamma correction.
+	/// IEC 61966-2-1:1999 specification https://www.w3.org/Graphics/Color/srgb
+	vec3 convertLinearToSRGB(vec3 ColorLinear, float Gamma);
+	vec4 convertLinearToSRGB(vec4 ColorLinear, float Gamma);
+
+	/// Convert a sRGB color to linear color using a standard gamma correction.
+	/// IEC 61966-2-1:1999 specification https://www.w3.org/Graphics/Color/srgb
+	vec3 convertSRGBToLinear(vec3 ColorSRGB);
+	vec4 convertSRGBToLinear(vec4 ColorSRGB);
+
+	/// Convert a sRGB color to linear color using a custom gamma correction.
+	// IEC 61966-2-1:1999 specification https://www.w3.org/Graphics/Color/srgb
+	vec3 convertSRGBToLinear(vec3 ColorSRGB, float Gamma);
+	vec4 convertSRGBToLinear(vec4 ColorSRGB, float Gamma);
+}
