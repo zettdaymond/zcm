@@ -6,51 +6,51 @@
 
 static_assert (std::is_standard_layout<zcm::mat3>::value, "");
 
-zcm::mat3::mat3() : mat3(1.0f)
+zcm::mat3::mat3() noexcept : mat3(1.0f)
 {}
 
-zcm::mat3::mat3(float value)
+zcm::mat3::mat3(float value) noexcept
 {
     _columns[0] = vec3(value, 0.0f, 0.0f);
     _columns[1] = vec3(0.0f, value, 0.0f);
     _columns[2] = vec3(0.0f, 0.0f, value);
 }
 
-zcm::mat3::mat3(const zcm::mat2 &m2)
+zcm::mat3::mat3(const zcm::mat2 &m2) noexcept
 {
     _columns[0] = vec3(m2[0].x, m2[0].y, 0.0f);
     _columns[1] = vec3(m2[1].x, m2[1].y, 0.0f);
     _columns[2] = vec3(m2[2].x, m2[2].y, 1.0f);
 }
 
-zcm::mat3::operator mat2() const
+zcm::mat3::operator mat2() const noexcept
 {
     return mat2{_columns[0].x, _columns[0].y, _columns[1].x, _columns[1].y};
 }
 
 
-zcm::mat3::mat3(const vec3& c0,  const vec3& c1, const vec3& c2)
+zcm::mat3::mat3(const vec3& c0,  const vec3& c1, const vec3& c2) noexcept
 {
     _columns[0] = c0;
     _columns[1] = c1;
     _columns[2] = c2;
 }
 
-zcm::mat3 zcm::operator +(const zcm::mat3& first, const zcm::mat3& second)
+zcm::mat3 zcm::operator +(const zcm::mat3& first, const zcm::mat3& second) noexcept
 {
     return { first[0] + second[0],
              first[1] + second[1],
              first[2] + second[2] };
 }
 
-zcm::mat3 zcm::operator -(const zcm::mat3& first, const zcm::mat3& second)
+zcm::mat3 zcm::operator -(const zcm::mat3& first, const zcm::mat3& second) noexcept
 {
     return { first[0] - second[0],
              first[1] - second[1],
              first[2] - second[2] };
 }
 
-zcm::mat3 zcm::operator -(const zcm::mat3& first)
+zcm::mat3 zcm::operator -(const zcm::mat3& first) noexcept
 {
     return { - first[0],
              - first[1],
@@ -74,7 +74,7 @@ zcm::mat3 zcm::operator -(const zcm::mat3& first)
 //    return mat3{ vec3{a00, a10, a20}, vec3{a01, a11, a21}, vec3{a02, a12, a22}};
 //}
 
-zcm::mat3 zcm::operator *(const zcm::mat3& m1, const zcm::mat3& m2)
+zcm::mat3 zcm::operator *(const zcm::mat3& m1, const zcm::mat3& m2) noexcept
 {
     auto const SrcA00 = m1[0][0];
     auto const SrcA01 = m1[0][1];
@@ -110,41 +110,41 @@ zcm::mat3 zcm::operator *(const zcm::mat3& m1, const zcm::mat3& m2)
 }
 
 
-zcm::mat3 zcm::operator *(const zcm::mat3& mat, float scalar)
+zcm::mat3 zcm::operator *(const zcm::mat3& mat, float scalar) noexcept
 {
     return { mat[0] * scalar,
              mat[1] * scalar,
              mat[2] * scalar };
 }
 
-zcm::mat3 zcm::operator /(const zcm::mat3& mat, float scalar)
+zcm::mat3 zcm::operator /(const zcm::mat3& mat, float scalar) noexcept
 {
     return { mat[0] / scalar,
              mat[1] / scalar,
              mat[2] / scalar };
 }
 
-zcm::mat3 zcm::operator *(float scalar, const mat3 &mat)
+zcm::mat3 zcm::operator *(float scalar, const mat3 &mat) noexcept
 {
     return { scalar * mat[0],
              scalar * mat[1],
              scalar * mat[2] };
 }
 
-zcm::mat3 zcm::operator /(float scalar, const mat3 &mat)
+zcm::mat3 zcm::operator /(float scalar, const mat3 &mat) noexcept
 {
     return { scalar / mat[0],
              scalar / mat[1],
              scalar / mat[2] };
 }
 
-zcm::vec3& zcm::mat3::operator[](unsigned pos)
+zcm::vec3& zcm::mat3::operator[](unsigned pos) noexcept
 {
     assert(pos < 3);
     return _columns[pos];
 }
 
-const zcm::vec3& zcm::mat3::operator[](unsigned pos) const
+const zcm::vec3& zcm::mat3::operator[](unsigned pos) const noexcept
 {
     assert(pos < 3);
     return _columns[pos];

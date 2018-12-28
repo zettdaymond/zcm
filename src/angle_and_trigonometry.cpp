@@ -9,57 +9,61 @@ namespace zcm
 {
     namespace detail
     {
-        float degreesf(float radians)
-        {
-            return radians * 57.2957795130823f;
-        }
+        namespace  {
 
-        float radiansf(float degrees)
-        {
-            return degrees * 0.01745329251994f;
+            float degreesf(float radians) noexcept
+            {
+                return radians * 57.2957795130823f;
+            }
+
+            float radiansf(float degrees) noexcept
+            {
+                return degrees * 0.01745329251994f;
+            }
+
         }
     }
 }
 
 
-float zcm::cos(float angle)
+float zcm::cos(float angle) noexcept
 {
     return detail::applyOp(angle,cosf);
 }
 
-zcm::vec2 zcm::cos(const zcm::vec2& angle)
+zcm::vec2 zcm::cos(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle,cosf);
 }
 
-zcm::vec3 zcm::cos(const zcm::vec3& angle)
+zcm::vec3 zcm::cos(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle,cosf);
 }
 
-zcm::vec4 zcm::cos(const zcm::vec4& angle)
+zcm::vec4 zcm::cos(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle,cosf);
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::sin(float angle)
+float zcm::sin(float angle) noexcept
 {
     return detail::applyOp(angle,sinf);
 }
 
-zcm::vec2 zcm::sin(const zcm::vec2& angle)
+zcm::vec2 zcm::sin(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle,sinf);
 }
 
-zcm::vec3 zcm::sin(const zcm::vec3& angle)
+zcm::vec3 zcm::sin(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle,sinf);
 }
 
-zcm::vec4 zcm::sin(const zcm::vec4& angle)
+zcm::vec4 zcm::sin(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle,sinf);
 }
@@ -67,22 +71,22 @@ zcm::vec4 zcm::sin(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::acos(float x)
+float zcm::acos(float x) noexcept
 {
     return detail::applyOp(x,acosf);
 }
 
-zcm::vec2 zcm::acos(const zcm::vec2& x)
+zcm::vec2 zcm::acos(const zcm::vec2& x) noexcept
 {
     return detail::applyOp(x,acosf);
 }
 
-zcm::vec3 zcm::acos(const zcm::vec3& x)
+zcm::vec3 zcm::acos(const zcm::vec3& x) noexcept
 {
     return detail::applyOp(x,acosf);
 }
 
-zcm::vec4 zcm::acos(const zcm::vec4& x)
+zcm::vec4 zcm::acos(const zcm::vec4& x) noexcept
 {
     return detail::applyOp(x,acosf);
 }
@@ -90,22 +94,22 @@ zcm::vec4 zcm::acos(const zcm::vec4& x)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::acosh(float x)
+float zcm::acosh(float x) noexcept
 {
     return detail::applyOp(x,acoshf);
 }
 
-zcm::vec2 zcm::acosh(const zcm::vec2& x)
+zcm::vec2 zcm::acosh(const zcm::vec2& x) noexcept
 {
     return detail::applyOp(x,acoshf);
 }
 
-zcm::vec3 zcm::acosh(const zcm::vec3& x)
+zcm::vec3 zcm::acosh(const zcm::vec3& x) noexcept
 {
     return detail::applyOp(x,acoshf);
 }
 
-zcm::vec4 zcm::acosh(const zcm::vec4& x)
+zcm::vec4 zcm::acosh(const zcm::vec4& x) noexcept
 {
     return detail::applyOp(x,acoshf);
 }
@@ -114,88 +118,88 @@ zcm::vec4 zcm::acosh(const zcm::vec4& x)
 
 
 
-float zcm::asin(float x)
+float zcm::asin(float x) noexcept
 {
     return detail::applyOp(x,asinf);
 }
 
-zcm::vec2 zcm::asin(const zcm::vec2& x)
+zcm::vec2 zcm::asin(const zcm::vec2& x) noexcept
 {
     return detail::applyOp(x,asinf);
 }
 
-zcm::vec3 zcm::asin(const zcm::vec3& x)
+zcm::vec3 zcm::asin(const zcm::vec3& x) noexcept
 {
     return detail::applyOp(x,asinf);
 }
 
-zcm::vec4 zcm::asin(const zcm::vec4& x)
+zcm::vec4 zcm::asin(const zcm::vec4& x) noexcept
 {
     return detail::applyOp(x,asinf);
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::asinh(float x)
+float zcm::asinh(float x) noexcept
 {
     return detail::applyOp(x,asinhf);
 }
 
-zcm::vec2 zcm::asinh(const zcm::vec2& x)
+zcm::vec2 zcm::asinh(const zcm::vec2& x) noexcept
 {
     return detail::applyOp(x,asinhf);
 }
 
-zcm::vec3 zcm::asinh(const zcm::vec3& x)
+zcm::vec3 zcm::asinh(const zcm::vec3& x) noexcept
 {
     return detail::applyOp(x,asinhf);
 }
 
-zcm::vec4 zcm::asinh(const zcm::vec4& x)
+zcm::vec4 zcm::asinh(const zcm::vec4& x) noexcept
 {
     return detail::applyOp(x,asinhf);
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::atan(float y, float x)
+float zcm::atan(float y, float x) noexcept
 {
     return atan2f(y,x);
 }
 
-zcm::vec2 zcm::atan(const zcm::vec2& y, const zcm::vec2& x)
+zcm::vec2 zcm::atan(const zcm::vec2& y, const zcm::vec2& x) noexcept
 {
     return { atan2f(y[0],x[0]), atan2f(y[1], x[1]) };
 }
 
-zcm::vec3 zcm::atan(const zcm::vec3& y, const zcm::vec3& x)
+zcm::vec3 zcm::atan(const zcm::vec3& y, const zcm::vec3& x) noexcept
 {
     return { atan2f(y[0],x[0]), atan2f(y[1], x[1]), atan2f(y[2], x[2]) };
 }
 
-zcm::vec4 zcm::atan(const zcm::vec4& y, const zcm::vec4& x)
+zcm::vec4 zcm::atan(const zcm::vec4& y, const zcm::vec4& x) noexcept
 {
     return { atan2f(y[0],x[0]), atan2f(y[1], x[1]), atan2f(y[2], x[2]), atan2f(y[3], x[3]) };
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::atan(float y_over_x)
+float zcm::atan(float y_over_x) noexcept
 {
     return detail::applyOp(y_over_x,atanf);
 }
 
-zcm::vec2 zcm::atan(const zcm::vec2& y_over_x)
+zcm::vec2 zcm::atan(const zcm::vec2& y_over_x) noexcept
 {
     return detail::applyOp(y_over_x,atanf);
 }
 
-zcm::vec3 zcm::atan(const zcm::vec3& y_over_x)
+zcm::vec3 zcm::atan(const zcm::vec3& y_over_x) noexcept
 {
     return detail::applyOp(y_over_x,atanf);
 }
 
-zcm::vec4 zcm::atan(const zcm::vec4& y_over_x)
+zcm::vec4 zcm::atan(const zcm::vec4& y_over_x) noexcept
 {
     return detail::applyOp(y_over_x,atanf);
 }
@@ -203,22 +207,22 @@ zcm::vec4 zcm::atan(const zcm::vec4& y_over_x)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::atanh(float x)
+float zcm::atanh(float x) noexcept
 {
     return detail::applyOp(x,atanhf);
 }
 
-zcm::vec2 zcm::atanh(const zcm::vec2& x)
+zcm::vec2 zcm::atanh(const zcm::vec2& x) noexcept
 {
     return detail::applyOp(x,atanhf);
 }
 
-zcm::vec3 zcm::atanh(const zcm::vec3& x)
+zcm::vec3 zcm::atanh(const zcm::vec3& x) noexcept
 {
     return detail::applyOp(x,atanhf);
 }
 
-zcm::vec4 zcm::atanh(const zcm::vec4& x)
+zcm::vec4 zcm::atanh(const zcm::vec4& x) noexcept
 {
     return detail::applyOp(x,atanhf);
 }
@@ -227,66 +231,66 @@ zcm::vec4 zcm::atanh(const zcm::vec4& x)
 
 
 
-float zcm::cosh(float angle)
+float zcm::cosh(float angle) noexcept
 {
     return detail::applyOp(angle,coshf);
 }
 
-zcm::vec2 zcm::cosh(const zcm::vec2& angle)
+zcm::vec2 zcm::cosh(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle,coshf);
 }
 
-zcm::vec3 zcm::cosh(const zcm::vec3& angle)
+zcm::vec3 zcm::cosh(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle,coshf);
 }
 
-zcm::vec4 zcm::cosh(const zcm::vec4& angle)
+zcm::vec4 zcm::cosh(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle,coshf);
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::degrees(float radians)
+float zcm::degrees(float radians) noexcept
 {
     return detail::applyOp(radians, detail::degreesf);
 }
 
-zcm::vec2 zcm::degrees(const zcm::vec2& radians)
+zcm::vec2 zcm::degrees(const zcm::vec2& radians) noexcept
 {
     return detail::applyOp(radians, detail::degreesf);
 }
 
-zcm::vec3 zcm::degrees(const zcm::vec3& radians)
+zcm::vec3 zcm::degrees(const zcm::vec3& radians) noexcept
 {
     return detail::applyOp(radians, detail::degreesf);
 }
 
-zcm::vec4 zcm::degrees(const zcm::vec4& radians)
+zcm::vec4 zcm::degrees(const zcm::vec4& radians) noexcept
 {
     return detail::applyOp(radians, detail::degreesf);
 }
 
 //---------------------------------------------------------------------------------------------------
 
-float zcm::radians(float degrees)
+float zcm::radians(float degrees) noexcept
 {
     return detail::applyOp(degrees, detail::radiansf);
 }
 
-zcm::vec2 zcm::radians(const zcm::vec2& degrees)
+zcm::vec2 zcm::radians(const zcm::vec2& degrees) noexcept
 {
     return detail::applyOp(degrees, detail::radiansf);
 }
 
-zcm::vec3 zcm::radians(const zcm::vec3& degrees)
+zcm::vec3 zcm::radians(const zcm::vec3& degrees) noexcept
 {
     return detail::applyOp(degrees, detail::radiansf);
 }
 
-zcm::vec4 zcm::radians(const zcm::vec4& degrees)
+zcm::vec4 zcm::radians(const zcm::vec4& degrees) noexcept
 {
     return detail::applyOp(degrees, detail::radiansf);
 }
@@ -294,22 +298,22 @@ zcm::vec4 zcm::radians(const zcm::vec4& degrees)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::sinh(float angle)
+float zcm::sinh(float angle) noexcept
 {
     return detail::applyOp(angle, sinhf);
 }
 
-zcm::vec2 zcm::sinh(const zcm::vec2& angle)
+zcm::vec2 zcm::sinh(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle, sinhf);
 }
 
-zcm::vec3 zcm::sinh(const zcm::vec3& angle)
+zcm::vec3 zcm::sinh(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle, sinhf);
 }
 
-zcm::vec4 zcm::sinh(const zcm::vec4& angle)
+zcm::vec4 zcm::sinh(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle, sinhf);
 }
@@ -318,22 +322,22 @@ zcm::vec4 zcm::sinh(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::tan(float angle)
+float zcm::tan(float angle) noexcept
 {
     return detail::applyOp(angle, tanf);
 }
 
-zcm::vec2 zcm::tan(const zcm::vec2& angle)
+zcm::vec2 zcm::tan(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle, tanf);
 }
 
-zcm::vec3 zcm::tan(const zcm::vec3& angle)
+zcm::vec3 zcm::tan(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle, tanf);
 }
 
-zcm::vec4 zcm::tan(const zcm::vec4& angle)
+zcm::vec4 zcm::tan(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle, tanf);
 }
@@ -342,22 +346,22 @@ zcm::vec4 zcm::tan(const zcm::vec4& angle)
 //---------------------------------------------------------------------------------------------------
 
 
-float zcm::tanh(float angle)
+float zcm::tanh(float angle) noexcept
 {
     return detail::applyOp(angle, tanhf);
 }
 
-zcm::vec2 zcm::tanh(const zcm::vec2& angle)
+zcm::vec2 zcm::tanh(const zcm::vec2& angle) noexcept
 {
     return detail::applyOp(angle, tanhf);
 }
 
-zcm::vec3 zcm::tanh(const zcm::vec3& angle)
+zcm::vec3 zcm::tanh(const zcm::vec3& angle) noexcept
 {
     return detail::applyOp(angle, tanhf);
 }
 
-zcm::vec4 zcm::tanh(const zcm::vec4& angle)
+zcm::vec4 zcm::tanh(const zcm::vec4& angle) noexcept
 {
     return detail::applyOp(angle, tanhf);
 }

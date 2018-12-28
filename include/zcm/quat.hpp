@@ -8,25 +8,25 @@ namespace zcm
 
     struct quat
     {
-        quat();
-        quat(float w, float x, float y, float z);
-        quat(float s, vec3 v);
-        quat(vec3 v, float s);
+        quat() noexcept;
+        quat(float w, float x, float y, float z) noexcept;
+        quat(float s, vec3 v) noexcept;
+        quat(vec3 v, float s) noexcept;
 
         /// Build a unit quaternion representing the rotation from u to v.
         /// @see http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors
         /// The input vectors need not be normalised.
-        quat(vec3 u, vec3 v);
+        quat(vec3 u, vec3 v) noexcept;
 
-        float& operator[](unsigned val);
-        float operator[](unsigned val) const;
+        float& operator[](unsigned val) noexcept;
+        float operator[](unsigned val) const noexcept;
 
-        void operator +=(const quat& other);
-        void operator -=(const quat& other);
-        void operator *=(const quat& other);
+        void operator +=(const quat& other) noexcept;
+        void operator -=(const quat& other) noexcept;
+        void operator *=(const quat& other) noexcept;
 
-        void operator *=(float scalar);
-        void operator /=(float scalar);
+        void operator *=(float scalar) noexcept;
+        void operator /=(float scalar) noexcept;
 
         float x;
         float y;
@@ -34,23 +34,23 @@ namespace zcm
         float w;
     };
 
-    bool operator==(const quat& first, const quat& second);
-    bool operator!=(const quat& first, const quat& second);
+    bool operator==(const quat& first, const quat& second) noexcept;
+    bool operator!=(const quat& first, const quat& second) noexcept;
 
-    quat operator +(const quat& a, const quat& b);
-    quat operator -(const quat& a, const quat& b);
-    quat operator *(const quat& a, const quat& b);
-    quat operator +(const quat& a);
-    quat operator -(const quat& a);
+    quat operator +(const quat& a, const quat& b) noexcept;
+    quat operator -(const quat& a, const quat& b) noexcept;
+    quat operator *(const quat& a, const quat& b) noexcept;
+    quat operator +(const quat& a) noexcept;
+    quat operator -(const quat& a) noexcept;
 
-    quat operator *(const quat& q, float s);
-    quat operator *(float s, const quat& q);
-    quat operator /(float s, const quat& q);
-    quat operator /(const quat& q, float s);
+    quat operator *(const quat& q, float s) noexcept;
+    quat operator *(float s, const quat& q) noexcept;
+    quat operator /(float s, const quat& q) noexcept;
+    quat operator /(const quat& q, float s) noexcept;
 
     /// rotate vector
-    vec3 operator*(const quat& q, const vec3& v);
+    vec3 operator*(const quat& q, const vec3& v) noexcept;
     /// inverse-rotate vector
-    vec3 operator*(const vec3& v, const quat& q);
+    vec3 operator*(const vec3& v, const quat& q) noexcept;
 
 }

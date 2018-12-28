@@ -5,7 +5,7 @@
 #include <zcm/vec3.hpp>
 #include <zcm/vec4.hpp>
 
-zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 ColorLinear, float Gamma)
+zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 ColorLinear, float Gamma) noexcept
 {
     auto ClampedColor = clamp(ColorLinear, vec4(0), vec4(1));
 
@@ -14,13 +14,13 @@ zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 ColorLinear, float Gamma)
                lessThan(ClampedColor, vec4(0.0031308f)));
 }
 
-zcm::vec3 zcm::convertLinearToSRGB(zcm::vec3 colorLinear, float Gamma)
+zcm::vec3 zcm::convertLinearToSRGB(zcm::vec3 colorLinear, float Gamma) noexcept
 {
     auto r = convertLinearToSRGB(vec4(colorLinear, 0.0f), Gamma);
     return vec3(r.x, r.y, r.z);
 }
 
-zcm::vec3 zcm::convertLinearToSRGB(zcm::vec3 colorLinear)
+zcm::vec3 zcm::convertLinearToSRGB(zcm::vec3 colorLinear) noexcept
 {
     // Based on Ian Taylor http://chilliant.blogspot.fr/2012/08/srgb-approximations-for-hlsl.html
     vec3 S1 = sqrt(colorLinear);
@@ -29,30 +29,30 @@ zcm::vec3 zcm::convertLinearToSRGB(zcm::vec3 colorLinear)
     return 0.662002687f * S1 + 0.684122060f * S2 - 0.323583601f * S3 - 0.0225411470f * colorLinear;
 }
 
-zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 colorLinear)
+zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 colorLinear) noexcept
 {
     return convertLinearToSRGB(colorLinear, 0.41666f);
 }
 
-zcm::vec3 zcm::convertSRGBToLinear(zcm::vec3 ColorSRGB, float Gamma)
+zcm::vec3 zcm::convertSRGBToLinear(zcm::vec3 ColorSRGB, float Gamma) noexcept
 {
     auto r = convertSRGBToLinear(vec4(ColorSRGB, 0.0f), Gamma);
     return vec3(r.x, r.y, r.z);
 }
 
-zcm::vec4 zcm::convertSRGBToLinear(zcm::vec4 ColorSRGB, float Gamma)
+zcm::vec4 zcm::convertSRGBToLinear(zcm::vec4 ColorSRGB, float Gamma) noexcept
 {
     return mix(pow((ColorSRGB + 0.055f) * 0.94786729857819905213270142180095f, vec4(Gamma)),
                ColorSRGB * 0.07739938080495356037151702786378f,
                lessThanEqual(ColorSRGB, vec4(0.04045)));
 }
 
-zcm::vec3 zcm::convertSRGBToLinear(zcm::vec3 ColorSRGB)
+zcm::vec3 zcm::convertSRGBToLinear(zcm::vec3 ColorSRGB) noexcept
 {
     return convertSRGBToLinear(ColorSRGB, 2.4f);
 }
 
-zcm::vec4 zcm::convertSRGBToLinear(zcm::vec4 ColorSRGB)
+zcm::vec4 zcm::convertSRGBToLinear(zcm::vec4 ColorSRGB) noexcept
 {
     return convertSRGBToLinear(ColorSRGB, 2.4f);
 }

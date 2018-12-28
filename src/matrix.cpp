@@ -3,23 +3,23 @@
 #include <zcm/mat3.hpp>
 #include <zcm/mat4.hpp>
 
-zcm::mat2 zcm::matrixCompMult(const zcm::mat2& x, const zcm::mat2& y)
+zcm::mat2 zcm::matrixCompMult(const zcm::mat2& x, const zcm::mat2& y) noexcept
 {
     return { x[0] * y[0], x[1] * y[1] };
 }
 
 
-zcm::mat3 zcm::matrixCompMult(const zcm::mat3& x, const zcm::mat3& y)
+zcm::mat3 zcm::matrixCompMult(const zcm::mat3& x, const zcm::mat3& y) noexcept
 {
     return { x[0] * y[0], x[1] * y[1], x[2] * y[2] };
 }
 
-zcm::mat4 zcm::matrixCompMult(const zcm::mat4& x, const zcm::mat4& y)
+zcm::mat4 zcm::matrixCompMult(const zcm::mat4& x, const zcm::mat4& y) noexcept
 {
     return { x[0] * y[0], x[1] * y[1], x[2] * y[2], x[3] * y[3] };
 }
 
-zcm::mat2 zcm::transpose(const zcm::mat2& m)
+zcm::mat2 zcm::transpose(const zcm::mat2& m) noexcept
 {
     mat2 result(0.0f);
 
@@ -31,7 +31,7 @@ zcm::mat2 zcm::transpose(const zcm::mat2& m)
     return result;
 }
 
-zcm::mat3 zcm::transpose(const zcm::mat3& m)
+zcm::mat3 zcm::transpose(const zcm::mat3& m) noexcept
 {
     mat3 result(0.0);
 
@@ -50,7 +50,7 @@ zcm::mat3 zcm::transpose(const zcm::mat3& m)
     return result;
 }
 
-zcm::mat4 zcm::transpose(const zcm::mat4& m)
+zcm::mat4 zcm::transpose(const zcm::mat4& m) noexcept
 {
     mat4 result(0.0);
 
@@ -77,12 +77,12 @@ zcm::mat4 zcm::transpose(const zcm::mat4& m)
     return result;
 }
 
-float zcm::determinant(const zcm::mat2& m)
+float zcm::determinant(const zcm::mat2& m) noexcept
 {
     return m[0][0] * m[1][1] - m[1][0] * m[0][1];
 }
 
-float zcm::determinant(const zcm::mat3& m)
+float zcm::determinant(const zcm::mat3& m) noexcept
 {
     return
             + m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2])
@@ -90,7 +90,7 @@ float zcm::determinant(const zcm::mat3& m)
             + m[2][0] * (m[0][1] * m[1][2] - m[1][1] * m[0][2]);
 }
 
-float zcm::determinant(const zcm::mat4& m)
+float zcm::determinant(const zcm::mat4& m) noexcept
 {
     auto SubFactor00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
     auto SubFactor01 = m[2][1] * m[3][3] - m[3][1] * m[2][3];
@@ -110,7 +110,7 @@ float zcm::determinant(const zcm::mat4& m)
             m[0][2] * DetCof[2] + m[0][3] * DetCof[3];
 }
 
-zcm::mat2 zcm::inverse(const zcm::mat2& m)
+zcm::mat2 zcm::inverse(const zcm::mat2& m) noexcept
 {
     float OneOverDeterminant = 1.0f / ( + m[0][0] * m[1][1]
                                         - m[1][0] * m[0][1]);
@@ -124,7 +124,7 @@ zcm::mat2 zcm::inverse(const zcm::mat2& m)
     return inverse;
 }
 
-zcm::mat3 zcm::inverse(const zcm::mat3& m)
+zcm::mat3 zcm::inverse(const zcm::mat3& m) noexcept
 {
     auto oneOverDeterminant = 1.0f / (
                                   + m[0][0] * (m[1][1] * m[2][2] - m[2][1] * m[1][2])
@@ -145,7 +145,7 @@ zcm::mat3 zcm::inverse(const zcm::mat3& m)
     return inverse;
 }
 
-zcm::mat4 zcm::inverse(const zcm::mat4& m)
+zcm::mat4 zcm::inverse(const zcm::mat4& m) noexcept
 {
     auto Coef00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
     auto Coef02 = m[1][2] * m[3][3] - m[3][2] * m[1][3];
@@ -202,7 +202,7 @@ zcm::mat4 zcm::inverse(const zcm::mat4& m)
     return inverse * oneOverDeterminant;
 }
 
-zcm::mat2 zcm::inverseTranspose(const zcm::mat2 &m)
+zcm::mat2 zcm::inverseTranspose(const zcm::mat2 &m) noexcept
 {
     auto Determinant = m[0][0] * m[1][1] - m[1][0] * m[0][1];
 
@@ -215,7 +215,7 @@ zcm::mat2 zcm::inverseTranspose(const zcm::mat2 &m)
     return Inverse;
 }
 
-zcm::mat3 zcm::inverseTranspose(const zcm::mat3 &m)
+zcm::mat3 zcm::inverseTranspose(const zcm::mat3 &m) noexcept
 {
     auto Determinant =
             + m[0][0] * (m[1][1] * m[2][2] - m[1][2] * m[2][1])
@@ -235,7 +235,7 @@ zcm::mat3 zcm::inverseTranspose(const zcm::mat3 &m)
     return Inverse / Determinant;
 }
 
-zcm::mat4 zcm::inverseTranspose(const zcm::mat4 &m)
+zcm::mat4 zcm::inverseTranspose(const zcm::mat4 &m) noexcept
 {
     auto SubFactor00 = m[2][2] * m[3][3] - m[3][2] * m[2][3];
     auto SubFactor01 = m[2][1] * m[3][3] - m[3][1] * m[2][3];

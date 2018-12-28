@@ -4,14 +4,14 @@
 #include <zcm/vec3.hpp>
 #include <zcm/mat4.hpp>
 
-zcm::mat4 zcm::translate(const zcm::mat4& m, const zcm::vec3& v)
+zcm::mat4 zcm::translate(const zcm::mat4& m, const zcm::vec3& v) noexcept
 {
     mat4 Result(m);
     Result[3] = m[0] * v[0] + m[1] * v[1] + m[2] * v[2] + m[3];
     return Result;
 }
 
-zcm::mat4 zcm::rotate(const zcm::mat4& m, float angle, const zcm::vec3& v)
+zcm::mat4 zcm::rotate(const zcm::mat4& m, float angle, const zcm::vec3& v) noexcept
 {
     auto const a = angle;
     auto const c = cos(a);
@@ -69,7 +69,7 @@ zcm::mat4 zcm::rotate(const zcm::mat4& m, float angle, const zcm::vec3& v)
 //    return m * Result;
 //}
 
-zcm::mat4 zcm::scale(const zcm::mat4& m, const zcm::vec3& v)
+zcm::mat4 zcm::scale(const zcm::mat4& m, const zcm::vec3& v) noexcept
 {
     mat4 Result;
     Result[0] = m[0] * v[0];
@@ -88,7 +88,7 @@ zcm::mat4 zcm::scale(const zcm::mat4& m, const zcm::vec3& v)
 //    return m * Result;
 //}
 
-zcm::mat4 zcm::lookAtRH(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up)
+zcm::mat4 zcm::lookAtRH(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up) noexcept
 {
     vec3 const f(normalize(center - eye));
     vec3 const s(normalize(cross(f, up)));
@@ -110,7 +110,7 @@ zcm::mat4 zcm::lookAtRH(const zcm::vec3& eye, const zcm::vec3& center, const zcm
     return Result;
 }
 
-zcm::mat4 zcm::lookAtLH(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up)
+zcm::mat4 zcm::lookAtLH(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up) noexcept
 {
     vec3 const f(normalize(center - eye));
     vec3 const s(normalize(cross(up, f)));
@@ -132,7 +132,7 @@ zcm::mat4 zcm::lookAtLH(const zcm::vec3& eye, const zcm::vec3& center, const zcm
     return Result;
 }
 
-zcm::mat4 zcm::lookAt(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up)
+zcm::mat4 zcm::lookAt(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up) noexcept
 {
     //TODO:
 //    if(GLM_CONFIG_CLIP_CONTROL & GLM_CLIP_CONTROL_LH_BIT)
