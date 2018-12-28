@@ -4,6 +4,7 @@
 
 
 static_assert (std::is_standard_layout<zcm::bvec2>::value, "");
+static_assert(sizeof(zcm::bvec2) == 2 * sizeof(bool), "extra padding detected!");
 
 
 zcm::bvec2::bvec2() :

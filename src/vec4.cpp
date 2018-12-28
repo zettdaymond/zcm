@@ -6,6 +6,7 @@
 
 
 static_assert(std::is_standard_layout<zcm::vec4>::value, "");
+static_assert(sizeof(zcm::vec4) == 4 * sizeof(float), "extra padding detected!");
 
 zcm::vec4::vec4() :
     vec4(0.0f)
