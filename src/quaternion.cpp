@@ -192,18 +192,6 @@ zcm::quat zcm::slerp(const zcm::quat &x, const zcm::quat &y, float t)
     }
 }
 
-zcm::vec3 zcm::rotate(const zcm::vec3 &v, const zcm::quat &q)
-{
-    auto qv = vec3{q.x, q.y, q.z};
-    auto t = 2.0f * cross(qv, v);
-    return v + q.w * t + cross(qv, t);
-}
-
-zcm::vec3 zcm::rotate(const zcm::quat &q, const zcm::vec3 &v)
-{
-    return rotate(v, q);
-}
-
 zcm::vec3 zcm::axis(const zcm::quat &q)
 {
     auto tmp1 = 1.0f - q.w * q.w;
@@ -223,4 +211,11 @@ zcm::quat zcm::angleAxis(float angle, zcm::vec3 axis)
 {
     auto s = sin(angle * 0.5f);
     return quat(cos(angle * 0.5f), axis * s);
+}
+
+zcm::quat zcm::rotate(const zcm::quat &q, float angle, const zcm::vec3 &axis)
+{
+    auto norm_axis = normalize(axis);
+    auto rq = angleAxis(angle, norm_axis);
+    return q * rq;
 }

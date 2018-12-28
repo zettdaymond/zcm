@@ -21,21 +21,36 @@ namespace zcm
         float& operator[](unsigned val);
         float operator[](unsigned val) const;
 
+        void operator +=(const quat& other);
+        void operator -=(const quat& other);
+        void operator *=(const quat& other);
+
+        void operator *=(float scalar);
+        void operator /=(float scalar);
+
         float x;
         float y;
         float z;
         float w;
     };
 
+    bool operator==(const quat& first, const quat& second);
+    bool operator!=(const quat& first, const quat& second);
+
     quat operator +(const quat& a, const quat& b);
     quat operator -(const quat& a, const quat& b);
+    quat operator *(const quat& a, const quat& b);
     quat operator +(const quat& a);
     quat operator -(const quat& a);
-    quat operator *(const quat& a, const quat& b);
 
     quat operator *(const quat& q, float s);
     quat operator *(float s, const quat& q);
     quat operator /(float s, const quat& q);
     quat operator /(const quat& q, float s);
+
+    /// rotate vector
+    vec3 operator*(const quat& q, const vec3& v);
+    /// inverse-rotate vector
+    vec3 operator*(const vec3& v, const quat& q);
 
 }

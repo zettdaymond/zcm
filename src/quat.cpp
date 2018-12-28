@@ -6,8 +6,11 @@
 #include <zcm/quat.hpp>
 #include <zcm/common.hpp>
 #include <zcm/geometric.hpp>
+#include <zcm/quaternion.hpp>
+
 
 static_assert(std::is_standard_layout<zcm::quat>::value, "");
+static_assert(sizeof(zcm::quat) == 4 * sizeof(float), "extra padding detected!");
 
 zcm::quat::quat() :
     x(0.0f),
@@ -90,24 +93,86 @@ float zcm::quat::operator[](unsigned val) const
     return w;
 }
 
+void zcm::quat::operator +=(const zcm::quat &other)
+{
+    x += other.x;
+    y += other.y;
+    z += other.z;
+    w += other.w;
+}
+
+void zcm::quat::operator -=(const zcm::quat &other)
+{
+    x -= other.x;
+    y -= other.y;
+    z -= other.z;
+    w -= other.w;
+}
+
+void zcm::quat::operator *=(const zcm::quat &q2)
+{
+    float ww = (z + x) * (q2.x + q2.y);
+    float yy = (w - y) * (q2.w + q2.z);
+    float zz = (w + y) * (q2.w - q2.z);
+    float xx = ww + yy + zz;
+    float qq = 0.5f * (xx + (z - x) * (q2.x - q2.y));
+
+    float _w = qq - ww + (z - y) * (q2.y - q2.z);
+    float _x = qq - xx + (x + w) * (q2.x + q2.w);
+    float _y = qq - yy + (w - x) * (q2.y + q2.z);
+    float _z = qq - zz + (z + y) * (q2.w - q2.x);
+    x = _x;
+    y = _y;
+    z = _z;
+    w = _w;
+}
+
+void zcm::quat::operator *=(float scalar)
+{
+    x *= scalar;
+    y *= scalar;
+    z *= scalar;
+    w *= scalar;
+}
+
+void zcm::quat::operator /=(float scalar)
+{
+    x /= scalar;
+    y /= scalar;
+    z /= scalar;
+    w /= scalar;
+}
+
 zcm::quat zcm::operator +(const zcm::quat &a, const zcm::quat &b)
 {
-    return quat(a.w + b.w, a.x + b.x, a.y + b.y, a.z + b.z);
+    return { a.w + b.w,
+             a.x + b.x,
+             a.y + b.y,
+             a.z + b.z };
 }
 
 zcm::quat zcm::operator -(const zcm::quat &a, const zcm::quat &b)
 {
-    return quat(a.w - b.w, a.x - b.x, a.y - b.y, a.z - b.z);
+    return { a.w - b.w,
+             a.x - b.x,
+             a.y - b.y,
+             a.z - b.z };
 }
 
 zcm::quat zcm::operator +(const zcm::quat &a)
 {
-    return a;
+    return { +a.w,
+             +a.x,
+             +a.y,
+             +a.z };
 }
 
 zcm::quat zcm::operator -(const zcm::quat &a)
 {
-    return quat(-a.w, -a.x, -a.y, -a.z);
+    return { -a.w,
+             -a.x,
+             -a.y,
+             -a.z };
 }
 
 zcm::quat zcm::operator *(const zcm::quat& q1, const zcm::quat& q2)
@@ -118,31 +183,66 @@ zcm::quat zcm::operator *(const zcm::quat& q1, const zcm::quat& q2)
     float xx = ww + yy + zz;
     float qq = 0.5f * (xx + (q1.z - q1.x) * (q2.x - q2.y));
 
-    float w = qq - ww + (q1.z - q1.y) * (q2.y - q2.z);
-    float x = qq - xx + (q1.x + q1.w) * (q2.x + q2.w);
-    float y = qq - yy + (q1.w - q1.x) * (q2.y + q2.z);
-    float z = qq - zz + (q1.z + q1.y) * (q2.w - q2.x);
-    return quat(w, x, y, z);
+    return { qq - ww + (q1.z - q1.y) * (q2.y - q2.z),
+             qq - xx + (q1.x + q1.w) * (q2.x + q2.w),
+             qq - yy + (q1.w - q1.x) * (q2.y + q2.z),
+             qq - zz + (q1.z + q1.y) * (q2.w - q2.x) };
 }
 
 zcm::quat zcm::operator *(const zcm::quat &q, float s)
 {
-    return quat(q.w * s, q.x * s, q.y * s, q.z * s);
+    return { q.w * s,
+             q.x * s,
+             q.y * s,
+             q.z * s };
 }
 
 zcm::quat zcm::operator *(float s, const zcm::quat &q)
 {
-    return quat(q.w * s, q.x * s, q.y * s, q.z * s);
+    return { q.w * s,
+             q.x * s,
+             q.y * s,
+             q.z * s };
 }
 
 zcm::quat zcm::operator /(float s, const zcm::quat &q)
 {
-    s = 1.0f / s;
-    return quat(q.w * s, q.x * s, q.y * s, q.z * s);
+    return { s / q.w,
+             s / q.x,
+             s / q.y,
+             s / q.z };
 }
 
 zcm::quat zcm::operator /(const zcm::quat &q, float s)
 {
-    s = 1.0f / s;
-    return quat(q.w * s, q.x * s, q.y * s, q.z * s);
+    return { q.w / s,
+             q.x / s,
+             q.y / s,
+             q.z / s };
 }
+
+
+zcm::vec3 zcm::operator *(const zcm::quat& q, const zcm::vec3& v)
+{
+    auto qv = vec3{q.x, q.y, q.z};
+    auto t = 2.0f * cross(qv, v);
+    return v + q.w * t + cross(qv, t);
+}
+
+zcm::vec3 zcm::operator*(const zcm::vec3 &v, const zcm::quat &q)
+{
+    return inverse(q) * v;
+}
+
+
+bool zcm::operator==(const zcm::quat &first, const zcm::quat &second)
+{
+    return first.x == second.x && first.y == second.y && first.z == second.z && first.w == second.w;
+}
+
+bool zcm::operator!=(const zcm::quat &first, const zcm::quat &second)
+{
+    return !(first == second);
+}
+
+

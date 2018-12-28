@@ -17,9 +17,7 @@ namespace zcm {
     vec3  axis(const quat& q);
     float angle(const quat& q);
     quat  angleAxis(float angle, vec3 axis);
-
-    vec3  rotate      (const vec3& v, const quat& q);
-    vec3  rotate      (const quat& q, const vec3& v);
+    quat  rotate(const quat& q, float angle, const vec3& v);
 
     vec3  eulerAngles (const quat& x);
     float pitch       (const quat& x);
