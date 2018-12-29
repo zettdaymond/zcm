@@ -6,6 +6,8 @@ The main focus of the library is compilation speed, so we don't use any template
 
 As a consequence, the runtime performance will be worse than GLM (LTO might help though).
 
+For building the library you need c++11 compatible compiler.
+
 # Planned Features
 * SIMD implementation
 * Fast (to compile) swizzling
