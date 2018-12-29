@@ -22,10 +22,11 @@ endif()
 
 #--- ZCM library sources ---
 
-add_library(zcm
+add_library(zcm STATIC
     src/angle_and_trigonometry.cpp
     src/common.cpp
     src/color_space.cpp
+    src/component_wise.cpp
     src/exponential.cpp
     src/geometric.cpp
     src/mat2.cpp

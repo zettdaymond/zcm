@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <zcm/vec4.hpp>
 #include <zcm/geometric.hpp>
+#include <zcm/component_wise.hpp>
 
 using namespace zcm;
 
@@ -175,6 +176,16 @@ TEST(vec4, vector_normalize)
     ASSERT_FLOAT_EQ(result.y,  0.453585525f);
     ASSERT_FLOAT_EQ(result.z, -0.582433145f);
     ASSERT_FLOAT_EQ(result.w,  0.6412002312f);
+}
+
+TEST(vec4, vector_component_wise)
+{
+    auto v = vec4{1.0f, 2.0f, 3.0f, 4.0f};
+
+    ASSERT_FLOAT_EQ(compMin(v), 1.0f);
+    ASSERT_FLOAT_EQ(compMax(v), 4.0f);
+    ASSERT_FLOAT_EQ(compAdd(v), 10.0f);
+    ASSERT_FLOAT_EQ(compMul(v), 24.0f);
 }
 
 //TODO: test - faceforward, reflect, refract
