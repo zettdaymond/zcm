@@ -1,20 +1,8 @@
 #pragma once
 
+#include <zcm/fwd.hpp>
+
 namespace zcm {
-
-    struct bvec2;
-    struct bvec3;
-    struct bvec4;
-
-    struct vec2;
-    struct vec3;
-    struct vec4;
-
-    struct quat;
-
-    struct mat2;
-    struct mat3;
-    struct mat4;
 
     // non-const
     bool*  value_ptr (bvec2& val) noexcept;
