@@ -2,6 +2,7 @@
 #include <type_traits>
 #include <zcm/mat2.hpp>
 #include <zcm/mat3.hpp>
+#include <zcm/matrix.hpp>
 
 
 static_assert(std::is_standard_layout<zcm::mat2>::value, "");
@@ -59,6 +60,12 @@ zcm::mat2 zcm::operator -(const zcm::mat2& first) noexcept
              -first[1] };
 }
 
+zcm::mat2 zcm::operator +(const zcm::mat2 &first) noexcept
+{
+    return first;
+}
+
+
 zcm::mat2 zcm::operator *(const zcm::mat2& m1, const zcm::mat2& m2) noexcept
 {
     return mat2(
@@ -67,6 +74,13 @@ zcm::mat2 zcm::operator *(const zcm::mat2& m1, const zcm::mat2& m2) noexcept
         m1[0][0] * m2[1][0] + m1[1][0] * m2[1][1],
         m1[0][1] * m2[1][0] + m1[1][1] * m2[1][1]);
 }
+
+
+zcm::mat2 zcm::operator /(const zcm::mat2 &first, const zcm::mat2 &second) noexcept
+{
+    return first * inverse(second);
+}
+
 
 zcm::mat2 zcm::operator *(const zcm::mat2& mat, float scalar) noexcept
 {
@@ -91,3 +105,57 @@ zcm::mat2 zcm::operator /(float scalar, const zcm::mat2& mat) noexcept
     return { scalar / mat[0],
              scalar / mat[1] };
 }
+
+zcm::vec2 zcm::operator *(const zcm::mat2 &m, const zcm::vec2 &v) noexcept
+{
+    return { m[0][0] * v.x + m[1][0] * v.y,
+             m[0][1] * v.x + m[1][1] * v.y };
+}
+
+zcm::vec2 zcm::operator *(const zcm::vec2 &v, const zcm::mat2 &m) noexcept
+{
+    return { v.x * m[0][0] + v.y * m[0][1],
+             v.x * m[1][0] + v.y * m[1][1] };
+}
+
+zcm::vec2 zcm::operator /(const zcm::mat2 &mat, const zcm::vec2 &vec) noexcept
+{
+    return inverse(mat) * vec;
+}
+
+zcm::vec2 zcm::operator /(const zcm::vec2 &vec, const zcm::mat2 &mat) noexcept
+{
+    return vec * inverse(mat);
+}
+
+void zcm::mat2::operator+=(const zcm::mat2 &first) noexcept
+{
+    *this = *this + first;
+}
+
+void zcm::mat2::operator-=(const zcm::mat2 &first) noexcept
+{
+    *this = *this - first;
+}
+
+void zcm::mat2::operator*=(const zcm::mat2 &first) noexcept
+{
+    *this = *this * first;
+}
+
+void zcm::mat2::operator/=(const zcm::mat2 &first) noexcept
+{
+    *this = *this / first;
+}
+
+bool zcm::operator ==(const zcm::mat2 &first, const zcm::mat2 &second) noexcept
+{
+    return first[0] == second[0] && first[1] == second[1];
+}
+
+bool zcm::operator !=(const zcm::mat2 &first, const zcm::mat2 &second) noexcept
+{
+    return !(first == second);
+}
+
+

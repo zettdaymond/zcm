@@ -2,6 +2,7 @@
 #include <type_traits>
 #include <zcm/mat3.hpp>
 #include <zcm/mat2.hpp>
+#include <zcm/matrix.hpp>
 
 
 static_assert (std::is_standard_layout<zcm::mat3>::value, "");
@@ -36,6 +37,13 @@ zcm::mat3::mat3(const vec3& c0,  const vec3& c1, const vec3& c2) noexcept
     _columns[2] = c2;
 }
 
+zcm::mat3::mat3(float c00, float c01, float c02, float c10, float c11, float c12, float c20, float c21, float c22) noexcept
+{
+    _columns[0] = {c00, c01, c02};
+    _columns[1] = {c10, c11, c12};
+    _columns[2] = {c20, c21, c22};
+}
+
 zcm::mat3 zcm::operator +(const zcm::mat3& first, const zcm::mat3& second) noexcept
 {
     return { first[0] + second[0],
@@ -56,6 +64,12 @@ zcm::mat3 zcm::operator -(const zcm::mat3& first) noexcept
              - first[1],
              - first[2] };
 }
+
+zcm::mat3 zcm::operator +(const zcm::mat3 &first) noexcept
+{
+    return first;
+}
+
 
 //zcm::mat3 zcm::operator *(const zcm::mat3& first, const zcm::mat3& second)
 //{
@@ -109,6 +123,10 @@ zcm::mat3 zcm::operator *(const zcm::mat3& m1, const zcm::mat3& m2) noexcept
     return Result;
 }
 
+zcm::mat3 zcm::operator /(const zcm::mat3 &first, const zcm::mat3 &second) noexcept
+{
+    return first * inverse(second);
+}
 
 zcm::mat3 zcm::operator *(const zcm::mat3& mat, float scalar) noexcept
 {
@@ -150,3 +168,56 @@ const zcm::vec3& zcm::mat3::operator[](unsigned pos) const noexcept
     return _columns[pos];
 }
 
+void zcm::mat3::operator+=(const zcm::mat3 &first) noexcept
+{
+    *this = *this + first;
+}
+
+void zcm::mat3::operator-=(const zcm::mat3 &first) noexcept
+{
+    *this = *this - first;
+}
+
+void zcm::mat3::operator*=(const zcm::mat3 &first) noexcept
+{
+    *this = *this * first;
+}
+
+void zcm::mat3::operator/=(const zcm::mat3 &first) noexcept
+{
+    *this = *this / first;
+}
+
+zcm::vec3 zcm::operator *(const zcm::mat3 &m, const zcm::vec3 &v) noexcept
+{
+    return { m[0][0] * v.x + m[1][0] * v.y + m[2][0] * v.z,
+             m[0][1] * v.x + m[1][1] * v.y + m[2][1] * v.z,
+             m[0][2] * v.x + m[1][2] * v.y + m[2][2] * v.z };
+}
+
+zcm::vec3 zcm::operator *(const zcm::vec3 &v, const zcm::mat3 &m) noexcept
+{
+    return { m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z,
+             m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z,
+             m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z };
+}
+
+zcm::vec3 zcm::operator /(const zcm::mat3 &mat, const zcm::vec3 &vec) noexcept
+{
+    return inverse(mat) * vec;
+}
+
+zcm::vec3 zcm::operator /(const zcm::vec3 &vec, const zcm::mat3 &mat) noexcept
+{
+    return vec * inverse(mat);
+}
+
+bool zcm::operator ==(const zcm::mat3 &first, const zcm::mat3 &second) noexcept
+{
+    return first[0] == second[0] && first[1] == second[1] && first[2] == second[2];
+}
+
+bool zcm::operator !=(const zcm::mat3 &first, const zcm::mat3 &second) noexcept
+{
+    return !(first == second);
+}
