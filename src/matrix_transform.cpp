@@ -132,13 +132,61 @@ zcm::mat4 zcm::lookAtLH(const zcm::vec3& eye, const zcm::vec3& center, const zcm
     return Result;
 }
 
-zcm::mat4 zcm::lookAt(const zcm::vec3& eye, const zcm::vec3& center, const zcm::vec3& up) noexcept
+zcm::mat4 zcm::ortho(float left, float right, float bottom, float top) noexcept
 {
-    //TODO:
-//    if(GLM_CONFIG_CLIP_CONTROL & GLM_CLIP_CONTROL_LH_BIT)
-//        return lookAtLH(eye, center, up);
-//    else
-//        return lookAtRH(eye, center, up);
+    mat4 Result(1.0f);
+    Result[0][0] = 2.0f / (right - left);
+    Result[1][1] = 2.0f / (top - bottom);
+    Result[2][2] = - 1.0f;
+    Result[3][0] = - (right + left) / (right - left);
+    Result[3][1] = - (top + bottom) / (top - bottom);
+    return Result;
+}
 
-    return lookAtRH(eye, center, up);
+zcm::mat4 zcm::orthoLH_ZO(float left, float right, float bottom, float top, float zNear, float zFar) noexcept
+{
+    mat4 Result(1.0f);
+    Result[0][0] = (2.0f) / (right - left);
+    Result[1][1] = (2.0f) / (top - bottom);
+    Result[2][2] = (1.0f) / (zFar - zNear);
+    Result[3][0] = - (right + left) / (right - left);
+    Result[3][1] = - (top + bottom) / (top - bottom);
+    Result[3][2] = - zNear / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 zcm::orthoRH_ZO(float left, float right, float bottom, float top, float zNear, float zFar) noexcept
+{
+    mat4 Result(1.0f);
+    Result[0][0] = (2.0f) / (right - left);
+    Result[1][1] = (2.0f) / (top - bottom);
+    Result[2][2] = - (1.0f) / (zFar - zNear);
+    Result[3][0] = - (right + left) / (right - left);
+    Result[3][1] = - (top + bottom) / (top - bottom);
+    Result[3][2] = - zNear / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 zcm::orthoLH_NO(float left, float right, float bottom, float top, float zNear, float zFar) noexcept
+{
+    mat4 Result(1.0f);
+    Result[0][0] = (2.0f) / (right - left);
+    Result[1][1] = (2.0f) / (top - bottom);
+    Result[2][2] = (2.0f) / (zFar - zNear);
+    Result[3][0] = - (right + left) / (right - left);
+    Result[3][1] = - (top + bottom) / (top - bottom);
+    Result[3][2] = - (zFar + zNear) / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 zcm::orthoRH_NO(float left, float right, float bottom, float top, float zNear, float zFar) noexcept
+{
+    mat4 Result(1);
+    Result[0][0] = (2) / (right - left);
+    Result[1][1] = (2) / (top - bottom);
+    Result[2][2] = - (2) / (zFar - zNear);
+    Result[3][0] = - (right + left) / (right - left);
+    Result[3][1] = - (top + bottom) / (top - bottom);
+    Result[3][2] = - (zFar + zNear) / (zFar - zNear);
+    return Result;
 }
