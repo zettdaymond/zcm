@@ -2,6 +2,7 @@
 #include <filesystem>
 #include <string>
 #include <ctime>
+#include <sstream>
 #include <fmt/format.h>
 
 
@@ -35,6 +36,9 @@ constexpr auto cppPreabule = R"(
 #include <zcm/mat4.hpp>
 #include <zcm/matrix.hpp>
 
+#include <zcm/quat.hpp>
+#include <zcm/quaternion.hpp>
+
 #include <zcm/geometric.hpp>
 #include <zcm/exponential.hpp>
 #include <zcm/common.hpp>
@@ -53,6 +57,8 @@ using namespace zcm;
 #include <glm/mat3x3.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/matrix.hpp>
+
+#include <glm/gtc/quaternion.hpp>
 
 #include <glm/geometric.hpp>
 #include <glm/exponential.hpp>
@@ -77,7 +83,7 @@ int main(int argc, char *argv[])
         std::exit(-1);
     }
 
-    std::srand(unsigned(std::time(0)));
+    std::srand( std::uint32_t( std::time( nullptr ) ) );
 
     //
     // Step 1: Generate *.cpp and *.h files
@@ -131,13 +137,13 @@ int main(int argc, char *argv[])
 
         {
             auto glmBuildPath = directoryPath / "glm-build.sh";
-            auto glmBuildSource = std::string("#!/bin/sh\n/usr/bin/time -v -- g++ -DGLM_VARIANT=1") + " main.cpp " + cppFiles.str() + "-o /dev/null\n";
+            auto glmBuildSource = std::string("#!/bin/sh\n/usr/bin/time g++ -std=c++11 -DGLM_VARIANT=1") + " main.cpp " + cppFiles.str() + "-o /dev/null\n";
             writeToFile(glmBuildPath, glmBuildSource);
         }
 
         {
             auto zcmBuildPath = directoryPath / "zcm-build.sh";
-            auto zcmBuildSource = std::string("#!/bin/sh\n/usr/bin/time -v -- g++ ") + " main.cpp " + cppFiles.str() + "-I \"$ZCM_INCLUDE_PATH\" -L \"$ZCM_LIBRARY_PATH\" -l$ZCM_LIBRARY_NAME -o /dev/null\n";
+            auto zcmBuildSource = std::string("#!/bin/sh\n/usr/bin/time g++ -std=c++11") + " main.cpp " + cppFiles.str() + "-I \"$ZCM_INCLUDE_PATH\" -L \"$ZCM_LIBRARY_PATH\" -l$ZCM_LIBRARY_NAME -o /dev/null\n";
             writeToFile(zcmBuildPath, zcmBuildSource);
         }
     }

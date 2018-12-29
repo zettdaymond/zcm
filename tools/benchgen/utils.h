@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <random>
 #include <fstream>
+#include <sstream>
 
 #include <fmt/format.h>
 

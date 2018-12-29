@@ -288,7 +288,64 @@ const std::string snippents[] = {
     "auto c = a + b / 3.25f - transpose(mat3(1.6f));\n"
     "}\n",
 
+    //----------------------------QUATERNION------------------------------------------
+    "{\n"
+    "auto a = quat(1.3f, 0.7f, 2.8f, 3.2f);\n"
+    "auto b = normalize(a);\n"
+    "float L = length(b);\n"
+    "float A = angle(b);\n"
+    "}\n",
 
+    "{\n"
+    "quat q(1.0, 0.0, 0.0, 1.0);\n"
+    "auto Roll = roll(q);\n"
+    "auto Pitch = pitch(q);\n"
+    "auto Yaw = yaw(q);\n"
+    "auto Angles = eulerAngles(q);\n"
+    "}\n",
+
+    "{\n"
+    "quat q(1.0, 0.0, 0.0, 1.0);\n"
+    "auto k = mat3_cast(q);\n"
+    "auto j = mat4_cast(q);\n"
+    "}\n",
+
+    "{\n"
+    "mat3 a(1.0);\n"
+    "mat4 b(1.0);\n"
+    "auto q1 = quat_cast(a);\n"
+    "auto q2 = quat_cast(b);\n"
+    "}\n",
+
+    //doubled
+
+    "{\n"
+    "auto a = quat(1.3f, 0.7f, 2.8f, 3.2f);\n"
+    "auto b = normalize(a);\n"
+    "float L = length(b);\n"
+    "float A = angle(b);\n"
+    "}\n",
+
+    "{\n"
+    "quat q(1.0, 0.0, 0.0, 1.0);\n"
+    "auto Roll = roll(q);\n"
+    "auto Pitch = pitch(q);\n"
+    "auto Yaw = yaw(q);\n"
+    "auto Angles = eulerAngles(q);\n"
+    "}\n",
+
+    "{\n"
+    "quat q(1.0, 0.0, 0.0, 1.0);\n"
+    "auto k = mat3_cast(q);\n"
+    "auto j = mat4_cast(q);\n"
+    "}\n",
+
+    "{\n"
+    "mat3 a(1.0);\n"
+    "mat4 b(1.0);\n"
+    "auto q1 = quat_cast(a);\n"
+    "auto q2 = quat_cast(b);\n"
+    "}\n",
 
 };
 
