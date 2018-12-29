@@ -11,7 +11,9 @@
 
 zcm::vec3 zcm::eulerAngles(const zcm::quat &x) noexcept
 {
-    return vec3(pitch(x), yaw(x), roll(x));
+    return { pitch(x),
+             yaw(x),
+             roll(x) };
 }
 
 float zcm::pitch(const zcm::quat &q) noexcept
@@ -138,7 +140,10 @@ zcm::quat zcm::quatLookAtRH(const zcm::vec3 &direction, const zcm::vec3 &up) noe
 
 zcm::quat zcm::conjugate(const zcm::quat &x) noexcept
 {
-    return quat(-x.x, -x.y,-x.z, x.w);
+    return { +x.w,
+             -x.x,
+             -x.y,
+             -x.z };
 }
 
 zcm::quat zcm::inverse(const zcm::quat &x) noexcept
