@@ -26,6 +26,7 @@ add_library(zcm STATIC
     src/angle_and_trigonometry.cpp
     src/common.cpp
     src/color_space.cpp
+    src/constants.cpp
     src/component_wise.cpp
     src/exponential.cpp
     src/geometric.cpp
