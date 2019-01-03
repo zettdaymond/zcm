@@ -18,6 +18,11 @@ namespace zcm
     float distance(const vec3& first, const vec3& second) noexcept;
     float distance(const vec4& first, const vec4& second) noexcept;
 
+    float distance2(float first, float second) noexcept;
+    float distance2(const vec2& first, const vec2& second) noexcept;
+    float distance2(const vec3& first, const vec3& second) noexcept;
+    float distance2(const vec4& first, const vec4& second) noexcept;
+
     float length(float first) noexcept;
     float length(const vec2& first) noexcept;
     float length(const vec3& first) noexcept;

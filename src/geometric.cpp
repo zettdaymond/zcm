@@ -271,6 +271,30 @@ float zcm::length2(const zcm::quat &first) noexcept
 //------------------------------------------------------------------------------------------
 
 
+float zcm::distance2(float first, float second) noexcept
+{
+    return length2(first - second);
+}
+
+float zcm::distance2(const zcm::vec2 &first, const zcm::vec2 &second) noexcept
+{
+        return length2(first - second);
+}
+
+float zcm::distance2(const zcm::vec3 &first, const zcm::vec3 &second) noexcept
+{
+    return length(first - second);
+}
+
+float zcm::distance2(const zcm::vec4 &first, const zcm::vec4 &second) noexcept
+{
+    return length(first - second);
+}
+
+
+//------------------------------------------------------------------------------------------
+
+
 zcm::vec3 zcm::orthogonal(const vec3 &v) noexcept
 {
     return abs(v.x) > abs(v.z) ? vec3(-v.y, v.x, 0.0f)
@@ -283,3 +307,4 @@ zcm::vec3 zcm::orthogonal_branchless(const vec3 &v) noexcept
     float k = fract(abs(v.x) + 0.5f);
     return vec3(-v.y, v.x - k * v.z, k * v.y);
 }
+
