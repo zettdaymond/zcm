@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.11.2)
 project(zcm)
 
+if(POLICY CMP0077)
+	# allow overriding options when used as cmake subdirectory
+	cmake_policy(SET CMP0077 NEW)
+endif()
+
 option(ZCM_ENABLE_TESTS "Build tests" ON)
 option(ZCM_ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
 option(ZCM_GENERATE_BENCHMARK "Generate benchmark code" OFF)
