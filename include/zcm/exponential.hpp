@@ -2,10 +2,10 @@
 
 namespace zcm
 {
-    class vec2;
-    class vec3;
-    class vec4;
-    class quat;
+    struct vec2;
+    struct vec3;
+    struct vec4;
+    struct quat;
 
     float exp (float x) noexcept;
     vec2  exp (const vec2& x) noexcept;

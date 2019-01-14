@@ -2,10 +2,10 @@
 
 namespace zcm
 {
-    class vec2;
-    class vec3;
-    class vec4;
-    class quat;
+    struct vec2;
+    struct vec3;
+    struct vec4;
+    struct quat;
 
     float dot(float first, float second) noexcept;
     float dot(const vec2& first, const vec2& second) noexcept;

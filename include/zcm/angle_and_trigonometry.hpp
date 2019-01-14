@@ -2,9 +2,9 @@
 
 namespace zcm
 {
-    class vec2;
-    class vec3;
-    class vec4;
+    struct vec2;
+    struct vec3;
+    struct vec4;
 
     float cos (float angle) noexcept;
     vec2  cos (const vec2& angle) noexcept;

@@ -3,8 +3,8 @@
 namespace zcm
 {
 
-    class vec3;
-    class vec4;
+    struct vec3;
+    struct vec4;
 
     struct quat
     {

@@ -2,8 +2,8 @@
 
 namespace zcm
 {
-    class vec3;
-    class mat4;
+    struct vec3;
+    struct mat4;
 
     mat4  lookAtLH (const vec3& eye, const vec3& center, const vec3& up) noexcept;
     mat4  lookAtRH (const vec3& eye, const vec3& center, const vec3& up) noexcept;

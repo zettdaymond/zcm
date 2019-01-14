@@ -2,12 +2,12 @@
 
 namespace zcm
 {
-    class bvec2;
-    class bvec3;
-    class bvec4;
-    class vec2;
-    class vec3;
-    class vec4;
+    struct bvec2;
+    struct bvec3;
+    struct bvec4;
+    struct vec2;
+    struct vec3;
+    struct vec4;
 
     float abs (float x) noexcept;
     vec2  abs (const vec2& x) noexcept;

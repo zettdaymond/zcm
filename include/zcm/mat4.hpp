@@ -26,7 +26,6 @@ namespace zcm
         vec4&       operator[] (unsigned pos) noexcept;
         const vec4& operator[] (unsigned pos) const noexcept;
 
-
         explicit operator mat3() const noexcept;
 
     //private:

@@ -2,10 +2,10 @@
 
 namespace zcm {
 
-    class quat;
-    class vec3;
-    class mat3;
-    class mat4;
+    struct quat;
+    struct vec3;
+    struct mat3;
+    struct mat4;
 
     quat  conjugate   (const quat& x) noexcept;
     quat  inverse     (const quat& x) noexcept;
