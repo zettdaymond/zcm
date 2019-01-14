@@ -2,7 +2,6 @@
 
 #include <zcm/access.hpp>
 
-
 namespace zcm
 {
     struct vec2
@@ -53,6 +52,30 @@ namespace zcm
 
     vec2 operator *(const float scalar, const vec2& vec) noexcept;
     vec2 operator /(const float scalar, const vec2& vec) noexcept;
+
+    //----------------------
+
+    #define ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(x) \
+        extern template _scalar_accessor<x, 2>::operator float() const noexcept; \
+        extern template void _scalar_accessor<x, 2>::operator=(float) noexcept;  \
+        extern template void _scalar_accessor<x, 2>::operator+=(float) noexcept; \
+        extern template void _scalar_accessor<x, 2>::operator-=(float) noexcept; \
+        extern template void _scalar_accessor<x, 2>::operator*=(float) noexcept; \
+        extern template void _scalar_accessor<x, 2>::operator/=(float) noexcept; \
+
+    #define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR(x, y) \
+        extern template  _shuffle_accessor<vec2, x, y>::operator vec2() const noexcept;
+
+    ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(0)
+    ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(1)
+
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR(0, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR(0, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR(1, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR(1, 1)
+
+    #undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR
+    #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR
 }
 
 

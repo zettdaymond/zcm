@@ -44,8 +44,11 @@ add_library(zcm STATIC
     src/quaternion.cpp
     src/type_ptr.cpp
     src/vec2.cpp
+    src/vec2_access.cpp
     src/vec3.cpp
+    src/vec3_access.cpp
     src/vec4.cpp
+    src/vec4_access.cpp
     src/bvec2.cpp
     src/bvec3.cpp
     src/bvec4.cpp

@@ -90,4 +90,66 @@ namespace zcm
 
     vec3 operator *(const float scalar, const vec3& vec) noexcept;
     vec3 operator /(const float scalar, const vec3& vec) noexcept;
+
+    //----------------------
+
+    #define ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(x) \
+        extern template _scalar_accessor<x, 3>::operator float() const noexcept; \
+        extern template void _scalar_accessor<x, 3>::operator=(float) noexcept;  \
+        extern template void _scalar_accessor<x, 3>::operator+=(float) noexcept; \
+        extern template void _scalar_accessor<x, 3>::operator-=(float) noexcept; \
+        extern template void _scalar_accessor<x, 3>::operator*=(float) noexcept; \
+        extern template void _scalar_accessor<x, 3>::operator/=(float) noexcept; \
+
+    #define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(x, y) \
+    extern template  _shuffle_accessor<vec2, x, y>::operator vec2() const noexcept;
+
+    #define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(x, y, z) \
+        extern template  _shuffle_accessor<vec3, x, y, z>::operator vec3() const noexcept;
+
+    ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(0)
+    ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(1)
+    ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(2)
+
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 2)
+
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 0)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 1)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 2)
+    ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 2)
+
+    #undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR
+    #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2
+    #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3
 }

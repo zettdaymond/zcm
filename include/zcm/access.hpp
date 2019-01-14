@@ -2,46 +2,24 @@
 
 namespace zcm {
 
-template<int index, int count>
-struct _scalar_accessor
-{
-    float _data[count];
+    template<int index, int count>
+    struct _scalar_accessor
+    {
+        float _data[count];
 
-    void operator +=(float s) noexcept
-    {
-	_data[index] += s;
-    }
-    void operator -=(float s) noexcept
-    {
-	_data[index] -= s;
-    }
-    void operator *=(float s) noexcept
-    {
-	_data[index] *= s;
-    }
-    void operator /=(float s) noexcept
-    {
-	_data[index] /= s;
-    }
-    void operator  =(float s) noexcept
-    {
-	_data[index] = s;
-    }
-    operator float() const noexcept
-    {
-	return _data[index];
-    }
-};
+        void operator +=(float s) noexcept;
+        void operator -=(float s) noexcept;
+        void operator *=(float s) noexcept;
+        void operator /=(float s) noexcept;
+        void operator  =(float s) noexcept;
+        operator float() const noexcept;
+    };
 
-template<typename T, int... indices>
-struct _shuffle_accessor
-{
-    float _data[sizeof...(indices)];
-
-    operator T() const noexcept
+    template<typename T, int... indices>
+    struct _shuffle_accessor
     {
-	return T{_data[indices]...};
-    }
-};
+        float _data[sizeof...(indices)];
 
+        operator T() const noexcept;
+    };
 }
