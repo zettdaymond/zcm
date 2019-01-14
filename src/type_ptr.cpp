@@ -28,17 +28,17 @@ bool *zcm::value_ptr(zcm::bvec4 &val) noexcept
 
 float *zcm::value_ptr(zcm::vec2 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 float *zcm::value_ptr(zcm::vec3 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 float *zcm::value_ptr(zcm::vec4 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 float *zcm::value_ptr(zcm::quat &val) noexcept
@@ -48,17 +48,17 @@ float *zcm::value_ptr(zcm::quat &val) noexcept
 
 float *zcm::value_ptr(zcm::mat2 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &val._columns[0][0];
 }
 
 float *zcm::value_ptr(zcm::mat3 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &val._columns[0][0];
 }
 
 float *zcm::value_ptr(zcm::mat4 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &val._columns[0][0];
 }
 
 
@@ -81,17 +81,17 @@ const bool *zcm::value_ptr(const zcm::bvec4 &val) noexcept
 
 const float *zcm::value_ptr(const zcm::vec2 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 const float *zcm::value_ptr(const zcm::vec3 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 const float *zcm::value_ptr(const zcm::vec4 &val) noexcept
 {
-    return &val.x;
+    return &val[0];
 }
 
 const float *zcm::value_ptr(const zcm::quat &val) noexcept
@@ -101,16 +101,16 @@ const float *zcm::value_ptr(const zcm::quat &val) noexcept
 
 const float *zcm::value_ptr(const zcm::mat2 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &(val._columns[0])[0];
 }
 
 const float *zcm::value_ptr(const zcm::mat3 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &val._columns[0][0];
 }
 
 const float *zcm::value_ptr(const zcm::mat4 &val) noexcept
 {
-    return &val._columns[0].x;
+    return &val._columns[0][0];
 }
 

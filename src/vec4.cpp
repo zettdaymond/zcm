@@ -12,60 +12,68 @@ zcm::vec4::vec4() noexcept :
     vec4(0.0f)
 {}
 
-zcm::vec4::vec4(float value) noexcept :
-    x(value),
-    y(value),
-    z(value),
-    w(value)
-{}
-zcm::vec4::vec4(float _x, float _y, float _z, float _w) noexcept :
-    x(_x),
-    y(_y),
-    z(_z),
-    w(_w)
-{}
+zcm::vec4::vec4(float value) noexcept
+{
+    _data[0] = value;
+    _data[1] = value;
+    _data[2] = value;
+    _data[3] = value;
+}
+zcm::vec4::vec4(float _x, float _y, float _z, float _w) noexcept
+{
+    _data[0] = _x;
+    _data[1] = _y;
+    _data[2] = _z;
+    _data[3] = _w;
+}
 
-zcm::vec4::vec4(const zcm::vec3 &xyz, float _w) noexcept :
-    x(xyz.x),
-    y(xyz.y),
-    z(xyz.z),
-    w(_w)
-{}
+zcm::vec4::vec4(const zcm::vec3 &xyz, float _w) noexcept
+{
+    _data[0] = xyz.x;
+    _data[1] = xyz.y;
+    _data[2] = xyz.z;
+    _data[3] = _w;
+}
 
-zcm::vec4::vec4(float _x, const zcm::vec3 &yzw) noexcept :
-    x(_x),
-    y(yzw.x),
-    z(yzw.y),
-    w(yzw.z)
-{}
+zcm::vec4::vec4(float _x, const zcm::vec3 &yzw) noexcept
+{
+    _data[0] = _x;
+    _data[1] = yzw.x;
+    _data[2] = yzw.y;
+    _data[3] = yzw.z;
+}
 
-zcm::vec4::vec4(const zcm::vec2 &xy, const zcm::vec2 &zw) noexcept :
-    x(xy.x),
-    y(xy.y),
-    z(zw.x),
-    w(zw.y)
-{}
+zcm::vec4::vec4(const zcm::vec2 &xy, const zcm::vec2 &zw) noexcept
+{
+    _data[0] = xy.x;
+    _data[1] = xy.y;
+    _data[2] = zw.x;
+    _data[3] = zw.y;
+}
 
-zcm::vec4::vec4(const zcm::vec2 &xy, float _z, float _w) noexcept :
-    x(xy.x),
-    y(xy.y),
-    z(_z),
-    w(_w)
-{}
+zcm::vec4::vec4(const zcm::vec2 &xy, float _z, float _w) noexcept
+{
+    _data[0] = xy.x;
+    _data[1] = xy.y;
+    _data[2] = _z;
+    _data[3] = _w;
+}
 
-zcm::vec4::vec4(float _x, const zcm::vec2 &yz, float _w) noexcept :
-    x(_x),
-    y(yz.x),
-    z(yz.y),
-    w(_w)
-{}
+zcm::vec4::vec4(float _x, const zcm::vec2 &yz, float _w) noexcept
+{
+    _data[0] = _x;
+    _data[1] = yz.x;
+    _data[2] = yz.y;
+    _data[3] = _w;
+}
 
-zcm::vec4::vec4(float _x, float _y, const zcm::vec2 &zw) noexcept :
-    x(_x),
-    y(_y),
-    z(zw.x),
-    w(zw.y)
-{}
+zcm::vec4::vec4(float _x, float _y, const zcm::vec2 &zw) noexcept
+{
+    _data[0] = _x;
+    _data[1] = _y;
+    _data[2] = zw.x;
+    _data[3] = zw.y;
+}
 
 zcm::vec4 zcm::operator +(const zcm::vec4& first, const zcm::vec4& second) noexcept
 {
@@ -225,33 +233,11 @@ bool zcm::operator!=(const zcm::vec4 &first, const zcm::vec4 &second) noexcept
 float& zcm::vec4::operator[](unsigned val) noexcept
 {
     assert(val < 4);
-    if (val == 0) {
-        return x;
-    }
-    else if (val == 1) {
-        return y;
-    }
-    else if (val == 2) {
-        return z;
-    }
-    else {
-        return w;
-    }
+    return _data[val];
 }
 
-float zcm::vec4::operator[](unsigned val) const noexcept
+const float& zcm::vec4::operator[](unsigned val) const noexcept
 {
     assert(val < 4);
-    if (val == 0) {
-        return x;
-    }
-    else if (val == 1) {
-        return y;
-    }
-    else if (val == 2) {
-        return z;
-    }
-    else {
-        return w;
-    }
+    return _data[val];
 }

@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include <zcm/vec3.hpp>
+#include <zcm/vec2.hpp>
 #include <zcm/geometric.hpp>
 
 using namespace zcm;
@@ -169,6 +170,46 @@ TEST(vec3, vector_normalize)
     ASSERT_FLOAT_EQ(result.x,  0.2730200246537f);
     ASSERT_FLOAT_EQ(result.y,  0.5910883533752f);
     ASSERT_FLOAT_EQ(result.z,  -0.758995668537f);
+}
+
+TEST(vec3, shuffle)
+{
+    zcm::vec2 result = first.yx;
+
+    ASSERT_FLOAT_EQ(result.x,  first.y);
+    ASSERT_FLOAT_EQ(result.y,  first.x);
+
+    result = first.xx;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.x);
+
+    result = first.yy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.y);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    result = first.xy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    result = first.xz;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.z);
+
+    result = first.zy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.z);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    zcm::vec3 result3 = first.yxz;
+
+    ASSERT_FLOAT_EQ(result3.x,  first.y);
+    ASSERT_FLOAT_EQ(result3.y,  first.x);
+    ASSERT_FLOAT_EQ(result3.z,  first.z);
+
 }
 
 //TODO: test - faceforward, reflect, refract

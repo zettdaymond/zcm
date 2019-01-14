@@ -9,15 +9,17 @@ static_assert(sizeof(zcm::vec2) == 2 * sizeof(float), "extra padding detected!")
 zcm::vec2::vec2() noexcept :
     vec2(0.0f)
 {}
-zcm::vec2::vec2(float value) noexcept :
-    x(value),
-    y(value)
-{}
+zcm::vec2::vec2(float value) noexcept
+{
+    _data[0] = value;
+    _data[1] = value;
+}
 
-zcm::vec2::vec2(float _x, float _y) noexcept :
-    x(_x),
-    y(_y)
-{}
+zcm::vec2::vec2(float _x, float _y) noexcept
+{
+    _data[0] = _x;
+    _data[1] = _y;
+}
 
 zcm::vec2 zcm::operator +(const zcm::vec2& first, const zcm::vec2& second) noexcept
 {
@@ -141,26 +143,14 @@ bool zcm::operator!=(const zcm::vec2 &first, const zcm::vec2 &second) noexcept
 }
 
 
-float&zcm::vec2::operator[](unsigned val) noexcept
+float& zcm::vec2::operator[](unsigned val) noexcept
 {
     assert(val < 3);
-
-    if (val == 0) {
-        return x;
-    }
-    else {
-        return y;
-    }
+    return _data[val];
 }
 
-float zcm::vec2::operator[](unsigned val) const noexcept
+const float& zcm::vec2::operator[](unsigned val) const noexcept
 {
     assert(val < 3);
-
-    if (val == 0) {
-        return x;
-    }
-    else {
-        return y;
-    }
+    return _data[val];
 }

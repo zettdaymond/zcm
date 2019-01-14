@@ -1,5 +1,7 @@
 #include <gtest/gtest.h>
 #include <zcm/vec4.hpp>
+#include <zcm/vec3.hpp>
+#include <zcm/vec2.hpp>
 #include <zcm/geometric.hpp>
 #include <zcm/component_wise.hpp>
 
@@ -186,6 +188,53 @@ TEST(vec4, vector_component_wise)
     ASSERT_FLOAT_EQ(compMax(v), 4.0f);
     ASSERT_FLOAT_EQ(compAdd(v), 10.0f);
     ASSERT_FLOAT_EQ(compMul(v), 24.0f);
+}
+
+
+TEST(vec4, shuffle)
+{
+    zcm::vec2 result = first.yx;
+
+    ASSERT_FLOAT_EQ(result.x,  first.y);
+    ASSERT_FLOAT_EQ(result.y,  first.x);
+
+    result = first.xx;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.x);
+
+    result = first.yy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.y);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    result = first.xy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    result = first.xz;
+
+    ASSERT_FLOAT_EQ(result.x,  first.x);
+    ASSERT_FLOAT_EQ(result.y,  first.z);
+
+    result = first.zy;
+
+    ASSERT_FLOAT_EQ(result.x,  first.z);
+    ASSERT_FLOAT_EQ(result.y,  first.y);
+
+    zcm::vec3 result3 = first.yxz;
+
+    ASSERT_FLOAT_EQ(result3.x,  first.y);
+    ASSERT_FLOAT_EQ(result3.y,  first.x);
+    ASSERT_FLOAT_EQ(result3.z,  first.z);
+
+    zcm::vec4 result4 = first.wwxy;
+    ASSERT_FLOAT_EQ(result4.x,  first.w);
+    ASSERT_FLOAT_EQ(result4.y,  first.w);
+    ASSERT_FLOAT_EQ(result4.z,  first.x);
+    ASSERT_FLOAT_EQ(result4.w,  first.y);
+
 }
 
 //TODO: test - faceforward, reflect, refract

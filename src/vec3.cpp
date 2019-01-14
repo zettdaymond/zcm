@@ -12,29 +12,33 @@ zcm::vec3::vec3() noexcept :
     vec3(0.0f)
 {}
 
-zcm::vec3::vec3(float value) noexcept :
-    x(value),
-    y(value),
-    z(value)
-{}
+zcm::vec3::vec3(float value) noexcept
+{
+    _data[0] = value;
+    _data[1] = value;
+    _data[2] = value;
+}
 
-zcm::vec3::vec3(float _x, float _y, float _z) noexcept :
-    x(_x),
-    y(_y),
-    z(_z)
-{}
+zcm::vec3::vec3(float _x, float _y, float _z) noexcept
+{
+    _data[0] = _x;
+    _data[1] = _y;
+    _data[2] = _z;
+}
 
-zcm::vec3::vec3(zcm::vec2 xy, float _z) noexcept :
-    x(xy.x),
-    y(xy.y),
-    z(_z)
-{}
+zcm::vec3::vec3(zcm::vec2 xy, float _z) noexcept
+{
+    _data[0] = xy.x;
+    _data[1] = xy.y;
+    _data[2] = _z;
+}
 
-zcm::vec3::vec3(float _x, zcm::vec2 yz) noexcept :
-    x(_x),
-    y(yz.x),
-    z(yz.y)
-{}
+zcm::vec3::vec3(float _x, zcm::vec2 yz) noexcept
+{
+    _data[0] = _x;
+    _data[1] = yz.x;
+    _data[2] = yz.y;
+}
 
 zcm::vec3 zcm::operator +(const zcm::vec3& first, const zcm::vec3& second) noexcept
 {
@@ -180,30 +184,12 @@ bool zcm::operator!=(const zcm::vec3 &first, const zcm::vec3 &second) noexcept
 float& zcm::vec3::operator[](unsigned val) noexcept
 {
     assert(val < 3);
-
-    if (val == 0) {
-        return x;
-    }
-    else if (val == 1) {
-        return y;
-    }
-    else {
-        return z;
-    }
+    return _data[val];
 }
 
-float zcm::vec3::operator[](unsigned val) const noexcept
+const float& zcm::vec3::operator[](unsigned val) const noexcept
 {
     assert(val < 3);
-
-    if (val == 0) {
-        return x;
-    }
-    else if (val == 1) {
-        return y;
-    }
-    else {
-        return z;
-    }
+    return _data[val];
 }
 
