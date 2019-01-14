@@ -6,7 +6,7 @@ namespace zcm
 {
     struct vec3;
     struct vec2;
-    struct vec4
+    struct alignas(16) vec4
     {
         vec4 () noexcept;
         vec4 (float value) noexcept;
