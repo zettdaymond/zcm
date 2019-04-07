@@ -39,7 +39,7 @@ float zcm::roll(const zcm::quat &q) noexcept
 
 zcm::mat3 zcm::mat3_cast(const zcm::quat &q) noexcept
 {
-    mat3 Result(1.0f);
+    mat3 Result{no_init_t{}};
     auto qxx(q.x * q.x);
     auto qyy(q.y * q.y);
     auto qzz(q.z * q.z);
@@ -118,7 +118,7 @@ zcm::quat zcm::quat_cast(const zcm::mat4 &m) noexcept
 
 zcm::quat zcm::quatLookAtLH(const zcm::vec3 &direction, const zcm::vec3 &up) noexcept
 {
-    mat3 Result;
+    mat3 Result{zcm::no_init_t{}};
 
     Result[2] = direction;
     Result[0] = normalize(cross(up, Result[2]));
@@ -129,7 +129,7 @@ zcm::quat zcm::quatLookAtLH(const zcm::vec3 &direction, const zcm::vec3 &up) noe
 
 zcm::quat zcm::quatLookAtRH(const zcm::vec3 &direction, const zcm::vec3 &up) noexcept
 {
-    mat3 Result;
+    mat3 Result{zcm::no_init_t{}};
 
     Result[2] = -direction;
     Result[0] = normalize(cross(up, Result[2]));

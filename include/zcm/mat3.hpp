@@ -9,6 +9,7 @@ namespace zcm
     struct mat3
     {
         mat3 () noexcept;
+        explicit mat3 (no_init_t) noexcept;
         explicit mat3 (float value) noexcept;
         explicit mat3 (const mat2& m2) noexcept;
         mat3 (const vec3& c0,  const vec3& c1, const vec3& c2) noexcept;

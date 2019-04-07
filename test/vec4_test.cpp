@@ -190,7 +190,7 @@ TEST(vec4, vector_component_wise)
     ASSERT_FLOAT_EQ(compMul(v), 24.0f);
 }
 
-
+#ifndef ZCM_DISABLE_SWIZZLE
 TEST(vec4, shuffle)
 {
     zcm::vec2 result = first.yx;
@@ -236,5 +236,6 @@ TEST(vec4, shuffle)
     ASSERT_FLOAT_EQ(result4.w,  first.y);
 
 }
+#endif
 
 //TODO: test - faceforward, reflect, refract

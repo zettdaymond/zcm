@@ -12,6 +12,9 @@ zcm::vec4::vec4() noexcept :
     vec4(0.0f)
 {}
 
+zcm::vec4::vec4(zcm::no_init_t) noexcept
+{}
+
 zcm::vec4::vec4(float value) noexcept
 {
     _data[0] = value;
@@ -27,7 +30,7 @@ zcm::vec4::vec4(float _x, float _y, float _z, float _w) noexcept
     _data[3] = _w;
 }
 
-zcm::vec4::vec4(const zcm::vec3 &xyz, float _w) noexcept
+zcm::vec4::vec4(vec3 xyz, float _w) noexcept
 {
     _data[0] = xyz.x;
     _data[1] = xyz.y;
@@ -35,7 +38,7 @@ zcm::vec4::vec4(const zcm::vec3 &xyz, float _w) noexcept
     _data[3] = _w;
 }
 
-zcm::vec4::vec4(float _x, const zcm::vec3 &yzw) noexcept
+zcm::vec4::vec4(float _x, vec3 yzw) noexcept
 {
     _data[0] = _x;
     _data[1] = yzw.x;
@@ -43,7 +46,7 @@ zcm::vec4::vec4(float _x, const zcm::vec3 &yzw) noexcept
     _data[3] = yzw.z;
 }
 
-zcm::vec4::vec4(const zcm::vec2 &xy, const zcm::vec2 &zw) noexcept
+zcm::vec4::vec4(vec2 xy, vec2 zw) noexcept
 {
     _data[0] = xy.x;
     _data[1] = xy.y;
@@ -51,7 +54,7 @@ zcm::vec4::vec4(const zcm::vec2 &xy, const zcm::vec2 &zw) noexcept
     _data[3] = zw.y;
 }
 
-zcm::vec4::vec4(const zcm::vec2 &xy, float _z, float _w) noexcept
+zcm::vec4::vec4(vec2 xy, float _z, float _w) noexcept
 {
     _data[0] = xy.x;
     _data[1] = xy.y;
@@ -59,7 +62,7 @@ zcm::vec4::vec4(const zcm::vec2 &xy, float _z, float _w) noexcept
     _data[3] = _w;
 }
 
-zcm::vec4::vec4(float _x, const zcm::vec2 &yz, float _w) noexcept
+zcm::vec4::vec4(float _x, vec2 yz, float _w) noexcept
 {
     _data[0] = _x;
     _data[1] = yz.x;
@@ -67,7 +70,7 @@ zcm::vec4::vec4(float _x, const zcm::vec2 &yz, float _w) noexcept
     _data[3] = _w;
 }
 
-zcm::vec4::vec4(float _x, float _y, const zcm::vec2 &zw) noexcept
+zcm::vec4::vec4(float _x, float _y, vec2 zw) noexcept
 {
     _data[0] = _x;
     _data[1] = _y;
@@ -91,7 +94,7 @@ zcm::vec4 zcm::operator -(const zcm::vec4& first, const vec4& second) noexcept
                  first.w - second.w };
 }
 
-zcm::vec4 zcm::operator -(const zcm::vec4& first) noexcept
+zcm::vec4 zcm::operator -(zcm::vec4 first) noexcept
 {
     return vec4{ -first.x,
                  -first.y,
@@ -100,7 +103,7 @@ zcm::vec4 zcm::operator -(const zcm::vec4& first) noexcept
 }
 
 
-zcm::vec4 zcm::operator +(const zcm::vec4 &first) noexcept
+zcm::vec4 zcm::operator +(zcm::vec4 first) noexcept
 {
     return { +first.x,
              +first.y,
@@ -156,7 +159,7 @@ zcm::vec4 zcm::operator /(const zcm::vec4& first, const zcm::vec4& second) noexc
              first.w / second.w };
 }
 
-void zcm::vec4::operator +=(const zcm::vec4 &other) noexcept
+void zcm::vec4::operator +=(zcm::vec4 other) noexcept
 {
     x += other.x;
     y += other.y;
@@ -164,7 +167,7 @@ void zcm::vec4::operator +=(const zcm::vec4 &other) noexcept
     w += other.w;
 }
 
-void zcm::vec4::operator -=(const zcm::vec4 &other) noexcept
+void zcm::vec4::operator -=(zcm::vec4 other) noexcept
 {
     x -= other.x;
     y -= other.y;
@@ -172,7 +175,7 @@ void zcm::vec4::operator -=(const zcm::vec4 &other) noexcept
     w -= other.w;
 }
 
-void zcm::vec4::operator *=(const zcm::vec4 &other) noexcept
+void zcm::vec4::operator *=(zcm::vec4 other) noexcept
 {
     x *= other.x;
     y *= other.y;
@@ -180,7 +183,7 @@ void zcm::vec4::operator *=(const zcm::vec4 &other) noexcept
     w *= other.w;
 }
 
-void zcm::vec4::operator /=(const zcm::vec4 &other) noexcept
+void zcm::vec4::operator /=(zcm::vec4 other) noexcept
 {
     x /= other.x;
     y /= other.y;

@@ -22,15 +22,6 @@ namespace detail {
     };
 
 
-    template<typename T, int... indices>
-    struct shuffle_accessor_4
-    {
-        float _data[4];
-
-        operator T() const noexcept;
-    };
-
-
 #define ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(x) \
     extern template scalar_accessor_4<x>::operator float() const noexcept; \
     extern template void scalar_accessor_4<x>::operator=(float) noexcept;  \
@@ -38,6 +29,22 @@ namespace detail {
     extern template void scalar_accessor_4<x>::operator-=(float) noexcept; \
     extern template void scalar_accessor_4<x>::operator*=(float) noexcept; \
     extern template void scalar_accessor_4<x>::operator/=(float) noexcept; \
+
+
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(0)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(1)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(2)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(3)
+#undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR
+
+
+#ifndef ZCM_DISABLE_SWIZZLE
+template<typename T, int... indices>
+struct shuffle_accessor_4
+{
+    float _data[4];
+    operator T() const noexcept;
+};
 
 #define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(x, y) \
     extern template  shuffle_accessor_4<vec2, x, y>::operator vec2() const noexcept;
@@ -48,10 +55,9 @@ namespace detail {
 #define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4(x, y, z, w) \
     extern template  shuffle_accessor_4<vec4, x, y, z, w>::operator vec4() const noexcept;
 
-ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(0)
-ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(1)
-ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(2)
-ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(3)
+#define ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4_ASSIGNABLE(x, y, z, w) \
+    extern template  shuffle_accessor_4_assignable<vec4, x, y, z, w>::operator vec4() const noexcept; \
+    extern template  void shuffle_accessor_4_assignable<vec4, x, y, z, w>::operator=(vec4) noexcept;
 
 ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 0)
 ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 0)
@@ -392,10 +398,10 @@ ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4(1, 3, 3, 3)
 ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4(2, 3, 3, 3)
 ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4(3, 3, 3, 3)
 
-#undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR
 #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_2
 #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_3
 #undef ZCM_EXTERN_TEMPLATE_SHUFFLE_ACCESSOR_4
+#endif // ZCM_DISABLE_SWIZZLE
 
 }
 }

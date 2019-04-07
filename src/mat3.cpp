@@ -10,6 +10,9 @@ static_assert (std::is_standard_layout<zcm::mat3>::value, "");
 zcm::mat3::mat3() noexcept : mat3(1.0f)
 {}
 
+zcm::mat3::mat3(zcm::no_init_t) noexcept
+{}
+
 zcm::mat3::mat3(float value) noexcept
 {
     _columns[0] = vec3(value, 0.0f, 0.0f);

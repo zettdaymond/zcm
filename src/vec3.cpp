@@ -12,6 +12,9 @@ zcm::vec3::vec3() noexcept :
     vec3(0.0f)
 {}
 
+zcm::vec3::vec3(zcm::no_init_t) noexcept
+{}
+
 zcm::vec3::vec3(float value) noexcept
 {
     _data[0] = value;
@@ -62,14 +65,14 @@ zcm::vec3 zcm::operator *(const zcm::vec3& first, const zcm::vec3& second) noexc
              first.z * second.z };
 }
 
-zcm::vec3 zcm::operator *(const float scalar, const zcm::vec3& vec) noexcept
+zcm::vec3 zcm::operator *(float scalar, zcm::vec3 vec) noexcept
 {
     return { scalar * vec.x,
              scalar * vec.y,
              scalar * vec.z };
 }
 
-zcm::vec3 zcm::operator /(const float scalar, const zcm::vec3& vec) noexcept
+zcm::vec3 zcm::operator /(const float scalar, zcm::vec3 vec) noexcept
 {
     return { scalar / vec.x,
              scalar / vec.y,
@@ -99,14 +102,14 @@ zcm::vec3 zcm::operator /(const zcm::vec3& vec, const float scalar) noexcept
 }
 
 
-zcm::vec3 zcm::operator -(const zcm::vec3& first) noexcept
+zcm::vec3 zcm::operator -(zcm::vec3 first) noexcept
 {
     return { -first.x,
                 -first.y,
                 -first.z };
 }
 
-zcm::vec3 zcm::operator +(const zcm::vec3 &first) noexcept
+zcm::vec3 zcm::operator +(zcm::vec3 first) noexcept
 {
     return { +first.x,
                 +first.y,
@@ -114,28 +117,28 @@ zcm::vec3 zcm::operator +(const zcm::vec3 &first) noexcept
 }
 
 
-void zcm::vec3::operator +=(const zcm::vec3 &other) noexcept
+void zcm::vec3::operator +=(zcm::vec3 other) noexcept
 {
     x += other.x;
     y += other.y;
     z += other.z;
 }
 
-void zcm::vec3::operator -=(const zcm::vec3 &other) noexcept
+void zcm::vec3::operator -=(zcm::vec3 other) noexcept
 {
     x -= other.x;
     y -= other.y;
     z -= other.z;
 }
 
-void zcm::vec3::operator *=(const zcm::vec3 &other) noexcept
+void zcm::vec3::operator *=(zcm::vec3 other) noexcept
 {
     x *= other.x;
     y *= other.y;
     z *= other.z;
 }
 
-void zcm::vec3::operator /=(const zcm::vec3 &other) noexcept
+void zcm::vec3::operator /=(zcm::vec3 other) noexcept
 {
     x /= other.x;
     y /= other.y;

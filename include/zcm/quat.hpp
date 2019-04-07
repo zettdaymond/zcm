@@ -1,5 +1,7 @@
 #pragma once
 
+#include <zcm/init.hpp>
+
 namespace zcm
 {
 
@@ -9,6 +11,7 @@ namespace zcm
     struct quat
     {
         quat() noexcept;
+        explicit quat(no_init_t) noexcept;
         quat(float w, float x, float y, float z) noexcept;
         quat(float s, vec3 v) noexcept;
         quat(vec3 v, float s) noexcept;

@@ -10,6 +10,7 @@ static_assert(sizeof(zcm::bvec2) == 2 * sizeof(bool), "extra padding detected!")
 zcm::bvec2::bvec2() noexcept :
     bvec2(false)
 {}
+
 zcm::bvec2::bvec2(bool value) noexcept :
     x(value),
     y(value)

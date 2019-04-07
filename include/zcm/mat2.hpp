@@ -8,6 +8,7 @@ namespace zcm
     struct mat2
     {
         mat2  () noexcept;
+        explicit mat2(no_init_t) noexcept;
         explicit mat2(float value) noexcept;
 
         mat2  (float a00, float a01, float a10, float a11) noexcept;

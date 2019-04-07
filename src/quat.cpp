@@ -19,6 +19,9 @@ zcm::quat::quat() noexcept :
     w(1.0f)
 {}
 
+zcm::quat::quat(zcm::no_init_t) noexcept
+{}
+
 zcm::quat::quat(float _w, float _x, float _y, float _z) noexcept :
     x(_x),
     y(_y),

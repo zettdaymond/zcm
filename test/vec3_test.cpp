@@ -172,6 +172,7 @@ TEST(vec3, vector_normalize)
     ASSERT_FLOAT_EQ(result.z,  -0.758995668537f);
 }
 
+#ifndef ZCM_DISABLE_SWIZZLE
 TEST(vec3, shuffle)
 {
     zcm::vec2 result = first.yx;
@@ -211,5 +212,6 @@ TEST(vec3, shuffle)
     ASSERT_FLOAT_EQ(result3.z,  first.z);
 
 }
+#endif
 
 //TODO: test - faceforward, reflect, refract
