@@ -4,6 +4,9 @@
 #include <zcm/vec3.hpp>
 #include <zcm/mat4.hpp>
 #include <zcm/mat3.hpp>
+#include <zcm/common.hpp>
+#include <limits>
+#include <cassert>
 
 zcm::mat4 zcm::translate(const zcm::mat4& m, const zcm::vec3& v) noexcept
 {
@@ -152,5 +155,65 @@ zcm::mat4 zcm::orthoRH_NO(float left, float right, float bottom, float top, floa
     Result[3][0] = - (right + left) / (right - left);
     Result[3][1] = - (top + bottom) / (top - bottom);
     Result[3][2] = - (zFar + zNear) / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 perspectiveRH_ZO(float fovy, float aspect, float zNear, float zFar)
+{
+    assert(zcm::abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
+
+    float const tanHalfFovy = zcm::tan(fovy * 0.5f);
+
+    zcm::mat4 Result(0.0f);
+    Result[0][0] = 1.0f / (aspect * tanHalfFovy);
+    Result[1][1] = 1.0f / (tanHalfFovy);
+    Result[2][2] = zFar / (zNear - zFar);
+    Result[2][3] = -1.0f;
+    Result[3][2] = -(zFar * zNear) / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 perspectiveRH_NO(float fovy, float aspect, float zNear, float zFar)
+{
+    assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
+
+    float const tanHalfFovy = zcm::tan(fovy * 0.5f);
+
+    zcm::mat4 Result(0.0f);
+    Result[0][0] = 1.0f / (aspect * tanHalfFovy);
+    Result[1][1] = 1.0f / (tanHalfFovy);
+    Result[2][2] = - (zFar + zNear) / (zFar - zNear);
+    Result[2][3] = - 1.0f;
+    Result[3][2] = - (2.0f * zFar * zNear) / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 perspectiveLH_ZO(float fovy, float aspect, float zNear, float zFar)
+{
+    assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
+
+    float const tanHalfFovy = zcm::tan(fovy * 0.5f);
+
+    zcm::mat4 Result(0.0f);
+    Result[0][0] = 1.0f / (aspect * tanHalfFovy);
+    Result[1][1] = 1.0f / (tanHalfFovy);
+    Result[2][2] = zFar / (zFar - zNear);
+    Result[2][3] = 1.0f;
+    Result[3][2] = -(zFar * zNear) / (zFar - zNear);
+    return Result;
+}
+
+zcm::mat4 perspectiveLH_NO(float fovy, float aspect, float zNear, float zFar)
+{
+    assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
+
+    float const tanHalfFovy = zcm::tan(fovy * 0.5f);
+
+    zcm::mat4 Result(0.0f);
+    Result[0][0] = 1.0f / (aspect * tanHalfFovy);
+    Result[1][1] = 1.0f / (tanHalfFovy);
+    Result[2][2] = (zFar + zNear) / (zFar - zNear);
+    Result[2][3] = 1.0f;
+    Result[3][2] = - (2.0f * zFar * zNear) / (zFar - zNear);
     return Result;
 }
