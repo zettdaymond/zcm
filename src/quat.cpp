@@ -1,6 +1,7 @@
 #include <cassert>
 #include <type_traits>
 #include <zcm/vec3.hpp>
+#include <zcm/angle_and_trigonometry.hpp>
 #include <zcm/exponential.hpp>
 #include <zcm/geometric.hpp>
 #include <zcm/quat.hpp>
@@ -66,6 +67,17 @@ zcm::quat::quat(zcm::vec3 u, zcm::vec3 v) noexcept
 
     auto res = normalize(quat(real_part, w.x, w.y, w.z));
     *this = res;
+}
+
+zcm::quat::quat(zcm::vec3 eulerAngles) noexcept
+{
+	vec3 c = zcm::cos(eulerAngles * 0.5f);
+	vec3 s = zcm::sin(eulerAngles * 0.5f);
+
+	this->w = c.x * c.y * c.z + s.x * s.y * s.z;
+	this->x = s.x * c.y * c.z - c.x * s.y * s.z;
+	this->y = c.x * s.y * c.z + s.x * c.y * s.z;
+	this->z = c.x * c.y * s.z - s.x * s.y * c.z;
 }
 
 float& zcm::quat::operator[](unsigned val) noexcept

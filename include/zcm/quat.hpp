@@ -21,6 +21,9 @@ namespace zcm
         /// The input vectors need not be normalised.
         quat(vec3 u, vec3 v) noexcept;
 
+        /// Build a quaternion from euler angles (pitch, yaw, roll), in radians.
+        explicit quat(vec3 eulerAngles) noexcept;
+
         float& operator[](unsigned val) noexcept;
         float operator[](unsigned val) const noexcept;
 

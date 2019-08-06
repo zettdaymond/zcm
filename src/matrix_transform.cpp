@@ -158,7 +158,7 @@ zcm::mat4 zcm::orthoRH_NO(float left, float right, float bottom, float top, floa
     return Result;
 }
 
-zcm::mat4 perspectiveRH_ZO(float fovy, float aspect, float zNear, float zFar)
+zcm::mat4 zcm::perspectiveRH_ZO(float fovy, float aspect, float zNear, float zFar)
 {
     assert(zcm::abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
 
@@ -173,7 +173,7 @@ zcm::mat4 perspectiveRH_ZO(float fovy, float aspect, float zNear, float zFar)
     return Result;
 }
 
-zcm::mat4 perspectiveRH_NO(float fovy, float aspect, float zNear, float zFar)
+zcm::mat4 zcm::perspectiveRH_NO(float fovy, float aspect, float zNear, float zFar)
 {
     assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
 
@@ -188,7 +188,7 @@ zcm::mat4 perspectiveRH_NO(float fovy, float aspect, float zNear, float zFar)
     return Result;
 }
 
-zcm::mat4 perspectiveLH_ZO(float fovy, float aspect, float zNear, float zFar)
+zcm::mat4 zcm::perspectiveLH_ZO(float fovy, float aspect, float zNear, float zFar)
 {
     assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
 
@@ -203,7 +203,7 @@ zcm::mat4 perspectiveLH_ZO(float fovy, float aspect, float zNear, float zFar)
     return Result;
 }
 
-zcm::mat4 perspectiveLH_NO(float fovy, float aspect, float zNear, float zFar)
+zcm::mat4 zcm::perspectiveLH_NO(float fovy, float aspect, float zNear, float zFar)
 {
     assert(abs(aspect - std::numeric_limits<float>::epsilon()) > 0.0f);
 
