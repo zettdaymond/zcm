@@ -8,6 +8,7 @@ namespace zcm
     struct vec2;
     struct vec3;
     struct vec4;
+    struct quat;
 
     float abs (float x) noexcept;
     vec2  abs (const vec2& x) noexcept;
@@ -59,11 +60,13 @@ namespace zcm
     bvec2 isinf (const vec2& x) noexcept;
     bvec3 isinf (const vec3& x) noexcept;
     bvec4 isinf (const vec4& x) noexcept;
+    bvec4 isinf (const quat& x) noexcept;
 
     bool  isnan (float x) noexcept;
     bvec2 isnan (const vec2& x) noexcept;
     bvec3 isnan (const vec3& x) noexcept;
     bvec4 isnan (const vec4& x) noexcept;
+    bvec4 isnan (const quat& x) noexcept;
 
     float max (float x, float y) noexcept;
     vec2  max (const vec2& x, const vec2& y) noexcept;
@@ -150,6 +153,7 @@ namespace zcm
     bvec2 equal (const vec2& x, const vec2& y) noexcept;
     bvec3 equal (const vec3& x, const vec3& y) noexcept;
     bvec4 equal (const vec4& x, const vec4& y) noexcept;
+    bvec4 equal (const quat& x, const quat& y) noexcept;
 
     bvec2 notEqual (const bvec2& x, const bvec2& y) noexcept;
     bvec3 notEqual (const bvec3& x, const bvec3& y) noexcept;
@@ -158,6 +162,7 @@ namespace zcm
     bvec2 notEqual (const vec2& x, const vec2& y) noexcept;
     bvec3 notEqual (const vec3& x, const vec3& y) noexcept;
     bvec4 notEqual (const vec4& x, const vec4& y) noexcept;
+    bvec4 notEqual (const quat& x, const quat& y) noexcept;
 
 
 

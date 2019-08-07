@@ -1,6 +1,9 @@
 #include <gtest/gtest.h>
 #include <zcm/quat.hpp>
 #include <zcm/geometric.hpp>
+#include <zcm/common.hpp>
+#include <zcm/bvec4.hpp>
+#include <cmath>
 
 using namespace zcm;
 
@@ -144,5 +147,44 @@ TEST(quat, normalize)
     ASSERT_FLOAT_EQ(result.y,  0.453585525f);
     ASSERT_FLOAT_EQ(result.z, -0.582433145f);
     ASSERT_FLOAT_EQ(result.w,  0.6412002312f);
+}
+
+TEST(quat, isnan)
+{
+    auto result = isnan(first);
+    EXPECT_EQ(zcm::any(result), false);
+
+    auto tmp = first;
+    tmp.x = NAN;
+
+    result = zcm::bvec4{true, false, false, false};
+
+    EXPECT_EQ(zcm::isnan(tmp), result);
+}
+
+TEST(quat, isinf)
+{
+    auto result = isinf(first);
+    EXPECT_EQ(zcm::any(result), false);
+
+    auto tmp = first;
+    tmp.y = INFINITY;
+    tmp.x = -INFINITY;
+
+    result = zcm::bvec4{true, true, false, false};
+
+    EXPECT_EQ(zcm::isinf(tmp), result);
+}
+
+TEST(quat, equal)
+{
+    auto result = equal(first, first);
+    EXPECT_EQ(zcm::all(result), true);
+
+    auto tmp = first;
+    tmp.x = 12312412;
+    result = zcm::bvec4{false, true, true, true};
+    EXPECT_EQ(zcm::equal(first, tmp), result);
+
 }
 

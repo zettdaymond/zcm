@@ -10,6 +10,7 @@
 #include <zcm/bvec2.hpp>
 #include <zcm/bvec3.hpp>
 #include <zcm/bvec4.hpp>
+#include <zcm/quat.hpp>
 
 
 float zcm::abs(float x) noexcept
@@ -478,6 +479,11 @@ zcm::bvec4 zcm::isinf(const zcm::vec4 &x) noexcept
     return { isinf(x.x), isinf(x.y), isinf(x.z), isinf(x.w) };
 }
 
+zcm::bvec4 zcm::isinf(const zcm::quat &x) noexcept
+{
+    return { isinf(x.x), isinf(x.y), isinf(x.z), isinf(x.w) };
+}
+
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -498,6 +504,11 @@ zcm::bvec3 zcm::isnan(const zcm::vec3 &x) noexcept
 }
 
 zcm::bvec4 zcm::isnan(const zcm::vec4 &x) noexcept
+{
+    return { isnan(x.x), isnan(x.y), isnan(x.z), isnan(x.w) };
+}
+
+zcm::bvec4 zcm::isnan(const zcm::quat &x) noexcept
 {
     return { isnan(x.x), isnan(x.y), isnan(x.z), isnan(x.w) };
 }
@@ -597,6 +608,11 @@ zcm::bvec4 zcm::equal(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
     return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
 }
 
+zcm::bvec4 zcm::equal(const zcm::quat &x, const zcm::quat &y) noexcept
+{
+    return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
+}
+
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -631,6 +647,11 @@ zcm::bvec3 zcm::notEqual(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
 }
 
 zcm::bvec4 zcm::notEqual(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+{
+    return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
+}
+
+zcm::bvec4 zcm::notEqual(const zcm::quat &x, const zcm::quat &y) noexcept
 {
     return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
 }
