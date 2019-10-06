@@ -1,6 +1,7 @@
 #include <cassert>
 #include <type_traits>
 #include <zcm/ivec2.hpp>
+#include <zcm/detail/impl_op_macro.hpp>
 
 
 static_assert (std::is_standard_layout<zcm::ivec2>::value, "");
@@ -25,120 +26,46 @@ zcm::ivec2::ivec2(int32_t _x, int32_t _y) noexcept
     _data[1] = _y;
 }
 
-zcm::ivec2 zcm::operator +(zcm::ivec2 first, zcm::ivec2 second) noexcept
-{
-    return { first.x + second.x,
-             first.y + second.y };
-}
-
-zcm::ivec2 zcm::operator -(zcm::ivec2 first, ivec2 second) noexcept
-{
-    return { first.x - second.x,
-             first.y - second.y };
-}
-
-zcm::ivec2 zcm::operator *(zcm::ivec2 first, zcm::ivec2 second) noexcept
-{
-    return { first.x * second.x,
-             first.y * second.y };
-}
-
-zcm::ivec2 zcm::operator *(zcm::ivec2 vec, int32_t scalar) noexcept
-{
-    return { vec.x * scalar,
-             vec.y * scalar };
-}
-
-zcm::ivec2 zcm::operator *(int32_t scalar, zcm::ivec2 vec) noexcept
-{
-    return { scalar * vec.x,
-             scalar * vec.y };
-}
-
-
-zcm::ivec2 zcm::operator /(zcm::ivec2 first, zcm::ivec2 second) noexcept
-{
-    return { first.x / second.x,
-             first.y / second.y };
-}
-
-
-zcm::ivec2 zcm::operator /(zcm::ivec2 vec, int32_t scalar) noexcept
-{
-    return { vec.x / scalar,
-             vec.y / scalar };
-}
-
-zcm::ivec2 zcm::operator /(int32_t scalar, zcm::ivec2 vec) noexcept
-{
-    return { scalar / vec.x,
-             scalar / vec.y };
-}
-
-
 zcm::ivec2 zcm::operator +(zcm::ivec2 first) noexcept
 {
-    return { +first.x,
-             +first.y };
+    return { +first._data[0],
+             +first._data[1] };
 }
 
 zcm::ivec2 zcm::operator -(zcm::ivec2 first) noexcept
 {
-    return { -first.x,
-             -first.y };
+    return { -first._data[0],
+             -first._data[1] };
 }
 
-void zcm::ivec2::operator +=(zcm::ivec2 other) noexcept
-{
-    x += other.x;
-    y += other.y;
+namespace zcm {
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, +)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, -)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, *)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, /)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, %)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, |)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, &)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, ^)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, >>)
+ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, <<)
 }
 
-void zcm::ivec2::operator -=(zcm::ivec2 other) noexcept
-{
-    x -= other.x;
-    y -= other.y;
-}
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, +=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, -=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, *=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, /=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, %=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, |=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, &=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, ^=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, >>=)
+ZCM_IMPL_V2_COMPOUND_OP(int32_t, zcm::ivec2, <<=)
 
-void zcm::ivec2::operator *=(zcm::ivec2 other) noexcept
-{
-    x *= other.x;
-    y *= other.y;
-}
-
-void zcm::ivec2::operator/=(ivec2 other) noexcept
-{
-    x /= other.x;
-    y /= other.y;
-}
-
-void zcm::ivec2::operator +=(int32_t scalar) noexcept
-{
-    x += scalar;
-    y += scalar;
-}
-
-void zcm::ivec2::operator -=(int32_t scalar) noexcept
-{
-    x -= scalar;
-    y -= scalar;
-}
-
-void zcm::ivec2::operator *=(int32_t scalar) noexcept
-{
-    x *= scalar;
-    y *= scalar;
-}
-
-void zcm::ivec2::operator /=(int32_t scalar) noexcept
-{
-    x /= scalar;
-    y /= scalar;
-}
 
 bool zcm::operator==(zcm::ivec2 first, zcm::ivec2 second) noexcept
 {
-    return first.x == second.x && first.y == second.y;
+    return first._data[0] == second._data[0] && first._data[1] == second._data[1];
 }
 
 bool zcm::operator!=(zcm::ivec2 first, zcm::ivec2 second) noexcept
@@ -146,6 +73,29 @@ bool zcm::operator!=(zcm::ivec2 first, zcm::ivec2 second) noexcept
     return !(first == second);
 }
 
+bool zcm::operator <(zcm::ivec2 first, zcm::ivec2 second) noexcept
+{
+    if (first._data[0] < second._data[0]) return true;
+    if (first._data[0] > second._data[0]) return false;
+    if (first._data[1] < second._data[1]) return true;
+    return false;
+}
+
+bool zcm::operator<=(zcm::ivec2 first, zcm::ivec2 second) noexcept
+{
+    return !(second < first);
+}
+
+
+bool zcm::operator >(zcm::ivec2 first, zcm::ivec2 second) noexcept
+{
+    return second < first;
+}
+
+bool zcm::operator>=(zcm::ivec2 first, zcm::ivec2 second) noexcept
+{
+    return !(first < second);
+}
 
 int32_t& zcm::ivec2::operator[](unsigned val) noexcept
 {
@@ -157,4 +107,39 @@ const int32_t& zcm::ivec2::operator[](unsigned val) const noexcept
 {
     assert(val < 3);
     return _data[val];
+}
+
+zcm::ivec2::operator bvec2() const noexcept
+{
+    return { bool(_data[0]), bool(_data[1]) };
+}
+
+zcm::ivec2& zcm::ivec2::operator++() noexcept
+{
+    ++_data[0];
+    ++_data[1];
+    return *this;
+}
+
+zcm::ivec2 zcm::ivec2::operator++(int) noexcept
+{
+    auto tmp = *this;
+    ++_data[0];
+    ++_data[1];
+    return tmp;
+}
+
+zcm::ivec2 &zcm::ivec2::operator--() noexcept
+{
+    --_data[0];
+    --_data[1];
+    return *this;
+}
+
+zcm::ivec2 zcm::ivec2::operator--(int) noexcept
+{
+    auto tmp = *this;
+    --_data[0];
+    --_data[1];
+    return tmp;
 }

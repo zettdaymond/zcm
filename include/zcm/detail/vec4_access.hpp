@@ -18,7 +18,22 @@ struct scalar_accessor_4
     void operator *=(T s) noexcept;
     void operator /=(T s) noexcept;
     void operator  =(T s) noexcept;
+    T& operator++()    noexcept;
+    T  operator++(int) noexcept;
+    T& operator--()    noexcept;
+    T  operator--(int) noexcept;
     operator T() const noexcept;
+};
+
+template <typename T, int index>
+struct scalar_accessor_4i : public scalar_accessor_4<T, index>
+{
+    void operator %=(T s) noexcept;
+    void operator |=(T s) noexcept;
+    void operator &=(T s) noexcept;
+    void operator ^=(T s) noexcept;
+    void operator<<=(T s) noexcept;
+    void operator>>=(T s) noexcept;
 };
 
 

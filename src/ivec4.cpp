@@ -1,15 +1,16 @@
 #include <cassert>
 #include <type_traits>
-#include <zcm/ivec4.hpp>
-#include <zcm/ivec3.hpp>
 #include <zcm/ivec2.hpp>
+#include <zcm/ivec3.hpp>
+#include <zcm/ivec4.hpp>
+#include <zcm/detail/impl_op_macro.hpp>
 
 
 static_assert(std::is_standard_layout<zcm::ivec4>::value, "");
 static_assert(sizeof(zcm::ivec4) == 4 * sizeof(int32_t), "extra padding detected!");
 
 zcm::ivec4::ivec4() noexcept :
-    ivec4(0.0f)
+    ivec4(0)
 {}
 
 zcm::ivec4::ivec4(zcm::no_init_t) noexcept
@@ -32,32 +33,32 @@ zcm::ivec4::ivec4(int32_t _x, int32_t _y, int32_t _z, int32_t _w) noexcept
 
 zcm::ivec4::ivec4(ivec3 xyz, int32_t _w) noexcept
 {
-    _data[0] = xyz.x;
-    _data[1] = xyz.y;
-    _data[2] = xyz.z;
+    _data[0] = xyz._data[0];
+    _data[1] = xyz._data[1];
+    _data[2] = xyz._data[2];
     _data[3] = _w;
 }
 
 zcm::ivec4::ivec4(int32_t _x, ivec3 yzw) noexcept
 {
     _data[0] = _x;
-    _data[1] = yzw.x;
-    _data[2] = yzw.y;
-    _data[3] = yzw.z;
+    _data[1] = yzw._data[0];
+    _data[2] = yzw._data[1];
+    _data[3] = yzw._data[2];
 }
 
 zcm::ivec4::ivec4(ivec2 xy, ivec2 zw) noexcept
 {
-    _data[0] = xy.x;
-    _data[1] = xy.y;
-    _data[2] = zw.x;
-    _data[3] = zw.y;
+    _data[0] = xy._data[0];
+    _data[1] = xy._data[1];
+    _data[2] = zw._data[0];
+    _data[3] = zw._data[1];
 }
 
 zcm::ivec4::ivec4(ivec2 xy, int32_t _z, int32_t _w) noexcept
 {
-    _data[0] = xy.x;
-    _data[1] = xy.y;
+    _data[0] = xy._data[0];
+    _data[1] = xy._data[1];
     _data[2] = _z;
     _data[3] = _w;
 }
@@ -65,8 +66,8 @@ zcm::ivec4::ivec4(ivec2 xy, int32_t _z, int32_t _w) noexcept
 zcm::ivec4::ivec4(int32_t _x, ivec2 yz, int32_t _w) noexcept
 {
     _data[0] = _x;
-    _data[1] = yz.x;
-    _data[2] = yz.y;
+    _data[1] = yz._data[0];
+    _data[2] = yz._data[1];
     _data[3] = _w;
 }
 
@@ -74,164 +75,114 @@ zcm::ivec4::ivec4(int32_t _x, int32_t _y, ivec2 zw) noexcept
 {
     _data[0] = _x;
     _data[1] = _y;
-    _data[2] = zw.x;
-    _data[3] = zw.y;
+    _data[2] = zw._data[0];
+    _data[3] = zw._data[1];
 }
 
-zcm::ivec4 zcm::operator +(const zcm::ivec4& first, const zcm::ivec4& second) noexcept
-{
-    return ivec4{ first.x + second.x,
-                 first.y + second.y,
-                 first.z + second.z,
-                 first.w + second.w };
+namespace zcm {
+ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, +)
+ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, -)
+ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, *)
+ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, /)
 }
 
-zcm::ivec4 zcm::operator -(const zcm::ivec4& first, const ivec4& second) noexcept
-{
-    return ivec4{ first.x - second.x,
-                 first.y - second.y,
-                 first.z - second.z,
-                 first.w - second.w };
-}
+ZCM_IMPL_V4_COMPOUND_OP(int32_t, zcm::ivec4, +=)
+ZCM_IMPL_V4_COMPOUND_OP(int32_t, zcm::ivec4, -=)
+ZCM_IMPL_V4_COMPOUND_OP(int32_t, zcm::ivec4, *=)
+ZCM_IMPL_V4_COMPOUND_OP(int32_t, zcm::ivec4, /=)
 
 zcm::ivec4 zcm::operator -(zcm::ivec4 first) noexcept
 {
-    return ivec4{ -first.x,
-                 -first.y,
-                 -first.z,
-                 -first.w };
+    return { -first._data[0],
+             -first._data[1],
+             -first._data[2],
+             -first._data[3] };
 }
 
 
 zcm::ivec4 zcm::operator +(zcm::ivec4 first) noexcept
 {
-    return { +first.x,
-             +first.y,
-             +first.z,
-             +first.w };
+    return { +first._data[0],
+             +first._data[1],
+             +first._data[2],
+             +first._data[3] };
 }
 
-zcm::ivec4 zcm::operator *(const zcm::ivec4& ivec, const int32_t scalar) noexcept
+zcm::ivec4& zcm::ivec4::operator++() noexcept
 {
-    return ivec4{ ivec.x * scalar,
-                 ivec.y * scalar,
-                 ivec.z * scalar,
-                 ivec.w * scalar };
+    ++_data[0];
+    ++_data[1];
+    ++_data[2];
+    ++_data[3];
+    return *this;
 }
 
-zcm::ivec4 zcm::operator /(const zcm::ivec4& ivec, const int32_t scalar) noexcept
+zcm::ivec4 zcm::ivec4::operator++(int) noexcept
 {
-    return ivec4{ ivec.x / scalar,
-                 ivec.y / scalar,
-                 ivec.z / scalar,
-                 ivec.w / scalar };
+    auto tmp = *this;
+    ++_data[0];
+    ++_data[1];
+    ++_data[2];
+    ++_data[3];
+    return tmp;
 }
 
-zcm::ivec4 zcm::operator *(const zcm::ivec4& first, const zcm::ivec4& second) noexcept
+zcm::ivec4& zcm::ivec4::operator--() noexcept
 {
-    return { first.x * second.x,
-             first.y * second.y,
-             first.z * second.z,
-             first.w * second.w };
+    --_data[0];
+    --_data[1];
+    --_data[2];
+    --_data[3];
+    return *this;
 }
 
-zcm::ivec4 zcm::operator *(const int32_t scalar, const zcm::ivec4& ivec) noexcept
+zcm::ivec4  zcm::ivec4::operator--(int) noexcept
 {
-    return { scalar * ivec.x,
-             scalar * ivec.y,
-             scalar * ivec.z,
-             scalar * ivec.w };
+    auto tmp = *this;
+    --_data[0];
+    --_data[1];
+    --_data[2];
+    --_data[3];
+    return tmp;
 }
 
-zcm::ivec4 zcm::operator /(const int32_t scalar, const zcm::ivec4& ivec) noexcept
-{
-    return { scalar / ivec.x,
-             scalar / ivec.y,
-             scalar / ivec.z,
-             scalar / ivec.w };
-}
-
-zcm::ivec4 zcm::operator /(const zcm::ivec4& first, const zcm::ivec4& second) noexcept
-{
-    return { first.x / second.x,
-             first.y / second.y,
-             first.z / second.z,
-             first.w / second.w };
-}
-
-void zcm::ivec4::operator +=(zcm::ivec4 other) noexcept
-{
-    x += other.x;
-    y += other.y;
-    z += other.z;
-    w += other.w;
-}
-
-void zcm::ivec4::operator -=(zcm::ivec4 other) noexcept
-{
-    x -= other.x;
-    y -= other.y;
-    z -= other.z;
-    w -= other.w;
-}
-
-void zcm::ivec4::operator *=(zcm::ivec4 other) noexcept
-{
-    x *= other.x;
-    y *= other.y;
-    z *= other.z;
-    w *= other.w;
-}
-
-void zcm::ivec4::operator /=(zcm::ivec4 other) noexcept
-{
-    x /= other.x;
-    y /= other.y;
-    z /= other.z;
-    w /= other.w;
-}
-
-void zcm::ivec4::operator +=(int32_t scalar) noexcept
-{
-    x += scalar;
-    y += scalar;
-    z += scalar;
-    w += scalar;
-}
-
-void zcm::ivec4::operator -=(int32_t scalar) noexcept
-{
-    x -= scalar;
-    y -= scalar;
-    z -= scalar;
-    w -= scalar;
-}
-
-void zcm::ivec4::operator *=(int32_t scalar) noexcept
-{
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
-    w *= scalar;
-}
-
-void zcm::ivec4::operator /=(int32_t scalar) noexcept
-{
-    x /= scalar;
-    y /= scalar;
-    z /= scalar;
-    w /= scalar;
-}
-
-bool zcm::operator==(const zcm::ivec4 &first, const zcm::ivec4 &second) noexcept
+bool zcm::operator==(zcm::ivec4 first, zcm::ivec4 second) noexcept
 {
     return first.x == second.x && first.y == second.y && first.z == second.z && first.w == second.w;
 }
 
-bool zcm::operator!=(const zcm::ivec4 &first, const zcm::ivec4 &second) noexcept
+bool zcm::operator!=(zcm::ivec4 first, zcm::ivec4 second) noexcept
 {
     return !(first == second);
 }
+
+bool zcm::operator <(zcm::ivec4 first, zcm::ivec4 second) noexcept
+{
+    if (first._data[0] < second._data[0]) return true;
+    if (first._data[0] > second._data[0]) return false;
+    if (first._data[1] < second._data[1]) return true;
+    if (first._data[1] > second._data[1]) return false;
+    if (first._data[2] < second._data[2]) return true;
+    if (first._data[2] > second._data[2]) return false;
+    if (first._data[3] < second._data[3]) return true;
+    return false;
+}
+
+bool zcm::operator<=(zcm::ivec4 first, zcm::ivec4 second) noexcept
+{
+    return !(second < first);
+}
+
+bool zcm::operator >(zcm::ivec4 first, zcm::ivec4 second) noexcept
+{
+    return second < first;
+}
+
+bool zcm::operator>=(zcm::ivec4 first, zcm::ivec4 second) noexcept
+{
+    return !(first < second);
+}
+
 
 int32_t& zcm::ivec4::operator[](unsigned val) noexcept
 {
@@ -243,4 +194,9 @@ const int32_t& zcm::ivec4::operator[](unsigned val) const noexcept
 {
     assert(val < 4);
     return _data[val];
+}
+
+zcm::ivec4::operator bvec4() const noexcept
+{
+    return { bool(_data[0]), bool(_data[1]), bool(_data[2]), bool(_data[3]) };
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include <zcm/detail/vec2_access.hpp>
 #include <zcm/detail/vec2_access_float.hpp>
 #include <zcm/init.hpp>
@@ -11,6 +12,9 @@ namespace zcm
         vec2() noexcept;
         explicit vec2(no_init_t) noexcept;
         vec2(float value) noexcept;
+        vec2(int32_t) noexcept;
+        vec2(int64_t) = delete;
+        vec2(double)  = delete;
         vec2(float x, float y) noexcept;
 
         float& operator[](unsigned val) noexcept;
@@ -26,6 +30,11 @@ namespace zcm
         void operator -=(float scalar) noexcept;
         void operator *=(float scalar) noexcept;
         void operator /=(float scalar) noexcept;
+
+        vec2& operator++()    noexcept;
+        vec2  operator++(int) noexcept;
+        vec2& operator--()    noexcept;
+        vec2  operator--(int) noexcept;
 
         union{
             float _data[2];
@@ -51,9 +60,13 @@ namespace zcm
     vec2 operator *(vec2 first, vec2 second) noexcept;
     vec2 operator /(vec2 first, vec2 second) noexcept;
 
+    vec2 operator +(vec2 vec, float scalar) noexcept;
+    vec2 operator -(vec2 vec, float scalar) noexcept;
     vec2 operator *(vec2 vec, float scalar) noexcept;
     vec2 operator /(vec2 vec, float scalar) noexcept;
 
+    vec2 operator +(vec2 vec, float scalar) noexcept;
+    vec2 operator -(vec2 vec, float scalar) noexcept;
     vec2 operator *(float scalar, vec2 vec) noexcept;
     vec2 operator /(float scalar, vec2 vec) noexcept;
 

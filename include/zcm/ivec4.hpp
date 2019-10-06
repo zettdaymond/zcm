@@ -3,6 +3,7 @@
 #include <zcm/detail/vec4_access.hpp>
 #include <zcm/detail/vec4_access_int.hpp>
 #include <zcm/init.hpp>
+#include <zcm/bvec4.hpp>
 
 namespace zcm
 {
@@ -14,6 +15,9 @@ namespace zcm
         ivec4 () noexcept;
         explicit ivec4 (no_init_t) noexcept;
         ivec4 (int32_t value) noexcept;
+        ivec4 (int64_t) = delete;
+        ivec4 (float)   = delete;
+        ivec4 (double)  = delete;
         ivec4 (int32_t x, int32_t y, int32_t z, int32_t w) noexcept;
 
         ivec4 (ivec3 xyz, int32_t w) noexcept;
@@ -27,23 +31,42 @@ namespace zcm
         int32_t& operator[](unsigned val) noexcept;
         const int32_t& operator[](unsigned val) const noexcept;
 
+        operator bvec4() const noexcept;
+
         void operator +=(ivec4 other) noexcept;
         void operator -=(ivec4 other) noexcept;
         void operator *=(ivec4 other) noexcept;
         void operator /=(ivec4 other) noexcept;
+        void operator %=(ivec4 other) noexcept;
+        void operator |=(ivec4 other) noexcept;
+        void operator &=(ivec4 other) noexcept;
+        void operator ^=(ivec4 other) noexcept;
+        void operator>>=(ivec4 other) noexcept;
+        void operator<<=(ivec4 other) noexcept;
 
         void operator +=(int32_t scalar) noexcept;
         void operator -=(int32_t scalar) noexcept;
         void operator *=(int32_t scalar) noexcept;
         void operator /=(int32_t scalar) noexcept;
+        void operator %=(int32_t scalar) noexcept;
+        void operator |=(int32_t scalar) noexcept;
+        void operator &=(int32_t scalar) noexcept;
+        void operator ^=(int32_t scalar) noexcept;
+        void operator>>=(int32_t scalar) noexcept;
+        void operator<<=(int32_t scalar) noexcept;
+
+        ivec4& operator++()    noexcept;
+        ivec4  operator++(int) noexcept;
+        ivec4& operator--()    noexcept;
+        ivec4  operator--(int) noexcept;
 
         union {
             int32_t _data[4];
 
-            detail::scalar_accessor_4<int32_t, 0> x, r, s;
-            detail::scalar_accessor_4<int32_t, 1> y, g, t;
-            detail::scalar_accessor_4<int32_t, 2> z, b, p;
-            detail::scalar_accessor_4<int32_t, 3> w, a, q;
+            detail::scalar_accessor_4i<int32_t, 0> x, r, s;
+            detail::scalar_accessor_4i<int32_t, 1> y, g, t;
+            detail::scalar_accessor_4i<int32_t, 2> z, b, p;
+            detail::scalar_accessor_4i<int32_t, 3> w, a, q;
 
 #ifndef ZCM_DISABLE_SWIZZLE
             detail::shuffle_accessor_4<int32_t, ivec2, 0, 0> xx, rr, ss;
@@ -388,21 +411,48 @@ namespace zcm
         };
     };
 
-    bool operator==(const ivec4& first, const ivec4& second) noexcept;
-    bool operator!=(const ivec4& first, const ivec4& second) noexcept;
+    bool operator==(ivec4 first, ivec4 second) noexcept;
+    bool operator!=(ivec4 first, ivec4 second) noexcept;
+    // to allow sorting and storing in maps.
+    bool operator <(ivec4 first, ivec4 second) noexcept;
+    bool operator<=(ivec4 first, ivec4 second) noexcept;
+    bool operator >(ivec4 first, ivec4 second) noexcept;
+    bool operator>=(ivec4 first, ivec4 second) noexcept;
 
     ivec4 operator -(ivec4 first) noexcept;
     ivec4 operator +(ivec4 first) noexcept;
 
-    ivec4 operator +(const ivec4& first, const ivec4& second) noexcept;
-    ivec4 operator -(const ivec4& first, const ivec4& second) noexcept;
-    ivec4 operator *(const ivec4& first, const ivec4& second) noexcept;
-    ivec4 operator /(const ivec4& first, const ivec4& second) noexcept;
+    ivec4 operator +(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator -(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator *(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator /(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator %(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator &(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator |(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator ^(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator<<(ivec4 first, ivec4 second) noexcept;
+    ivec4 operator>>(ivec4 first, ivec4 second) noexcept;
 
-    ivec4 operator *(const ivec4& ivec, const int32_t scalar) noexcept;
-    ivec4 operator /(const ivec4& ivec, const int32_t scalar) noexcept;
+    ivec4 operator +(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator -(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator *(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator /(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator %(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator &(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator |(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator ^(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator<<(ivec4 vec, int32_t scalar) noexcept;
+    ivec4 operator>>(ivec4 vec, int32_t scalar) noexcept;
 
-    ivec4 operator *(const int32_t scalar, const ivec4& ivec) noexcept;
-    ivec4 operator /(const int32_t scalar, const ivec4& ivec) noexcept;
+    ivec4 operator +(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator -(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator *(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator /(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator %(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator &(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator |(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator ^(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator<<(int32_t scalar, ivec4 vec) noexcept;
+    ivec4 operator>>(int32_t scalar, ivec4 vec) noexcept;
 
 }

@@ -2,7 +2,7 @@
 #include <type_traits>
 #include <zcm/vec3.hpp>
 #include <zcm/vec2.hpp>
-#include <zcm/common.hpp>
+#include <zcm/detail/impl_op_macro.hpp>
 
 
 static_assert(std::is_standard_layout<zcm::vec3>::value, "");
@@ -22,6 +22,9 @@ zcm::vec3::vec3(float value) noexcept
     _data[2] = value;
 }
 
+zcm::vec3::vec3(int32_t value) noexcept : vec3(static_cast<float>(value))
+{}
+
 zcm::vec3::vec3(float _x, float _y, float _z) noexcept
 {
     _data[0] = _x;
@@ -31,151 +34,78 @@ zcm::vec3::vec3(float _x, float _y, float _z) noexcept
 
 zcm::vec3::vec3(zcm::vec2 xy, float _z) noexcept
 {
-    _data[0] = xy.x;
-    _data[1] = xy.y;
+    _data[0] = xy._data[0];
+    _data[1] = xy._data[1];
     _data[2] = _z;
 }
 
 zcm::vec3::vec3(float _x, zcm::vec2 yz) noexcept
 {
     _data[0] = _x;
-    _data[1] = yz.x;
-    _data[2] = yz.y;
+    _data[1] = yz._data[0];
+    _data[2] = yz._data[1];
 }
 
-zcm::vec3 zcm::operator +(const zcm::vec3& first, const zcm::vec3& second) noexcept
-{
-    return { first.x + second.x,
-             first.y + second.y,
-             first.z + second.z };
+namespace zcm {
+ZCM_IMPL_V3_BINOP(float, zcm::vec3, +)
+ZCM_IMPL_V3_BINOP(float, zcm::vec3, -)
+ZCM_IMPL_V3_BINOP(float, zcm::vec3, *)
+ZCM_IMPL_V3_BINOP(float, zcm::vec3, /)
 }
 
-zcm::vec3 zcm::operator -(const zcm::vec3& first, const vec3& second) noexcept
-{
-    return { first.x - second.x,
-             first.y - second.y,
-             first.z - second.z };
-}
-
-
-zcm::vec3 zcm::operator *(const zcm::vec3& first, const zcm::vec3& second) noexcept
-{
-    return { first.x * second.x,
-             first.y * second.y,
-             first.z * second.z };
-}
-
-zcm::vec3 zcm::operator *(float scalar, zcm::vec3 vec) noexcept
-{
-    return { scalar * vec.x,
-             scalar * vec.y,
-             scalar * vec.z };
-}
-
-zcm::vec3 zcm::operator /(const float scalar, zcm::vec3 vec) noexcept
-{
-    return { scalar / vec.x,
-             scalar / vec.y,
-             scalar / vec.z };
-}
-
-zcm::vec3 zcm::operator /(const zcm::vec3& first, const zcm::vec3& second) noexcept
-{
-    return { first.x / second.x,
-             first.y / second.y,
-             first.z / second.z };
-}
-
-
-zcm::vec3 zcm::operator *(const zcm::vec3& vec, const float scalar) noexcept
-{
-    return { vec.x * scalar,
-             vec.y * scalar,
-             vec.z * scalar };
-}
-
-zcm::vec3 zcm::operator /(const zcm::vec3& vec, const float scalar) noexcept
-{
-    return { vec.x / scalar,
-             vec.y / scalar,
-             vec.z / scalar };
-}
+ZCM_IMPL_V3_COMPOUND_OP(float, zcm::vec3, +=)
+ZCM_IMPL_V3_COMPOUND_OP(float, zcm::vec3, -=)
+ZCM_IMPL_V3_COMPOUND_OP(float, zcm::vec3, *=)
+ZCM_IMPL_V3_COMPOUND_OP(float, zcm::vec3, /=)
 
 
 zcm::vec3 zcm::operator -(zcm::vec3 first) noexcept
 {
-    return { -first.x,
-                -first.y,
-                -first.z };
+    return { -first.x, -first.y, -first.z };
 }
 
 zcm::vec3 zcm::operator +(zcm::vec3 first) noexcept
 {
-    return { +first.x,
-                +first.y,
-                +first.z };
+    return { +first.x, +first.y, +first.z };
 }
 
-
-void zcm::vec3::operator +=(zcm::vec3 other) noexcept
+zcm::vec3& zcm::vec3::operator++() noexcept
 {
-    x += other.x;
-    y += other.y;
-    z += other.z;
+    ++_data[0];
+    ++_data[1];
+    ++_data[2];
+    return *this;
 }
 
-void zcm::vec3::operator -=(zcm::vec3 other) noexcept
+zcm::vec3 zcm::vec3::operator++(int) noexcept
 {
-    x -= other.x;
-    y -= other.y;
-    z -= other.z;
+    auto tmp = *this;
+    ++_data[0];
+    ++_data[1];
+    ++_data[2];
+    return tmp;
 }
 
-void zcm::vec3::operator *=(zcm::vec3 other) noexcept
+zcm::vec3& zcm::vec3::operator--() noexcept
 {
-    x *= other.x;
-    y *= other.y;
-    z *= other.z;
+    --_data[0];
+    --_data[1];
+    --_data[2];
+    return *this;
 }
 
-void zcm::vec3::operator /=(zcm::vec3 other) noexcept
+zcm::vec3  zcm::vec3::operator--(int) noexcept
 {
-    x /= other.x;
-    y /= other.y;
-    z /= other.z;
-}
-
-void zcm::vec3::operator +=(float scalar) noexcept
-{
-    x += scalar;
-    y += scalar;
-    z += scalar;
-}
-
-void zcm::vec3::operator -=(float scalar) noexcept
-{
-    x -= scalar;
-    y -= scalar;
-    z -= scalar;
-}
-
-void zcm::vec3::operator *=(float scalar) noexcept
-{
-    x *= scalar;
-    y *= scalar;
-    z *= scalar;
-}
-
-void zcm::vec3::operator /=(float scalar) noexcept
-{
-    x /= scalar;
-    y /= scalar;
-    z /= scalar;
+    auto tmp = *this;
+    --_data[0];
+    --_data[1];
+    --_data[2];
+    return tmp;
 }
 
 bool zcm::operator==(const zcm::vec3 &first, const zcm::vec3 &second) noexcept
 {
-    return first.x == second.x && first.y == second.y && first.z == second.z;
+    return first._data[0] == second._data[0] && first._data[1] == second._data[1] && first._data[2] == second._data[2];
 }
 
 bool zcm::operator!=(const zcm::vec3 &first, const zcm::vec3 &second) noexcept

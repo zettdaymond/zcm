@@ -40,6 +40,66 @@ void scalar_accessor_4<T, index>::operator =(T s) noexcept
 }
 
 template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator %=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] %= s;
+}
+
+template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator |=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] |= s;
+}
+
+template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator &=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] &= s;
+}
+
+template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator ^=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] ^= s;
+}
+
+template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator<<=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] <<= s;
+}
+
+template<typename T, int index>
+void scalar_accessor_4i<T, index>::operator>>=(T s) noexcept
+{
+    scalar_accessor_4<T,index>::_data[index] >>= s;
+}
+
+template<typename T, int index>
+T &scalar_accessor_4<T, index>::operator++() noexcept
+{
+    return ++_data[index];
+}
+
+template<typename T, int index>
+T scalar_accessor_4<T, index>::operator++(int) noexcept
+{
+    return _data[index]++;
+}
+
+template<typename T, int index>
+T &scalar_accessor_4<T, index>::operator--() noexcept
+{
+    return --_data[index];
+}
+
+template<typename T, int index>
+T scalar_accessor_4<T, index>::operator--(int) noexcept
+{
+    return _data[index]--;
+}
+
+template<typename T, int index>
 scalar_accessor_4<T, index>::operator T() const noexcept
 {
 	return _data[index];
@@ -53,6 +113,14 @@ scalar_accessor_4<T, index>::operator T() const noexcept
     template void scalar_accessor_4<T, x>::operator*=(T) noexcept; \
     template void scalar_accessor_4<T, x>::operator/=(T) noexcept; \
 
+#define ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(T, x) \
+    template void scalar_accessor_4i<T, x>::operator%=(T) noexcept; \
+    template void scalar_accessor_4i<T, x>::operator|=(T) noexcept; \
+    template void scalar_accessor_4i<T, x>::operator&=(T) noexcept; \
+    template void scalar_accessor_4i<T, x>::operator^=(T) noexcept; \
+    template void scalar_accessor_4i<T, x>::operator<<=(T) noexcept; \
+    template void scalar_accessor_4i<T, x>::operator>>=(T) noexcept; \
+
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(float, 0)
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(float, 1)
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(float, 2)
@@ -62,6 +130,21 @@ ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(int32_t, 0)
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(int32_t, 1)
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(int32_t, 2)
 ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(int32_t, 3)
+
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(uint32_t, 0)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(uint32_t, 1)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(uint32_t, 2)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR(uint32_t, 3)
+
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(int32_t, 0)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(int32_t, 1)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(int32_t, 2)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(int32_t, 3)
+
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(uint32_t, 0)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(uint32_t, 1)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(uint32_t, 2)
+ZCM_VEC4_TEMPLATE_SCALAR_ACCESSOR_INT(uint32_t, 3)
 
 
 #ifndef ZCM_DISABLE_SWIZZLE
@@ -500,7 +583,6 @@ ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(float, vec4, 0, 3, 3, 3)
 ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(float, vec4, 1, 3, 3, 3)
 ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(float, vec4, 2, 3, 3, 3)
 ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(float, vec4, 3, 3, 3, 3)
-
 
 ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(int32_t, ivec4, 0, 0, 0, 0)
 ZCM_VEC4_TEMPLATE_SHUFFLE_ACCESSOR_4(int32_t, ivec4, 1, 0, 0, 0)

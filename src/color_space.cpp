@@ -7,7 +7,7 @@
 
 zcm::vec4 zcm::convertLinearToSRGB(zcm::vec4 ColorLinear, float Gamma) noexcept
 {
-    auto ClampedColor = clamp(ColorLinear, vec4(0), vec4(1));
+    auto ClampedColor = clamp(ColorLinear, vec4{0}, vec4{1});
 
     return mix(pow(ClampedColor, vec4(Gamma)) * 1.055f - 0.055f,
                ClampedColor * 12.92f,
@@ -44,7 +44,7 @@ zcm::vec4 zcm::convertSRGBToLinear(zcm::vec4 ColorSRGB, float Gamma) noexcept
 {
     return mix(pow((ColorSRGB + 0.055f) * 0.94786729857819905213270142180095f, vec4(Gamma)),
                ColorSRGB * 0.07739938080495356037151702786378f,
-               lessThanEqual(ColorSRGB, vec4(0.04045)));
+               lessThanEqual(ColorSRGB, vec4(0.04045f)));
 }
 
 zcm::vec3 zcm::convertSRGBToLinear(zcm::vec3 ColorSRGB) noexcept

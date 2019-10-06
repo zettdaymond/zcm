@@ -11,10 +11,22 @@ namespace detail {
     extern template void scalar_accessor_3<int32_t,x>::operator*=(int32_t) noexcept; \
     extern template void scalar_accessor_3<int32_t,x>::operator/=(int32_t) noexcept; \
 
+#define ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR_INT(x) \
+    extern template void scalar_accessor_3i<int32_t, x>::operator%=(int32_t) noexcept; \
+    extern template void scalar_accessor_3i<int32_t, x>::operator|=(int32_t) noexcept; \
+    extern template void scalar_accessor_3i<int32_t, x>::operator&=(int32_t) noexcept; \
+    extern template void scalar_accessor_3i<int32_t, x>::operator^=(int32_t) noexcept; \
+    extern template void scalar_accessor_3i<int32_t, x>::operator<<=(int32_t) noexcept; \
+    extern template void scalar_accessor_3i<int32_t, x>::operator>>=(int32_t) noexcept; \
+
 ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(0)
 ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(1)
 ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR(2)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR_INT(0)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR_INT(1)
+ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR_INT(2)
 #undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR
+#undef ZCM_EXTERN_TEMPLATE_SCALAR_ACCESSOR_INT
 
 #ifndef ZCM_DISABLE_SWIZZLE
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include <zcm/detail/vec3_access.hpp>
 #include <zcm/detail/vec3_access_float.hpp>
 #include <zcm/init.hpp>
@@ -12,6 +13,9 @@ namespace zcm
         vec3() noexcept;
         explicit vec3(no_init_t) noexcept;
         vec3(float value) noexcept;
+        vec3(int32_t) noexcept;
+        vec3(int64_t) = delete;
+        vec3(double)  = delete;
         vec3(float x, float y, float z) noexcept;
 
         vec3(vec2 xy, float z) noexcept;
@@ -29,6 +33,11 @@ namespace zcm
         void operator -=(float scalar) noexcept;
         void operator *=(float scalar) noexcept;
         void operator /=(float scalar) noexcept;
+
+        vec3& operator++()    noexcept;
+        vec3  operator++(int) noexcept;
+        vec3& operator--()    noexcept;
+        vec3  operator--(int) noexcept;
 
         union{
             float _data[3];
@@ -84,14 +93,18 @@ namespace zcm
     vec3 operator -(vec3 first) noexcept;
     vec3 operator +(vec3 first) noexcept;
 
-    vec3 operator +(const vec3& first, const vec3& second) noexcept;
-    vec3 operator -(const vec3& first, const vec3& second) noexcept;
-    vec3 operator *(const vec3& first, const vec3& second) noexcept;
-    vec3 operator /(const vec3& first, const vec3& second) noexcept;
+    vec3 operator +(vec3 first, vec3 second) noexcept;
+    vec3 operator -(vec3 first, vec3 second) noexcept;
+    vec3 operator *(vec3 first, vec3 second) noexcept;
+    vec3 operator /(vec3 first, vec3 second) noexcept;
 
-    vec3 operator *(const vec3& vec, const float scalar) noexcept;
-    vec3 operator /(const vec3& vec, const float scalar) noexcept;
+    vec3 operator +(vec3 vec, float scalar) noexcept;
+    vec3 operator -(vec3 vec, float scalar) noexcept;
+    vec3 operator *(vec3 vec, float scalar) noexcept;
+    vec3 operator /(vec3 vec, float scalar) noexcept;
 
-    vec3 operator *(const float scalar, const vec3 vec) noexcept;
-    vec3 operator /(const float scalar, const vec3 vec) noexcept;
+    vec3 operator +(float scalar, vec3 vec) noexcept;
+    vec3 operator -(float scalar, vec3 vec) noexcept;
+    vec3 operator *(float scalar, vec3 vec) noexcept;
+    vec3 operator /(float scalar, vec3 vec) noexcept;
 }

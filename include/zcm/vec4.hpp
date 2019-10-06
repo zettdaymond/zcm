@@ -1,5 +1,6 @@
 #pragma once
 
+#include <stdint.h>
 #include <zcm/detail/vec4_access.hpp>
 #include <zcm/detail/vec4_access_float.hpp>
 #include <zcm/init.hpp>
@@ -14,6 +15,9 @@ namespace zcm
         vec4 () noexcept;
         explicit vec4 (no_init_t) noexcept;
         vec4 (float value) noexcept;
+        vec4 (int32_t) noexcept;
+        vec4 (int64_t) = delete;
+        vec4 (double)  = delete;
         vec4 (float x, float y, float z, float w) noexcept;
 
         vec4 (vec3 xyz, float w) noexcept;
@@ -36,6 +40,11 @@ namespace zcm
         void operator -=(float scalar) noexcept;
         void operator *=(float scalar) noexcept;
         void operator /=(float scalar) noexcept;
+
+        vec4& operator++()    noexcept;
+        vec4  operator++(int) noexcept;
+        vec4& operator--()    noexcept;
+        vec4  operator--(int) noexcept;
 
         union {
             float _data[4];
@@ -394,15 +403,19 @@ namespace zcm
     vec4 operator -(vec4 first) noexcept;
     vec4 operator +(vec4 first) noexcept;
 
-    vec4 operator +(const vec4& first, const vec4& second) noexcept;
-    vec4 operator -(const vec4& first, const vec4& second) noexcept;
-    vec4 operator *(const vec4& first, const vec4& second) noexcept;
-    vec4 operator /(const vec4& first, const vec4& second) noexcept;
+    vec4 operator +(vec4 first, vec4 second) noexcept;
+    vec4 operator -(vec4 first, vec4 second) noexcept;
+    vec4 operator *(vec4 first, vec4 second) noexcept;
+    vec4 operator /(vec4 first, vec4 second) noexcept;
 
-    vec4 operator *(const vec4& vec, const float scalar) noexcept;
-    vec4 operator /(const vec4& vec, const float scalar) noexcept;
+    vec4 operator +(vec4 vec, float scalar) noexcept;
+    vec4 operator -(vec4 vec, float scalar) noexcept;
+    vec4 operator *(vec4 vec, float scalar) noexcept;
+    vec4 operator /(vec4 vec, float scalar) noexcept;
 
-    vec4 operator *(const float scalar, const vec4& vec) noexcept;
-    vec4 operator /(const float scalar, const vec4& vec) noexcept;
+    vec4 operator +(float scalar, vec4 vec) noexcept;
+    vec4 operator -(float scalar, vec4 vec) noexcept;
+    vec4 operator *(float scalar, vec4 vec) noexcept;
+    vec4 operator /(float scalar, vec4 vec) noexcept;
 
 }

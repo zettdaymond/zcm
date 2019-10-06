@@ -1,6 +1,7 @@
 #include <cassert>
 #include <type_traits>
 #include <zcm/vec2.hpp>
+#include <zcm/detail/impl_op_macro.hpp>
 
 
 static_assert (std::is_standard_layout<zcm::vec2>::value, "");
@@ -19,126 +20,71 @@ zcm::vec2::vec2(float value) noexcept
     _data[1] = value;
 }
 
+zcm::vec2::vec2(int32_t value) noexcept : vec2(static_cast<float>(value))
+{}
+
 zcm::vec2::vec2(float _x, float _y) noexcept
 {
     _data[0] = _x;
     _data[1] = _y;
 }
 
-zcm::vec2 zcm::operator +(zcm::vec2 first, zcm::vec2 second) noexcept
-{
-    return { first.x + second.x,
-             first.y + second.y };
+namespace zcm {
+ZCM_IMPL_V2_BINOP(float, zcm::vec2, +)
+ZCM_IMPL_V2_BINOP(float, zcm::vec2, -)
+ZCM_IMPL_V2_BINOP(float, zcm::vec2, *)
+ZCM_IMPL_V2_BINOP(float, zcm::vec2, /)
 }
 
-zcm::vec2 zcm::operator -(zcm::vec2 first, vec2 second) noexcept
-{
-    return { first.x - second.x,
-             first.y - second.y };
-}
-
-zcm::vec2 zcm::operator *(zcm::vec2 first, zcm::vec2 second) noexcept
-{
-    return { first.x * second.x,
-             first.y * second.y };
-}
-
-zcm::vec2 zcm::operator *(zcm::vec2 vec, float scalar) noexcept
-{
-    return { vec.x * scalar,
-             vec.y * scalar };
-}
-
-zcm::vec2 zcm::operator *(float scalar, zcm::vec2 vec) noexcept
-{
-    return { scalar * vec.x,
-             scalar * vec.y };
-}
-
-
-zcm::vec2 zcm::operator /(zcm::vec2 first, zcm::vec2 second) noexcept
-{
-    return { first.x / second.x,
-             first.y / second.y };
-}
-
-
-zcm::vec2 zcm::operator /(zcm::vec2 vec, float scalar) noexcept
-{
-    return { vec.x / scalar,
-             vec.y / scalar };
-}
-
-zcm::vec2 zcm::operator /(float scalar, zcm::vec2 vec) noexcept
-{
-    return { scalar / vec.x,
-             scalar / vec.y };
-}
+ZCM_IMPL_V2_COMPOUND_OP(float, zcm::vec2, +=)
+ZCM_IMPL_V2_COMPOUND_OP(float, zcm::vec2, -=)
+ZCM_IMPL_V2_COMPOUND_OP(float, zcm::vec2, *=)
+ZCM_IMPL_V2_COMPOUND_OP(float, zcm::vec2, /=)
 
 
 zcm::vec2 zcm::operator +(zcm::vec2 first) noexcept
 {
-    return { +first.x,
-             +first.y };
+    return { +first._data[0], +first._data[1] };
 }
 
 zcm::vec2 zcm::operator -(zcm::vec2 first) noexcept
 {
-    return { -first.x,
-             -first.y };
+    return { -first._data[0], -first._data[1] };
 }
 
-void zcm::vec2::operator +=(zcm::vec2 other) noexcept
+zcm::vec2& zcm::vec2::operator++() noexcept
 {
-    x += other.x;
-    y += other.y;
+    ++_data[0];
+    ++_data[1];
+    return *this;
 }
 
-void zcm::vec2::operator -=(zcm::vec2 other) noexcept
+zcm::vec2  zcm::vec2::operator++(int) noexcept
 {
-    x -= other.x;
-    y -= other.y;
+    auto tmp = *this;
+    ++_data[0];
+    ++_data[1];
+    return tmp;
 }
 
-void zcm::vec2::operator *=(zcm::vec2 other) noexcept
+zcm::vec2& zcm::vec2::operator--() noexcept
 {
-    x *= other.x;
-    y *= other.y;
+    --_data[0];
+    --_data[1];
+    return *this;
 }
 
-void zcm::vec2::operator/=(vec2 other) noexcept
+zcm::vec2  zcm::vec2::operator--(int) noexcept
 {
-    x /= other.x;
-    y /= other.y;
-}
-
-void zcm::vec2::operator +=(float scalar) noexcept
-{
-    x += scalar;
-    y += scalar;
-}
-
-void zcm::vec2::operator -=(float scalar) noexcept
-{
-    x -= scalar;
-    y -= scalar;
-}
-
-void zcm::vec2::operator *=(float scalar) noexcept
-{
-    x *= scalar;
-    y *= scalar;
-}
-
-void zcm::vec2::operator /=(float scalar) noexcept
-{
-    x /= scalar;
-    y /= scalar;
+    auto tmp = *this;
+    --_data[0];
+    --_data[1];
+    return tmp;
 }
 
 bool zcm::operator==(zcm::vec2 first, zcm::vec2 second) noexcept
 {
-    return first.x == second.x && first.y == second.y;
+    return first._data[0] == second._data[0] && first._data[1] == second._data[1];
 }
 
 bool zcm::operator!=(zcm::vec2 first, zcm::vec2 second) noexcept
@@ -158,3 +104,4 @@ const float& zcm::vec2::operator[](unsigned val) const noexcept
     assert(val < 3);
     return _data[val];
 }
+

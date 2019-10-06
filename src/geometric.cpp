@@ -97,7 +97,7 @@ float zcm::distance(const zcm::vec4& first, const zcm::vec4& second) noexcept
 
 float zcm::faceforward(float N, float I, float Nref) noexcept
 {
-    if (dot(Nref, I) < 0.0) {
+    if (dot(Nref, I) < 0.0f) {
         return N;
     }
     else {
@@ -107,7 +107,7 @@ float zcm::faceforward(float N, float I, float Nref) noexcept
 
 zcm::vec2 zcm::faceforward(const vec2& N, const vec2& I, const vec2& Nref) noexcept
 {
-    if (dot(Nref, I) < 0.0) {
+    if (dot(Nref, I) < 0.0f) {
         return N;
     }
     else {
@@ -117,7 +117,7 @@ zcm::vec2 zcm::faceforward(const vec2& N, const vec2& I, const vec2& Nref) noexc
 
 zcm::vec3 zcm::faceforward(const vec3& N, const vec3& I, const vec3& Nref) noexcept
 {
-    if (dot(Nref, I) < 0.0) {
+    if (dot(Nref, I) < 0.0f) {
         return N;
     }
     else {
@@ -127,7 +127,7 @@ zcm::vec3 zcm::faceforward(const vec3& N, const vec3& I, const vec3& Nref) noexc
 
 zcm::vec4 zcm::faceforward(const vec4& N, const vec4& I, const vec4& Nref) noexcept
 {
-    if (dot(Nref, I) < 0.0) {
+    if (dot(Nref, I) < 0.0f) {
         return N;
     }
     else {
@@ -141,22 +141,22 @@ zcm::vec4 zcm::faceforward(const vec4& N, const vec4& I, const vec4& Nref) noexc
 
 float zcm::reflect(float I, float N) noexcept
 {
-    return I - 2.0 * dot(N, I) * N;
+    return I - 2.0f * dot(N, I) * N;
 }
 
 zcm::vec2 zcm::reflect(const zcm::vec2& I, const zcm::vec2& N) noexcept
 {
-    return I - 2.0 * dot(N, I) * N;
+    return I - 2.0f * dot(N, I) * N;
 }
 
 zcm::vec3 zcm::reflect(const zcm::vec3& I, const zcm::vec3& N) noexcept
 {
-    return I - 2.0 * dot(N, I) * N;
+    return I - 2.0f * dot(N, I) * N;
 }
 
 zcm::vec4 zcm::reflect(const zcm::vec4& I, const zcm::vec4& N) noexcept
 {
-    return I - 2.0 * dot(N, I) * N;
+    return I - 2.0f * dot(N, I) * N;
 }
 
 
@@ -165,8 +165,8 @@ zcm::vec4 zcm::reflect(const zcm::vec4& I, const zcm::vec4& N) noexcept
 
 float zcm::refract(float I, float N, float eta) noexcept
 {
-    auto k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
-    if (k < 0.0){
+    auto k = 1.0f - eta * eta * (1.0f - dot(N, I) * dot(N, I));
+    if (k < 0.0f){
         return 0.f;       // or genDType(0.0)
     }
     else{
@@ -176,9 +176,9 @@ float zcm::refract(float I, float N, float eta) noexcept
 
 zcm::vec2 zcm::refract(const zcm::vec2& I, const zcm::vec2& N, float eta) noexcept
 {
-    auto k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
-    if (k < 0.0){
-        return {0.0};       // or genDType(0.0)
+    auto k = 1.0f - eta * eta * (1.0f - dot(N, I) * dot(N, I));
+    if (k < 0.0f){
+        return {0.0f};       // or genDType(0.0)
     }
     else{
         return eta * I - (eta * dot(N, I) + sqrt(k)) * N;
@@ -187,9 +187,9 @@ zcm::vec2 zcm::refract(const zcm::vec2& I, const zcm::vec2& N, float eta) noexce
 
 zcm::vec3 zcm::refract(const zcm::vec3& I, const zcm::vec3& N, float eta) noexcept
 {
-    auto k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
-    if (k < 0.0){
-        return {0.0};       // or genDType(0.0)
+    auto k = 1.0f - eta * eta * (1.0f - dot(N, I) * dot(N, I));
+    if (k < 0.0f){
+        return {0.0f};       // or genDType(0.0)
     }
     else{
         return eta * I - (eta * dot(N, I) + sqrt(k)) * N;
@@ -198,9 +198,9 @@ zcm::vec3 zcm::refract(const zcm::vec3& I, const zcm::vec3& N, float eta) noexce
 
 zcm::vec4 zcm::refract(const zcm::vec4& I, const zcm::vec4& N, float eta) noexcept
 {
-    auto k = 1.0 - eta * eta * (1.0 - dot(N, I) * dot(N, I));
-    if (k < 0.0){
-        return {0.0};       // or genDType(0.0)
+    auto k = 1.0f - eta * eta * (1.0f - dot(N, I) * dot(N, I));
+    if (k < 0.0f){
+        return {0.0f};       // or genDType(0.0)
     }
     else{
         return eta * I - (eta * dot(N, I) + sqrt(k)) * N;
@@ -297,14 +297,14 @@ float zcm::distance2(const zcm::vec4 &first, const zcm::vec4 &second) noexcept
 
 zcm::vec3 zcm::orthogonal(const vec3 &v) noexcept
 {
-    return abs(v.x) > abs(v.z) ? vec3(-v.y, v.x, 0.0f)
-                               : vec3(0.0f, -v.z, v.y);
+    return abs(v.x) > abs(v.z) ? vec3{-v.y, v.x, 0.0f}
+                               : vec3{0.0f, -v.z, v.y};
 
 }
 
 zcm::vec3 zcm::orthogonal_branchless(const vec3 &v) noexcept
 {
     float k = fract(abs(v.x) + 0.5f);
-    return vec3(-v.y, v.x - k * v.z, k * v.y);
+    return vec3{-v.y, v.x - k * v.z, k * v.y};
 }
 
