@@ -1,110 +1,154 @@
+#include <stdint.h>
 #include <zcm/vec3.hpp>
 #include <zcm/vec2.hpp>
+#include <zcm/ivec2.hpp>
+#include <zcm/ivec3.hpp>
 
 namespace zcm {
 namespace detail {
 
-template<int index>
-void scalar_accessor_3<index>::operator +=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_3<T, index>::operator +=(T s) noexcept
 {
 	_data[index] += s;
 }
 
-template<int index>
-void scalar_accessor_3<index>::operator -=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_3<T, index>::operator -=(T s) noexcept
 {
 	_data[index] -= s;
 }
 
-template<int index>
-void scalar_accessor_3<index>::operator *=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_3<T, index>::operator *=(T s) noexcept
 {
 	_data[index] *= s;
 }
 
-template<int index>
-void scalar_accessor_3<index>::operator /=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_3<T, index>::operator /=(T s) noexcept
 {
 	_data[index] /= s;
 }
 
-template<int index>
-void scalar_accessor_3<index>::operator =(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_3<T, index>::operator =(T s) noexcept
 {
 	_data[index] = s;
 }
 
-template<int index>
-scalar_accessor_3<index>::operator float() const noexcept
+template<typename T, int index>
+scalar_accessor_3<T, index>::operator T() const noexcept
 {
 	return _data[index];
 }
 
-#define ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(x) \
-    template scalar_accessor_3<x>::operator float() const noexcept; \
-    template void scalar_accessor_3<x>::operator=(float) noexcept;  \
-    template void scalar_accessor_3<x>::operator+=(float) noexcept; \
-    template void scalar_accessor_3<x>::operator-=(float) noexcept; \
-    template void scalar_accessor_3<x>::operator*=(float) noexcept; \
-    template void scalar_accessor_3<x>::operator/=(float) noexcept; \
+#define ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(T, x) \
+    template scalar_accessor_3<T, x>::operator T() const noexcept; \
+    template void scalar_accessor_3<T, x>::operator=(T) noexcept;  \
+    template void scalar_accessor_3<T, x>::operator+=(T) noexcept; \
+    template void scalar_accessor_3<T, x>::operator-=(T) noexcept; \
+    template void scalar_accessor_3<T, x>::operator*=(T) noexcept; \
+    template void scalar_accessor_3<T, x>::operator/=(T) noexcept; \
 
-ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(0)
-ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(1)
-ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(2)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(float, 0)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(float, 1)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(float, 2)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(int32_t, 0)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(int32_t, 1)
+ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(int32_t, 2)
 
 
 #ifndef ZCM_DISABLE_SWIZZLE
 
-template<typename T, int... indices>
-shuffle_accessor_3<T, indices...>::operator T() const noexcept
+template<typename T, typename V, int... indices>
+shuffle_accessor_3<T, V, indices...>::operator V() const noexcept
 {
-	return T{_data[indices]...};
+	return V{_data[indices]...};
 }
 
-#define ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(x, y) \
-    template shuffle_accessor_3<vec2, x, y>::operator vec2() const noexcept;
+#define ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(T, V, x, y) \
+    template shuffle_accessor_3<T, V, x, y>::operator V() const noexcept;
 
-#define ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(x, y, z) \
-    template shuffle_accessor_3<vec3, x, y, z>::operator vec3() const noexcept;
+#define ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(T, V, x, y, z) \
+    template shuffle_accessor_3<T, V, x, y, z>::operator V() const noexcept;
 
 
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(0, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(1, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(float, vec2, 2, 2)
 
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 0)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 1)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 0, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 0, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 0, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 1, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 1, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 1, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(0, 2, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(1, 2, 2)
-ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(2, 2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(int32_t, ivec2, 2, 2)
+
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 0, 2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 1, 2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(float, vec3, 2, 2, 2)
+
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 0, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 1, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 2, 0)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 0, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 1, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 2, 1)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 0, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 1, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 0, 2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 1, 2, 2)
+ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 2, 2)
 #endif // ZCM_DISABLE_SWIZZLE
 
 }

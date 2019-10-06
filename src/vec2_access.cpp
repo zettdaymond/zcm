@@ -1,72 +1,79 @@
 #include <zcm/vec2.hpp>
+#include <zcm/ivec2.hpp>
 
 namespace zcm {
 namespace detail {
 
-template<int index>
-void scalar_accessor_2<index>::operator +=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_2<T, index>::operator +=(T s) noexcept
 {
 	_data[index] += s;
 }
 
-template<int index>
-void scalar_accessor_2<index>::operator -=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_2<T, index>::operator -=(T s) noexcept
 {
 	_data[index] -= s;
 }
 
-template<int index>
-void scalar_accessor_2<index>::operator *=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_2<T, index>::operator *=(T s) noexcept
 {
 	_data[index] *= s;
 }
 
-template<int index>
-void scalar_accessor_2<index>::operator /=(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_2<T, index>::operator /=(T s) noexcept
 {
 	_data[index] /= s;
 }
 
-template<int index>
-void scalar_accessor_2<index>::operator =(float s) noexcept
+template<typename T, int index>
+void scalar_accessor_2<T, index>::operator =(T s) noexcept
 {
 	_data[index] = s;
 }
 
-template<int index>
-scalar_accessor_2<index>::operator float() const noexcept
+template<typename T, int index>
+scalar_accessor_2<T, index>::operator T() const noexcept
 {
 	return _data[index];
 }
 
 
 
-#define ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(x) \
-    template scalar_accessor_2<x>::operator float() const noexcept; \
-    template void scalar_accessor_2<x>::operator=(float) noexcept;  \
-    template void scalar_accessor_2<x>::operator+=(float) noexcept; \
-    template void scalar_accessor_2<x>::operator-=(float) noexcept; \
-    template void scalar_accessor_2<x>::operator*=(float) noexcept; \
-    template void scalar_accessor_2<x>::operator/=(float) noexcept; \
+#define ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(T, x) \
+    template      scalar_accessor_2<T, x>::operator T() const noexcept; \
+    template void scalar_accessor_2<T, x>::operator=(T) noexcept;  \
+    template void scalar_accessor_2<T, x>::operator+=(T) noexcept; \
+    template void scalar_accessor_2<T, x>::operator-=(T) noexcept; \
+    template void scalar_accessor_2<T, x>::operator*=(T) noexcept; \
+    template void scalar_accessor_2<T, x>::operator/=(T) noexcept; \
 
-ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(0)
-ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(1)
+ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(float, 0)
+ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(float, 1)
+ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(int32_t, 0)
+ZCM_VEC2_TEMPLATE_SCALAR_ACCESSOR(int32_t, 1)
 
 #ifndef ZCM_DISABLE_SWIZZLE
 
-template<typename T, int... indices>
-shuffle_accessor_2<T, indices...>::operator T() const noexcept
+template<typename T, typename V, int... indices>
+shuffle_accessor_2<T, V, indices...>::operator V() const noexcept
 {
-	return T{_data[indices]...};
+	return V{_data[indices]...};
 }
 
-#define ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(x, y) \
-    template shuffle_accessor_2<vec2, x, y>::operator vec2() const noexcept;
+#define ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(T, V, x, y) \
+    template shuffle_accessor_2<T, V, x, y>::operator V() const noexcept;
 
-ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(0, 0)
-ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(0, 1)
-ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(1, 0)
-ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(1, 1)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(float, vec2, 0, 0)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(float, vec2, 0, 1)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(float, vec2, 1, 0)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(float, vec2, 1, 1)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(int32_t, ivec2, 0, 0)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(int32_t, ivec2, 0, 1)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(int32_t, ivec2, 1, 0)
+ZCM_VEC2_TEMPLATE_SHUFFLE_ACCESSOR(int32_t, ivec2, 1, 1)
 #endif // ZCM_DISABLE_SWIZZLE
 
 }

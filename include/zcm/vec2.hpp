@@ -1,6 +1,7 @@
 #pragma once
 
 #include <zcm/detail/vec2_access.hpp>
+#include <zcm/detail/vec2_access_float.hpp>
 #include <zcm/init.hpp>
 
 namespace zcm
@@ -28,13 +29,13 @@ namespace zcm
 
         union{
             float _data[2];
-            detail::scalar_accessor_2<0> x, r, s;
-            detail::scalar_accessor_2<1> y, g, t;
+            detail::scalar_accessor_2<float, 0> x, r, s;
+            detail::scalar_accessor_2<float, 1> y, g, t;
 #ifndef ZCM_DISABLE_SWIZZLE
-            detail::shuffle_accessor_2<vec2, 0, 0> xx, rr, ss;
-            detail::shuffle_accessor_2<vec2, 1, 0> yx, gr, ts;
-            detail::shuffle_accessor_2<vec2, 0, 1> xy, rg, st;
-            detail::shuffle_accessor_2<vec2, 1, 1> yy, gg, tt;
+            detail::shuffle_accessor_2<float, vec2, 0, 0> xx, rr, ss;
+            detail::shuffle_accessor_2<float, vec2, 1, 0> yx, gr, ts;
+            detail::shuffle_accessor_2<float, vec2, 0, 1> xy, rg, st;
+            detail::shuffle_accessor_2<float, vec2, 1, 1> yy, gg, tt;
 #endif // ZCM_DISABLE_SWIZZLE
         };
     };

@@ -5,8 +5,8 @@
 
 using namespace zcm;
 
-const auto first = vec2(2.0, 4.33);
-const auto second = vec2(-4.33, 5.4325);
+const auto first = vec2(2.0f, 4.33f);
+const auto second = vec2(-4.33f, 5.4325f);
 const auto scalar = 5.0f;
 
 TEST(vec2, element_access)
@@ -92,7 +92,7 @@ TEST(vec2, vector_per_component_multiplication)
     auto result = first * second;
 
     ASSERT_FLOAT_EQ(result.x, -8.66f);
-    ASSERT_FLOAT_EQ(result.y,  23.522725);
+    ASSERT_FLOAT_EQ(result.y,  23.522725f);
 }
 
 TEST(vec2, vector_access)
@@ -110,8 +110,8 @@ TEST(vec2, vector_const_access)
 {
     const auto result = first;
 
-    ASSERT_FLOAT_EQ(result[0],  2.0);
-    ASSERT_FLOAT_EQ(result[1],  4.33);
+    ASSERT_FLOAT_EQ(result[0],  2.0f);
+    ASSERT_FLOAT_EQ(result[1],  4.33f);
 }
 
 //
