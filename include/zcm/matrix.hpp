@@ -2,9 +2,9 @@
 
 namespace zcm {
 
-    class mat2;
-    class mat3;
-    class mat4;
+    struct mat2;
+    struct mat3;
+    struct mat4;
 
 
     mat2 matrixCompMult(const mat2& x, const mat2& y) noexcept;
