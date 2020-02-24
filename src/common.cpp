@@ -7,6 +7,9 @@
 #include <zcm/vec2.hpp>
 #include <zcm/vec3.hpp>
 #include <zcm/vec4.hpp>
+#include <zcm/ivec2.hpp>
+#include <zcm/ivec3.hpp>
+#include <zcm/ivec4.hpp>
 #include <zcm/bvec2.hpp>
 #include <zcm/bvec3.hpp>
 #include <zcm/bvec4.hpp>
@@ -29,6 +32,26 @@ zcm::vec3 zcm::abs(const zcm::vec3& x) noexcept
 }
 
 zcm::vec4 zcm::abs(const zcm::vec4& x) noexcept
+{
+    return { zcm::abs(x.x), zcm::abs(x.y), zcm::abs(x.z), zcm::abs(x.w) };
+}
+
+int zcm::abs(int x) noexcept
+{
+    return std::abs(x);
+}
+
+zcm::ivec2 zcm::abs(const zcm::ivec2 &x) noexcept
+{
+    return { abs(x.x), abs(x.y) };
+}
+
+zcm::ivec3 zcm::abs(const zcm::ivec3 &x) noexcept
+{
+    return { zcm::abs(x.x), zcm::abs(x.y), zcm::abs(x.z) };
+}
+
+zcm::ivec4 zcm::abs(const zcm::ivec4 &x) noexcept
 {
     return { zcm::abs(x.x), zcm::abs(x.y), zcm::abs(x.z), zcm::abs(x.w) };
 }
@@ -77,6 +100,26 @@ zcm::vec3 zcm::clamp(const zcm::vec3& x, const zcm::vec3& minVal, const zcm::vec
 }
 
 zcm::vec4 zcm::clamp(const zcm::vec4& x, const zcm::vec4& minVal, const zcm::vec4& maxVal) noexcept
+{
+    return min(max(x, minVal), maxVal);
+}
+
+int zcm::clamp(int x, int minVal, int maxVal) noexcept
+{
+    return min(max(x, minVal), maxVal);
+}
+
+zcm::ivec2 zcm::clamp(const zcm::ivec2 &x, const zcm::ivec2 &minVal, const zcm::ivec2 &maxVal) noexcept
+{
+    return min(max(x, minVal), maxVal);
+}
+
+zcm::ivec3 zcm::clamp(const zcm::ivec3 &x, const zcm::ivec3 &minVal, const zcm::ivec3 &maxVal) noexcept
+{
+    return min(max(x, minVal), maxVal);
+}
+
+zcm::ivec4 zcm::clamp(const zcm::ivec4 &x, const zcm::ivec4 &minVal, const zcm::ivec4 &maxVal) noexcept
 {
     return min(max(x, minVal), maxVal);
 }
@@ -177,6 +220,26 @@ zcm::vec4 zcm::max(const zcm::vec4& x, const zcm::vec4& y) noexcept
     return { zcm::max(x.x, y.x), zcm::max(x.y, y.y), zcm::max(x.z, y.z), zcm::max(x.w, y.w) };
 }
 
+int zcm::max(int x, int y) noexcept
+{
+    return x < y ? y : x;
+}
+
+zcm::ivec2 zcm::max(const zcm::ivec2 &x, const zcm::ivec2 &y) noexcept
+{
+    return { zcm::max(x.x, y.x), zcm::max(x.y, y.y) };
+}
+
+zcm::ivec3 zcm::max(const zcm::ivec3 &x, const zcm::ivec3 &y) noexcept
+{
+    return { zcm::max(x.x, y.x), zcm::max(x.y, y.y), zcm::max(x.z, y.z) };
+}
+
+zcm::ivec4 zcm::max(const zcm::ivec4 &x, const zcm::ivec4 &y) noexcept
+{
+    return { zcm::max(x.x, y.x), zcm::max(x.y, y.y), zcm::max(x.z, y.z), zcm::max(x.w, y.w) };
+}
+
 
 //-----------------------------------------------------------------------------------------------------
 
@@ -197,6 +260,26 @@ zcm::vec3 zcm::min(const zcm::vec3& x, const zcm::vec3& y) noexcept
 }
 
 zcm::vec4 zcm::min(const zcm::vec4& x, const zcm::vec4& y) noexcept
+{
+    return { zcm::min(x.x, y.x), zcm::min(x.y, y.y), zcm::min(x.z, y.z), zcm::min(x.w, y.w) };
+}
+
+int zcm::min(int x, int y) noexcept
+{
+    return y < x ? y : x;
+}
+
+zcm::ivec2 zcm::min(const zcm::ivec2 &x, const zcm::ivec2 &y) noexcept
+{
+    return { zcm::min(x.x, y.x), zcm::min(x.y, y.y) };
+}
+
+zcm::ivec3 zcm::min(const zcm::ivec3 &x, const zcm::ivec3 &y) noexcept
+{
+    return { zcm::min(x.x, y.x), zcm::min(x.y, y.y), zcm::min(x.z, y.z) };
+}
+
+zcm::ivec4 zcm::min(const zcm::ivec4 &x, const zcm::ivec4 &y) noexcept
 {
     return { zcm::min(x.x, y.x), zcm::min(x.y, y.y), zcm::min(x.z, y.z), zcm::min(x.w, y.w) };
 }
@@ -317,6 +400,73 @@ zcm::vec4 zcm::sign(const zcm::vec4& x) noexcept
 {
     return { zcm::sign(x.x), zcm::sign(x.y), zcm::sign(x.z), zcm::sign(x.w) };
 }
+
+int zcm::sign(int x) noexcept
+{
+    if(x == 0) {
+        return 0;
+    }
+    if(x > 0) {
+        return 1;
+    }
+    return -1;
+}
+
+zcm::ivec2 zcm::sign(const zcm::ivec2 &x) noexcept
+{
+    return { zcm::sign(x.x), zcm::sign(x.y) };
+}
+
+zcm::ivec3 zcm::sign(const zcm::ivec3 &x) noexcept
+{
+    return { zcm::sign(x.x), zcm::sign(x.y), zcm::sign(x.z)};
+}
+
+zcm::ivec4 zcm::sign(const zcm::ivec4 &x) noexcept
+{
+    return { zcm::sign(x.x), zcm::sign(x.y), zcm::sign(x.z), zcm::sign(x.w) };
+}
+
+float zcm::signNotZero(float x) noexcept
+{
+    return x >= 0.0f ? +1.0f : -1.0f;
+}
+
+zcm::vec2 zcm::signNotZero(const zcm::vec2 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y) };
+}
+
+zcm::vec3 zcm::signNotZero(const zcm::vec3 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z) };
+}
+
+zcm::vec4 zcm::signNotZero(const zcm::vec4 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z), signNotZero(x.w) };
+}
+
+int zcm::signNotZero(int x) noexcept
+{
+    return x >= 0 ? 1 : -1;
+}
+
+zcm::ivec2 zcm::signNotZero(const zcm::ivec2 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y) };
+}
+
+zcm::ivec3 zcm::signNotZero(const zcm::ivec3 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z) };
+}
+
+zcm::ivec4 zcm::signNotZero(const zcm::ivec4 &x) noexcept
+{
+    return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z), signNotZero(x.w) };
+}
+
 
 
 //-----------------------------------------------------------------------------------------------------
@@ -617,17 +767,17 @@ zcm::bvec4 zcm::equal(const zcm::quat &x, const zcm::quat &y) noexcept
 //-----------------------------------------------------------------------------------------------------
 
 
-zcm::bvec2 zcm::equal(const zcm::bvec2 &x, const zcm::bvec2 &y) noexcept
+zcm::bvec2 zcm::equal(zcm::bvec2 x, zcm::bvec2 y) noexcept
 {
     return { x.x == y.x, x.y == y.y };
 }
 
-zcm::bvec3 zcm::equal(const zcm::bvec3 &x, const zcm::bvec3 &y) noexcept
+zcm::bvec3 zcm::equal(zcm::bvec3 x, zcm::bvec3 y) noexcept
 {
     return { x.x == y.x, x.y == y.y, x.z == y.z };
 }
 
-zcm::bvec4 zcm::equal(const zcm::bvec4 &x, const zcm::bvec4 &y) noexcept
+zcm::bvec4 zcm::equal(zcm::bvec4 x, zcm::bvec4 y) noexcept
 {
     return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
 }
@@ -660,17 +810,17 @@ zcm::bvec4 zcm::notEqual(const zcm::quat &x, const zcm::quat &y) noexcept
 //-----------------------------------------------------------------------------------------------------
 
 
-zcm::bvec2 zcm::notEqual(const zcm::bvec2 &x, const zcm::bvec2 &y) noexcept
+zcm::bvec2 zcm::notEqual(zcm::bvec2 x, zcm::bvec2 y) noexcept
 {
     return { x.x != y.x, x.y != y.y };
 }
 
-zcm::bvec3 zcm::notEqual(const zcm::bvec3 &x, const zcm::bvec3 &y) noexcept
+zcm::bvec3 zcm::notEqual(zcm::bvec3 x, zcm::bvec3 y) noexcept
 {
     return { x.x != y.x, x.y != y.y, x.z != y.z };
 }
 
-zcm::bvec4 zcm::notEqual(const zcm::bvec4 &x, const zcm::bvec4 &y) noexcept
+zcm::bvec4 zcm::notEqual(zcm::bvec4 x, zcm::bvec4 y) noexcept
 {
     return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
 }
@@ -678,17 +828,17 @@ zcm::bvec4 zcm::notEqual(const zcm::bvec4 &x, const zcm::bvec4 &y) noexcept
 
 //-----------------------------------------------------------------------------------------------------
 
-bool zcm::all(const zcm::bvec2 &x) noexcept
+bool zcm::all(zcm::bvec2 x) noexcept
 {
     return x.x && x.y;
 }
 
-bool zcm::all(const zcm::bvec3 &x) noexcept
+bool zcm::all(zcm::bvec3 x) noexcept
 {
     return x.x && x.y && x.z;
 }
 
-bool zcm::all(const zcm::bvec4 &x) noexcept
+bool zcm::all(zcm::bvec4 x) noexcept
 {
     return x.x && x.y && x.z && x.w;
 }
@@ -697,17 +847,18 @@ bool zcm::all(const zcm::bvec4 &x) noexcept
 //-----------------------------------------------------------------------------------------------------
 
 
-bool zcm::any(const zcm::bvec2 &x) noexcept
+bool zcm::any(zcm::bvec2 x) noexcept
 {
     return x.x || x.y;
 }
 
-bool zcm::any(const zcm::bvec3 &x) noexcept
+bool zcm::any(zcm::bvec3 x) noexcept
 {
     return  x.x || x.y || x.z;
 }
 
-bool zcm::any(const zcm::bvec4 &x) noexcept
+bool zcm::any(bvec4 x) noexcept
 {
     return x.x || x.y || x.z || x.w;
 }
+

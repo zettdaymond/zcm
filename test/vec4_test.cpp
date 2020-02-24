@@ -3,6 +3,7 @@
 #include <zcm/vec3.hpp>
 #include <zcm/vec2.hpp>
 #include <zcm/geometric.hpp>
+#include <zcm/common.hpp>
 #include <zcm/component_wise.hpp>
 
 using namespace zcm;
@@ -235,6 +236,10 @@ TEST(vec4, shuffle)
     ASSERT_FLOAT_EQ(result4.z,  first.x);
     ASSERT_FLOAT_EQ(result4.w,  first.y);
 
+    auto res = zcm::mix(result3, result4.xzy, 1.0f);
+    ASSERT_FLOAT_EQ(res.x, result4.x);
+    ASSERT_FLOAT_EQ(res.y, result4.z);
+    ASSERT_FLOAT_EQ(res.z, result4.y);
 }
 #endif
 

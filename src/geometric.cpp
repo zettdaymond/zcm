@@ -308,3 +308,27 @@ zcm::vec3 zcm::orthogonal_branchless(const vec3 &v) noexcept
     return vec3{-v.y, v.x - k * v.z, k * v.y};
 }
 
+
+zcm::vec2 zcm::encode_octahedral(zcm::vec3 v) noexcept
+{
+    // @ref: Zina H. Cigolle, Sam Donow, Daniel Evangelakos, Michael Mara, Morgan McGuire, and Quirin Meyer,
+    // Survey of Efficient Representations for Independent Unit Vectors,
+    // Journal of Computer Graphics Techniques (JCGT), vol. 3, no. 2, 1-30, 2014
+    // URL: http://jcgt.org/published/0003/02/01/
+
+    // project the sphere onto octahedron and then onto XY plane (top hemisphere)
+    auto p = zcm::vec2(v.x, v.y) * (1.0f / (abs(v.x) + abs(v.y) + abs(v.z)));
+
+    // reflect the folds of the lower hemisphere over the diagonals
+    return (v.z <= 0.0f) ? ((1.0f - abs(zcm::vec2(p.y, p.x))) * signNotZero(p)) : p;
+}
+
+zcm::vec3 zcm::decode_octahedral(zcm::vec2 e) noexcept
+{
+    auto v = zcm::vec3(e.x, e.y, 1.0f - abs(e.x) - abs(e.y));
+    if (v.z < 0.0f) {
+        v.x = 1.0f - abs(v.y) * signNotZero(v.x);
+        v.y = 1.0f - abs(v.x) * signNotZero(v.y);
+    }
+    return normalize(v);
+}

@@ -2,7 +2,6 @@
 
 #include <stdint.h>
 #include <zcm/detail/vec3_access.hpp>
-#include <zcm/detail/vec3_access_float.hpp>
 #include <zcm/init.hpp>
 
 namespace zcm

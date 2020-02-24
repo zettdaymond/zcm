@@ -66,4 +66,11 @@ namespace zcm
      * Doesn’t normalise the output. */
     vec3 orthogonal_branchless(const vec3& v) noexcept;
 
+    /* Encodes unit vector to octahedral representation.
+     * Output is on [-1, 1] for each component. */
+    vec2 encode_octahedral(zcm::vec3 unit_vector) noexcept;
+
+    /* Decodes unit vector from octahedral representation. */
+    vec3 decode_octahedral(zcm::vec2 oct_vector) noexcept;
+
 }
