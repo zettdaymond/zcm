@@ -143,14 +143,17 @@ namespace zcm
     ivec4 signNotZero (const ivec4& x) noexcept;
 
     float mix (float x, float y, float t) noexcept;
+    vec2  mix (const vec2& x, const vec2& y, float t) noexcept;
+    vec3  mix (const vec3& x, const vec3& y, float t) noexcept;
+    vec4  mix (const vec4& x, const vec4& y, float t) noexcept;
     vec2  mix (const vec2& x, const vec2& y, const vec2& t) noexcept;
-    vec3  mix (const vec3& x, const vec3& y, const vec3 &t) noexcept;
-    vec4  mix (const vec4& x, const vec4& y, const vec4 &t) noexcept;
+    vec3  mix (const vec3& x, const vec3& y, const vec3& t) noexcept;
+    vec4  mix (const vec4& x, const vec4& y, const vec4& t) noexcept;
 
     float mix (float x, float y, bool t) noexcept;
     vec2  mix (const vec2& x, const vec2& y, const bvec2& t) noexcept;
-    vec3  mix (const vec3& x, const vec3& y, const bvec3 &t) noexcept;
-    vec4  mix (const vec4& x, const vec4& y, const bvec4 &t) noexcept;
+    vec3  mix (const vec3& x, const vec3& y, const bvec3& t) noexcept;
+    vec4  mix (const vec4& x, const vec4& y, const bvec4& t) noexcept;
 
     float step (float edge, float x) noexcept;
     vec2  step (const vec2& edge, const vec2 & x) noexcept;

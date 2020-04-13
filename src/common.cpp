@@ -576,6 +576,27 @@ zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::vec4 &t) n
 }
 
 
+zcm::vec2 zcm::mix(const zcm::vec2 &x, const zcm::vec2 &y, float t) noexcept
+{
+    return { mix(x.x, y.x, t),
+             mix(x.y, y.y, t) };
+}
+
+zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, float t) noexcept
+{
+    return { mix(x.x, y.x, t),
+             mix(x.y, y.y, t),
+             mix(x.z, y.z, t) };
+}
+
+zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, float t) noexcept
+{
+    return { mix(x.x, y.x, t),
+             mix(x.y, y.y, t),
+             mix(x.z, y.z, t),
+             mix(x.w, y.w, t) };
+}
+
 //-----------------------------------------------------------------------------------------------------
 
 

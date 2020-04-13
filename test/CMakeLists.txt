@@ -1,3 +1,4 @@
+set(gtest_force_shared_crt ON CACHE INTERNAL "")
 add_subdirectory("${PROJECT_SOURCE_DIR}/third_party/gtest" "third_party/gtest")
 mark_as_advanced(BUILD_GMOCK BUILD_GTEST gmock_build_tests gtest_build_samples gtest_build_tests
                  gtest_disable_pthreads gtest_force_shared_crt gtest_hide_internal_symbols

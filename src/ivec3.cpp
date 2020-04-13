@@ -143,7 +143,7 @@ zcm::ivec3 zcm::ivec3::operator--(int) noexcept
     return tmp;
 }
 
-zcm::ivec3::operator bvec3() const noexcept
+zcm::ivec3::operator zcm::bvec3() const noexcept
 {
     return { bool(_data[0]), bool(_data[1]), bool(_data[2])};
 }

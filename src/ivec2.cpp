@@ -109,7 +109,7 @@ const int32_t& zcm::ivec2::operator[](unsigned val) const noexcept
     return _data[val];
 }
 
-zcm::ivec2::operator bvec2() const noexcept
+zcm::ivec2::operator zcm::bvec2() const noexcept
 {
     return { bool(_data[0]), bool(_data[1]) };
 }

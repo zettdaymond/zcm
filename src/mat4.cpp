@@ -48,7 +48,7 @@ zcm::mat4::mat4(const zcm::mat3 &m) noexcept
     _columns[3] = vec4(0.0f, 0.0f, 0.0f, 1.0f);
 }
 
-zcm::mat4::operator mat3() const noexcept
+zcm::mat4::operator zcm::mat3() const noexcept
 {
     return mat3{vec3{_columns[0].x, _columns[0].y, _columns[0].z},
                 vec3{_columns[1].x, _columns[1].y, _columns[1].z},

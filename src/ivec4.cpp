@@ -196,7 +196,7 @@ const int32_t& zcm::ivec4::operator[](unsigned val) const noexcept
     return _data[val];
 }
 
-zcm::ivec4::operator bvec4() const noexcept
+zcm::ivec4::operator zcm::bvec4() const noexcept
 {
     return { bool(_data[0]), bool(_data[1]), bool(_data[2]), bool(_data[3]) };
 }
