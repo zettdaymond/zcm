@@ -4,6 +4,8 @@
 #include <zcm/vec3.hpp>
 #include <zcm/mat4.hpp>
 #include <zcm/mat3.hpp>
+#include <zcm/quat.hpp>
+#include <zcm/exponential.hpp>
 #include <zcm/common.hpp>
 #include <limits>
 #include <cassert>
@@ -216,4 +218,69 @@ zcm::mat4 zcm::perspectiveLH_NO(float fovy, float aspect, float zNear, float zFa
     Result[2][3] = 1.0f;
     Result[3][2] = - (2.0f * zFar * zNear) / (zFar - zNear);
     return Result;
+}
+
+void zcm::decompose_orthogonal(const zcm::mat4& model_mat,
+                               zcm::vec3& scale,
+                               zcm::quat& orientation,
+                               zcm::vec3& translation) noexcept
+{
+	translation = zcm::vec3(model_mat[3].x, model_mat[3].y, model_mat[3].z);
+
+	zcm::vec3 Row[3];
+
+	// Now get scale and shear.
+	for(int i = 0; i < 3; ++i)
+		for(int j = 0; j < 3; ++j)
+			Row[i][j] = model_mat[i][j];
+
+	// Compute X scale factor and normalize first row.
+	scale.x = zcm::length(Row[0]);
+	Row[0] /= scale.x;
+
+	// Now, compute Y scale and normalize 2nd row.
+	scale.y = zcm::length(Row[1]);
+	Row[1] /= scale.y;
+
+	// Next, get Z scale and normalize 3rd row.
+	scale.z = zcm::length(Row[2]);
+	Row[2] /= scale.z;
+
+	// At this point, the matrix (in rows[]) is orthonormal.
+	// Check for a coordinate system flip.  If the determinant
+	// is -1, then negate the matrix and the scaling factors.
+	if(zcm::dot(Row[0], zcm::cross(Row[1], Row[2])) < 0) {
+		for(int i = 0; i < 3; i++) {
+			scale[i] *= -1.f;
+			Row[i] *= -1.f;
+		}
+	}
+
+	// Now, get the rotations out, as described in the gem.
+
+	int i, j, k = 0;
+	float root, trace = Row[0].x + Row[1].y + Row[2].z;
+	if(trace > 0.f) {
+		root = zcm::sqrt(trace + 1.0f);
+		orientation.w = 0.5f * root;
+		root = 0.5f / root;
+		orientation.x = root * (Row[1].z - Row[2].y);
+		orientation.y = root * (Row[2].x - Row[0].z);
+		orientation.z = root * (Row[0].y - Row[1].x);
+	} else {
+		static int Next[3] = {1, 2, 0};
+		i = 0;
+		if(Row[1].y > Row[0].x) i = 1;
+		if(Row[2].z > Row[i][i]) i = 2;
+		j = Next[i];
+		k = Next[j];
+
+		root = zcm::sqrt(Row[i][i] - Row[j][j] - Row[k][k] + 1.0f);
+
+		orientation[i] = 0.5f * root;
+		root = 0.5f / root;
+		orientation[j] = root * (Row[i][j] + Row[j][i]);
+		orientation[k] = root * (Row[i][k] + Row[k][i]);
+		orientation.w = root * (Row[j][k] - Row[k][j]);
+	}
 }

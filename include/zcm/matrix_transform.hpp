@@ -4,6 +4,7 @@ namespace zcm
 {
     struct vec3;
     struct mat4;
+    struct quat;
 
     mat4  lookAtLH (const vec3& eye, const vec3& center, const vec3& up) noexcept;
     mat4  lookAtRH (const vec3& eye, const vec3& center, const vec3& up) noexcept;
@@ -25,5 +26,8 @@ namespace zcm
     mat4  rotate (const mat4& m, float angle, const vec3& axis) noexcept;
     mat4  scale (const mat4& m, const vec3& v) noexcept;
     mat4  translate (const mat4& m, const vec3& v) noexcept;
+
+    /// Decompose rigid transform matrix into translate, rotate and scale.
+    void decompose_orthogonal(const zcm::mat4& mat, zcm::vec3& scale, zcm::quat& orientation, zcm::vec3& translate) noexcept;
 
 }
