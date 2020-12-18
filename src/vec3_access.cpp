@@ -7,101 +7,7 @@
 namespace zcm {
 namespace detail {
 
-template<typename T, int index>
-void scalar_accessor_3<T, index>::operator +=(T s) noexcept
-{
-	_data[index] += s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3<T, index>::operator -=(T s) noexcept
-{
-	_data[index] -= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3<T, index>::operator *=(T s) noexcept
-{
-	_data[index] *= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3<T, index>::operator /=(T s) noexcept
-{
-	_data[index] /= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3<T, index>::operator =(T s) noexcept
-{
-	_data[index] = s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator %=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] %= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator |=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] |= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator &=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] &= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator ^=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] ^= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator<<=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] <<= s;
-}
-
-template<typename T, int index>
-void scalar_accessor_3i<T, index>::operator>>=(T s) noexcept
-{
-    scalar_accessor_3<T,index>::_data[index] >>= s;
-}
-
-template<typename T, int index>
-T &scalar_accessor_3<T, index>::operator++() noexcept
-{
-    return ++_data[index];
-}
-
-template<typename T, int index>
-T scalar_accessor_3<T, index>::operator++(int) noexcept
-{
-    return _data[index]++;
-}
-
-template<typename T, int index>
-T &scalar_accessor_3<T, index>::operator--() noexcept
-{
-    return --_data[index];
-}
-
-template<typename T, int index>
-T scalar_accessor_3<T, index>::operator--(int) noexcept
-{
-    return _data[index]--;
-}
-
-template<typename T, int index>
-scalar_accessor_3<T, index>::operator T() const noexcept
-{
-	return _data[index];
-}
+#ifndef ZCM_RELEASE_BUILD
 
 #define ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR(T, x) \
     template scalar_accessor_3<T, x>::operator T() const noexcept; \
@@ -142,12 +48,6 @@ ZCM_VEC3_TEMPLATE_SCALAR_ACCESSOR_INT(uint32_t, 2)
 
 
 #ifndef ZCM_DISABLE_SWIZZLE
-
-template<typename T, typename V, int... indices>
-shuffle_accessor_3<T, V, indices...>::operator V() const noexcept
-{
-	return V{_data[indices]...};
-}
 
 #define ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_2(T, V, x, y) \
     template shuffle_accessor_3<T, V, x, y>::operator V() const noexcept;
@@ -234,5 +134,6 @@ ZCM_VEC3_TEMPLATE_SHUFFLE_ACCESSOR_3(int32_t, ivec3, 2, 2, 2)
 
 #endif // ZCM_DISABLE_SWIZZLE
 
+#endif // ZCM_RELEASE_BUILD
 }
 }

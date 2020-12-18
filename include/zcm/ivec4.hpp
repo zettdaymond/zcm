@@ -1,7 +1,6 @@
 #pragma once
 #include <stdint.h>
 #include <zcm/detail/vec4_access.hpp>
-#include <zcm/detail/vec4_access_int.hpp>
 #include <zcm/init.hpp>
 #include <zcm/bvec4.hpp>
 

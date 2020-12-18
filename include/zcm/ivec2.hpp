@@ -2,7 +2,6 @@
 
 #include <stdint.h>
 #include <zcm/detail/vec2_access.hpp>
-#include <zcm/detail/vec2_access_int.hpp>
 #include <zcm/init.hpp>
 #include <zcm/bvec2.hpp>
 

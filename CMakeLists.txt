@@ -71,7 +71,11 @@ set_target_properties(zcm
 #-------------------
 
 if(NOT ZCM_ENABLE_SWIZZLE)
-	target_compile_definitions(zcm PUBLIC ZCM_DISABLE_SWIZZLE)
+    target_compile_definitions(zcm PUBLIC ZCM_DISABLE_SWIZZLE)
+endif()
+
+if (NOT ${CMAKE_BUILD_TYPE} MATCHES Debug)
+    target_compile_definitions(zcm PUBLIC ZCM_RELEASE_BUILD)
 endif()
 
 if(ZCM_ENABLE_TESTS)
