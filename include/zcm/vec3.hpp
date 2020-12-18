@@ -86,6 +86,8 @@ namespace zcm
         };
     };
 
+    zcm::vec3 make_vec3(const float* ptr) noexcept;
+
     bool operator==(const vec3& first, const vec3& second) noexcept;
     bool operator!=(const vec3& first, const vec3& second) noexcept;
 

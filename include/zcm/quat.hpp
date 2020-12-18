@@ -40,6 +40,8 @@ namespace zcm
         float w;
     };
 
+    zcm::quat make_quat(const float * ptr) noexcept;
+
     bool operator==(const quat& first, const quat& second) noexcept;
     bool operator!=(const quat& first, const quat& second) noexcept;
 

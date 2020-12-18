@@ -138,4 +138,12 @@ TEST(ivec2, shuffle)
 }
 #endif
 
+TEST(ivec2, make) {
+    int d[] = {0, 1};
+    auto result = zcm::make_ivec2(d);
+
+    ASSERT_EQ(result[0], d[0]);
+    ASSERT_EQ(result[1], d[1]);
+}
+
 ////TODO: test - faceforward, reflect, refract

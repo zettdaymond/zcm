@@ -224,3 +224,13 @@ bool zcm::operator !=(const zcm::mat3 &first, const zcm::mat3 &second) noexcept
 {
     return !(first == second);
 }
+
+zcm::mat3 zcm::make_mat3(const float * ptr) noexcept
+{
+    assert(ptr);
+    return zcm::mat3{
+        ptr[0], ptr[1], ptr[2],
+        ptr[3], ptr[4], ptr[5],
+        ptr[6], ptr[7], ptr[8]
+    };
+}

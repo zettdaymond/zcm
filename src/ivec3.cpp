@@ -43,6 +43,12 @@ zcm::ivec3::ivec3(int32_t _x, zcm::ivec2 yz) noexcept
     _data[2] = yz._data[1];
 }
 
+zcm::ivec3 zcm::make_ivec3(const int32_t* ptr) noexcept
+{
+    assert(ptr);
+    return zcm::ivec3{ptr[0], ptr[1], ptr[2]};
+}
+
 
 namespace zcm {
 ZCM_IMPL_V3_BINOP(int32_t, zcm::ivec3, +)

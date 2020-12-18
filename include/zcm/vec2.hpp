@@ -48,6 +48,8 @@ namespace zcm
         };
     };
 
+    zcm::vec2 make_vec2(const float* ptr) noexcept;
+
     bool operator==(vec2 first, vec2 second) noexcept;
     bool operator!=(vec2 first, vec2 second) noexcept;
 

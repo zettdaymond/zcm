@@ -80,6 +80,16 @@ zcm::quat::quat(zcm::vec3 eulerAngles) noexcept
 	this->z = c.x * c.y * s.z - s.x * s.y * c.z;
 }
 
+zcm::quat zcm::make_quat(const float * ptr) noexcept {
+    assert(ptr);
+    zcm::quat res;
+    res.x = ptr[0];
+    res.y = ptr[1];
+    res.z = ptr[2];
+    res.w = ptr[3];
+    return res;
+}
+
 float& zcm::quat::operator[](unsigned val) noexcept
 {
     assert(val < 4);

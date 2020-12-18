@@ -170,4 +170,13 @@ TEST(ivec3, shuffle)
 }
 #endif
 
+TEST(ivec3, make) {
+    int d[] = {0, 1, -1};
+    auto result = zcm::make_ivec3(d);
+
+    ASSERT_EQ(result[0], d[0]);
+    ASSERT_EQ(result[1], d[1]);
+    ASSERT_EQ(result[2], d[2]);
+}
+
 //TODO: test - faceforward, reflect, refract

@@ -396,6 +396,8 @@ namespace zcm
         };
     };
 
+    zcm::vec4 make_vec4(const float * ptr) noexcept;
+
     bool operator==(const vec4& first, const vec4& second) noexcept;
     bool operator!=(const vec4& first, const vec4& second) noexcept;
 

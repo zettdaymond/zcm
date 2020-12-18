@@ -102,6 +102,8 @@ namespace zcm
         };
     };
 
+    zcm::ivec3 make_ivec3(const int32_t* ptr) noexcept;
+
     bool operator==(ivec3 first, ivec3 second) noexcept;
     bool operator!=(ivec3 first, ivec3 second) noexcept;
     // to allow sorting and storing in maps.

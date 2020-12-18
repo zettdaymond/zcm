@@ -79,6 +79,12 @@ zcm::ivec4::ivec4(int32_t _x, int32_t _y, ivec2 zw) noexcept
     _data[3] = zw._data[1];
 }
 
+zcm::ivec4 zcm::make_ivec4(const int32_t* ptr) noexcept
+{
+    assert(ptr);
+    return zcm::ivec4{ptr[0], ptr[1], ptr[2], ptr[3]};
+}
+
 namespace zcm {
 ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, +)
 ZCM_IMPL_V4_BINOP(int32_t, zcm::ivec4, -)

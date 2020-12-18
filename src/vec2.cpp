@@ -29,6 +29,12 @@ zcm::vec2::vec2(float _x, float _y) noexcept
     _data[1] = _y;
 }
 
+zcm::vec2 zcm::make_vec2(const float * ptr) noexcept
+{
+    assert(ptr);
+    return zcm::vec2{ptr[0], ptr[1]};
+}
+
 namespace zcm {
 ZCM_IMPL_V2_BINOP(float, zcm::vec2, +)
 ZCM_IMPL_V2_BINOP(float, zcm::vec2, -)

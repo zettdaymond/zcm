@@ -38,6 +38,12 @@ zcm::ivec2 zcm::operator -(zcm::ivec2 first) noexcept
              -first._data[1] };
 }
 
+zcm::ivec2 zcm::make_ivec2(const int32_t* ptr) noexcept
+{
+    assert(ptr);
+    return zcm::ivec2{ptr[0], ptr[1]};
+}
+
 namespace zcm {
 ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, +)
 ZCM_IMPL_V2_BINOP(int32_t, zcm::ivec2, -)

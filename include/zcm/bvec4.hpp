@@ -35,6 +35,8 @@ namespace zcm
         bool w;
     };
 
+    zcm::bvec4 make_bvec4(const bool* ptr) noexcept;
+
     bool  operator == (bvec4 first, bvec4 second) noexcept;
     bool  operator != (bvec4 first, bvec4 second) noexcept;
 

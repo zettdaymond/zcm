@@ -33,6 +33,8 @@ namespace zcm
         vec4 _columns[4];
     };
 
+    zcm::mat4 make_mat4(const float* ptr) noexcept;
+
     mat4  operator - (const mat4& first) noexcept;
     mat4  operator + (const mat4& first) noexcept;
 

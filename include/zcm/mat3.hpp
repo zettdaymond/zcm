@@ -31,6 +31,8 @@ namespace zcm
         vec3 _columns[3];
     };
 
+    zcm::mat3 make_mat3(const float* ptr) noexcept;
+
     mat3  operator - (const mat3& first) noexcept;
     mat3  operator + (const mat3& first) noexcept;
 

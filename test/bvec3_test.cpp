@@ -166,3 +166,12 @@ TEST(bvec3, vector_compare_neq)
 
     ASSERT_EQ(result,  false);
 }
+
+TEST(bvec3, make) {
+    bool d[] = {true, false, true};
+    auto result = zcm::make_bvec3(d);
+
+    ASSERT_EQ(result[0], d[0]);
+    ASSERT_EQ(result[1], d[1]);
+    ASSERT_EQ(result[2], d[2]);
+}

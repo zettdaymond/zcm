@@ -241,3 +241,9 @@ bool zcm::bvec4::operator[](unsigned val) const noexcept
         return w;
     }
 }
+
+zcm::bvec4 zcm::make_bvec4(const bool* ptr) noexcept
+{
+    assert(ptr);
+    return zcm::bvec4{ptr[0], ptr[1], ptr[2], ptr[3]};
+}

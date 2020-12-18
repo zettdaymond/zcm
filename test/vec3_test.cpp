@@ -214,4 +214,13 @@ TEST(vec3, shuffle)
 }
 #endif
 
+TEST(vec3, make) {
+    float d[] = {0.0f, 1.0f, -1.0f};
+    auto result = zcm::make_vec3(d);
+
+    ASSERT_EQ(result[0], d[0]);
+    ASSERT_EQ(result[1], d[1]);
+    ASSERT_EQ(result[2], d[2]);
+}
+
 //TODO: test - faceforward, reflect, refract

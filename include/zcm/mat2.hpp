@@ -26,6 +26,7 @@ namespace zcm
         vec2 _columns[2];
     };
 
+    zcm::mat2 make_mat2(const float* ptr) noexcept;
 
     mat2  operator - (const mat2& first) noexcept;
     mat2  operator + (const mat2& first) noexcept;

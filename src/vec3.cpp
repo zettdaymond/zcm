@@ -46,6 +46,12 @@ zcm::vec3::vec3(float _x, zcm::vec2 yz) noexcept
     _data[2] = yz._data[1];
 }
 
+zcm::vec3 zcm::make_vec3(const float * ptr) noexcept
+{
+    assert(ptr);
+    return zcm::vec3{ptr[0], ptr[1], ptr[2]};
+}
+
 namespace zcm {
 ZCM_IMPL_V3_BINOP(float, zcm::vec3, +)
 ZCM_IMPL_V3_BINOP(float, zcm::vec3, -)
