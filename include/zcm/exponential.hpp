@@ -48,4 +48,11 @@ namespace zcm
     vec3  sqrt (const vec3& x) noexcept;
     vec4  sqrt (const vec4& x) noexcept;
     quat  sqrt (const quat& x) noexcept;
+
+    float cbrt(float x) noexcept;
+    vec2  cbrt(vec2 x) noexcept;
+    vec3  cbrt(vec3 x) noexcept;
+    vec4  cbrt(vec4 x) noexcept;
+    quat  cbrt(quat x) noexcept;
+
 }
