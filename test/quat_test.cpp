@@ -3,6 +3,7 @@
 #include <zcm/geometric.hpp>
 #include <zcm/common.hpp>
 #include <zcm/bvec4.hpp>
+#include <zcm/exponential.hpp>
 #include <cmath>
 
 using namespace zcm;
@@ -196,5 +197,53 @@ TEST(quat, make) {
     ASSERT_EQ(result[1], d[1]);
     ASSERT_EQ(result[2], d[2]);
     ASSERT_EQ(result[3], d[3]);
+}
+
+TEST(quat, sqrt) {
+    float s[] = { zcm::sqrt(2.0f), zcm::sqrt(3.0f), zcm::sqrt(4.0f), zcm::sqrt(5.0f) };
+    auto result = zcm::sqrt(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, cbrt) {
+    float s[] = { zcm::cbrt(2.0f), zcm::cbrt(3.0f), zcm::cbrt(4.0f), zcm::cbrt(5.0f) };
+    auto result = zcm::cbrt(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, pow) {
+    float s[] = { zcm::pow(2.0f, 1.5f), zcm::pow(3.0f, 1.5f), zcm::pow(4.0f, 1.5f), zcm::pow(5.0f, 1.5f) };
+    auto result = zcm::pow(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f), 1.5f);
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, exp) {
+    float s[] = { zcm::exp(2.0f), zcm::exp(3.0f), zcm::exp(4.0f), zcm::exp(5.0f) };
+    auto result = zcm::exp(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, log) {
+    float s[] = { zcm::log(2.0f), zcm::log(3.0f), zcm::log(4.0f), zcm::log(5.0f) };
+    auto result = zcm::log(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, log2) {
+    float s[] = { zcm::log2(2.0f), zcm::log2(3.0f), zcm::log2(4.0f), zcm::log2(5.0f) };
+    auto result = zcm::log2(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, exp2) {
+    float s[] = { zcm::exp2(2.0f), zcm::exp2(3.0f), zcm::exp2(4.0f), zcm::exp2(5.0f) };
+    auto result = zcm::exp2(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
+}
+
+TEST(quat, inversesqrt) {
+    float s[] = { zcm::inversesqrt(2.0f), zcm::inversesqrt(3.0f), zcm::inversesqrt(4.0f), zcm::inversesqrt(5.0f) };
+    auto result = zcm::inversesqrt(zcm::quat::wxyz(5.0f, 2.0f, 3.0f, 4.0f));
+    ASSERT_EQ(result, make_quat(s));
 }
 

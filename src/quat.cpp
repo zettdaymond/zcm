@@ -44,6 +44,11 @@ zcm::quat::quat(zcm::vec3 v, float s) noexcept :
     w(s)
 {}
 
+zcm::quat zcm::quat::wxyz(float w, float x, float y, float z) noexcept
+{
+    return quat{w, x, y, z};
+}
+
 zcm::quat::quat(zcm::vec3 u, zcm::vec3 v) noexcept
 {
     float norm_u_norm_v = sqrt(dot(u, u) * dot(v, v));
@@ -65,7 +70,7 @@ zcm::quat::quat(zcm::vec3 u, zcm::vec3 v) noexcept
         w = cross(u, v);
     }
 
-    auto res = normalize(quat(real_part, w.x, w.y, w.z));
+    auto res = normalize(quat::wxyz(real_part, w.x, w.y, w.z));
     *this = res;
 }
 

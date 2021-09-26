@@ -12,9 +12,13 @@ namespace zcm
     {
         quat() noexcept;
         explicit quat(no_init_t) noexcept;
+
+        // avoid this contructor, use wxyz() instead.
         quat(float w, float x, float y, float z) noexcept;
         quat(float s, vec3 v) noexcept;
         quat(vec3 v, float s) noexcept;
+
+        static quat wxyz(float w, float x, float y, float z) noexcept;
 
         /// Build a unit quaternion representing the rotation from u to v.
         /// @see http://lolengine.net/blog/2013/09/18/beautiful-maths-quaternion-from-vectors

@@ -63,7 +63,7 @@ add_library(zcm::zcm ALIAS zcm)
 target_include_directories(zcm PUBLIC include)
 set_target_properties(zcm
     PROPERTIES
-        CXX_STANDARD 11
+        CXX_STANDARD 14
         CXX_STANDARD_REQUIRED ON
         CXX_EXTENSIONS OFF
 )

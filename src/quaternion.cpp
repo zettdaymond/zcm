@@ -100,13 +100,13 @@ zcm::quat zcm::quat_cast(const zcm::mat3 &m) noexcept
     switch(biggestIndex)
     {
     case 0:
-        return quat(biggestVal, (m[1][2] - m[2][1]) * mult, (m[2][0] - m[0][2]) * mult, (m[0][1] - m[1][0]) * mult);
+        return quat::wxyz(biggestVal, (m[1][2] - m[2][1]) * mult, (m[2][0] - m[0][2]) * mult, (m[0][1] - m[1][0]) * mult);
     case 1:
-        return quat((m[1][2] - m[2][1]) * mult, biggestVal, (m[0][1] + m[1][0]) * mult, (m[2][0] + m[0][2]) * mult);
+        return quat::wxyz((m[1][2] - m[2][1]) * mult, biggestVal, (m[0][1] + m[1][0]) * mult, (m[2][0] + m[0][2]) * mult);
     case 2:
-        return quat((m[2][0] - m[0][2]) * mult, (m[0][1] + m[1][0]) * mult, biggestVal, (m[1][2] + m[2][1]) * mult);
+        return quat::wxyz((m[2][0] - m[0][2]) * mult, (m[0][1] + m[1][0]) * mult, biggestVal, (m[1][2] + m[2][1]) * mult);
     case 3:
-        return quat((m[0][1] - m[1][0]) * mult, (m[2][0] + m[0][2]) * mult, (m[1][2] + m[2][1]) * mult, biggestVal);
+        return quat::wxyz((m[0][1] - m[1][0]) * mult, (m[2][0] + m[0][2]) * mult, (m[1][2] + m[2][1]) * mult, biggestVal);
     }
     return quat();
 }
@@ -173,24 +173,19 @@ zcm::quat zcm::slerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
 
     // If cosTheta < 0, the interpolation will take the long way around the sphere.
     // To fix this, one quat must be negated.
-    if(cosTheta < 0.f)
-    {
+    if(cosTheta < 0.f) {
         z = -y;
         cosTheta = -cosTheta;
     }
 
     // Perform a linear interpolation when cosTheta is close to 1 to avoid side effect of sin(angle) becoming a zero denominator
-    if(cosTheta > 1.0f - std::numeric_limits<float>::epsilon())
-    {
+    if(cosTheta > 1.0f - std::numeric_limits<float>::epsilon()) {
         // Linear interpolation
-        return quat(
-                    mix(x.w, z.w, t),
-                    mix(x.x, z.x, t),
-                    mix(x.y, z.y, t),
-                    mix(x.z, z.z, t));
-    }
-    else
-    {
+        return quat::wxyz(mix(x.w, z.w, t),
+                          mix(x.x, z.x, t),
+                          mix(x.y, z.y, t),
+                          mix(x.z, z.z, t));
+    } else {
         // Essential Mathematics, page 467
         auto angle = acos(cosTheta);
         return (sin((1.0f - t) * angle) * x + sin(t * angle) * z) / sin(angle);
