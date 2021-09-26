@@ -8,8 +8,8 @@
 
 using namespace zcm;
 
-const auto first = vec4(2.0, 4.33, -5.56, 6.121);
-const auto second = vec4(-4.33, 5.4325, -1.0005, -2.3465);
+const auto first = vec4(2.0f, 4.33f, -5.56f, 6.121f);
+const auto second = vec4(-4.33f, 5.4325f, -1.0005f, -2.3465f);
 const auto scalar = 5.0f;
 
 TEST(vec4, element_access)
@@ -47,7 +47,7 @@ TEST(vec4, vector_scalar_devision)
     ASSERT_FLOAT_EQ(result.x,  0.4f);
     ASSERT_FLOAT_EQ(result.y,  0.866f);
     ASSERT_FLOAT_EQ(result.z, -1.112f);
-    ASSERT_FLOAT_EQ(result.w,  1.2242);
+    ASSERT_FLOAT_EQ(result.w,  1.2242f);
 }
 
 TEST(vec4, scalar_vector_devision)
@@ -56,8 +56,8 @@ TEST(vec4, scalar_vector_devision)
 
     ASSERT_FLOAT_EQ(result.x,  2.5f);
     ASSERT_FLOAT_EQ(result.y,  1.154734411f);
-    ASSERT_FLOAT_EQ(result.z,  -0.89928057);
-    ASSERT_FLOAT_EQ(result.w,  0.816859990);
+    ASSERT_FLOAT_EQ(result.z,  -0.89928057f);
+    ASSERT_FLOAT_EQ(result.w,  0.816859990f);
 }
 
 TEST(vec4, scalar_addition)
@@ -115,9 +115,9 @@ TEST(vec4, vector_per_component_multiplication)
     auto result = first * second;
 
     ASSERT_FLOAT_EQ(result.x, -8.66f);
-    ASSERT_FLOAT_EQ(result.y,  23.522725);
-    ASSERT_FLOAT_EQ(result.z,  5.56278);
-    ASSERT_FLOAT_EQ(result.w,  -14.3629265);
+    ASSERT_FLOAT_EQ(result.y,  23.522725f);
+    ASSERT_FLOAT_EQ(result.z,  5.56278f);
+    ASSERT_FLOAT_EQ(result.w,  -14.3629265f);
 }
 
 TEST(vec4, vector_access)
@@ -139,10 +139,10 @@ TEST(vec4, vector_const_access)
 {
     const auto result = first;
 
-    ASSERT_FLOAT_EQ(result[0],  2.0);
-    ASSERT_FLOAT_EQ(result[1],  4.33);
-    ASSERT_FLOAT_EQ(result[2],  -5.56);
-    ASSERT_FLOAT_EQ(result[3],  6.121);
+    ASSERT_FLOAT_EQ(result[0],  2.0f);
+    ASSERT_FLOAT_EQ(result[1],  4.33f);
+    ASSERT_FLOAT_EQ(result[2],  -5.56f);
+    ASSERT_FLOAT_EQ(result[3],  6.121f);
 }
 
 //

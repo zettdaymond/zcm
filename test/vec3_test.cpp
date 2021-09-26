@@ -6,8 +6,8 @@
 
 using namespace zcm;
 
-const auto first = vec3(2.0f, 4.33, -5.56);
-const auto second = vec3(-4.33, 5.4325, -1.0005);
+const auto first = vec3(2.0f, 4.33f, -5.56f);
+const auto second = vec3(-4.33f, 5.4325f, -1.0005f);
 const auto scalar = 5.0f;
 
 TEST(vec3, element_access)
@@ -50,7 +50,7 @@ TEST(vec3, scalar_vector_devision)
 
     ASSERT_FLOAT_EQ(result.x,  2.5f);
     ASSERT_FLOAT_EQ(result.y,  1.154734411f);
-    ASSERT_FLOAT_EQ(result.z,  -0.89928057);
+    ASSERT_FLOAT_EQ(result.z,  -0.89928057f);
 }
 
 TEST(vec3, scalar_addition)
@@ -103,8 +103,8 @@ TEST(vec3, vector_per_component_multiplication)
     auto result = first * second;
 
     ASSERT_FLOAT_EQ(result.x, -8.66f);
-    ASSERT_FLOAT_EQ(result.y,  23.522725);
-    ASSERT_FLOAT_EQ(result.z,  5.56278);
+    ASSERT_FLOAT_EQ(result.y,  23.522725f);
+    ASSERT_FLOAT_EQ(result.z,  5.56278f);
 }
 
 TEST(vec3, vector_access)
@@ -124,9 +124,9 @@ TEST(vec3, vector_const_access)
 {
     const auto result = first;
 
-    ASSERT_FLOAT_EQ(result[0],  2.0);
-    ASSERT_FLOAT_EQ(result[1],  4.33);
-    ASSERT_FLOAT_EQ(result[2],  -5.56);
+    ASSERT_FLOAT_EQ(result[0],  2.0f);
+    ASSERT_FLOAT_EQ(result[1],  4.33f);
+    ASSERT_FLOAT_EQ(result[2],  -5.56f);
 }
 
 //
@@ -144,9 +144,9 @@ TEST(vec3, vector_cross)
 {
     auto result = cross(first,second);
 
-    ASSERT_FLOAT_EQ(result.x,  25.872535);
-    ASSERT_FLOAT_EQ(result.y,  26.0758);
-    ASSERT_FLOAT_EQ(result.z,  29.6139);
+    ASSERT_FLOAT_EQ(result.x,  25.872535f);
+    ASSERT_FLOAT_EQ(result.y,  26.0758f);
+    ASSERT_FLOAT_EQ(result.z,  29.6139f);
 }
 
 TEST(vec3, vector_distance)
@@ -160,7 +160,7 @@ TEST(vec3, vector_lenght)
 {
     auto result = length(first);
 
-    ASSERT_FLOAT_EQ(result,  7.32547);
+    ASSERT_FLOAT_EQ(result,  7.32547f);
 }
 
 TEST(vec3, vector_normalize)

@@ -53,7 +53,7 @@ zcm::quat::quat(zcm::vec3 u, zcm::vec3 v) noexcept
 {
     float norm_u_norm_v = sqrt(dot(u, u) * dot(v, v));
     float real_part = norm_u_norm_v + dot(u, v);
-    vec3 w;
+    vec3 w_;
 
     if (real_part < 1.e-6f * norm_u_norm_v)
     {
@@ -61,16 +61,16 @@ zcm::quat::quat(zcm::vec3 u, zcm::vec3 v) noexcept
          * around an arbitrary orthogonal axis. Axis normalisation
          * can happen later, when we normalise the quaternion. */
         real_part = 0.0f;
-        w = zcm::abs(u.x) > zcm::abs(u.z) ? vec3(-u.y, u.x, 0.f)
+        w_ = zcm::abs(u.x) > zcm::abs(u.z) ? vec3(-u.y, u.x, 0.f)
                                 : vec3(0.f, -u.z, u.y);
     }
     else
     {
         /* Otherwise, build quaternion the standard way. */
-        w = cross(u, v);
+        w_ = cross(u, v);
     }
 
-    auto res = normalize(quat::wxyz(real_part, w.x, w.y, w.z));
+    auto res = normalize(quat::wxyz(real_part, w_.x, w_.y, w_.z));
     *this = res;
 }
 

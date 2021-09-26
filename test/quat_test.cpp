@@ -47,7 +47,7 @@ TEST(quat, quat_scalar_devision)
     ASSERT_FLOAT_EQ(result.x,  0.4f);
     ASSERT_FLOAT_EQ(result.y,  0.866f);
     ASSERT_FLOAT_EQ(result.z, -1.112f);
-    ASSERT_FLOAT_EQ(result.w,  1.2242);
+    ASSERT_FLOAT_EQ(result.w,  1.2242f);
 }
 
 TEST(quat, scalar_quat_devision)
@@ -56,8 +56,8 @@ TEST(quat, scalar_quat_devision)
 
     ASSERT_FLOAT_EQ(result.x,  2.5f);
     ASSERT_FLOAT_EQ(result.y,  1.154734411f);
-    ASSERT_FLOAT_EQ(result.z,  -0.89928057);
-    ASSERT_FLOAT_EQ(result.w,  0.816859990);
+    ASSERT_FLOAT_EQ(result.z,  -0.89928057f);
+    ASSERT_FLOAT_EQ(result.w,  0.816859990f);
 }
 
 TEST(quat, quat_addition)
@@ -119,10 +119,10 @@ TEST(quat, const_access)
 {
     const auto result = first;
 
-    ASSERT_FLOAT_EQ(result[0],  2.0);
-    ASSERT_FLOAT_EQ(result[1],  4.33);
-    ASSERT_FLOAT_EQ(result[2],  -5.56);
-    ASSERT_FLOAT_EQ(result[3],  6.121);
+    ASSERT_FLOAT_EQ(result[0],  2.0f);
+    ASSERT_FLOAT_EQ(result[1],  4.33f);
+    ASSERT_FLOAT_EQ(result[2],  -5.56f);
+    ASSERT_FLOAT_EQ(result[3],  6.121f);
 }
 
 TEST(quat, dot)
