@@ -8,7 +8,7 @@ namespace zcm
     struct vec3;
     struct vec4;
 
-    struct quat
+    struct alignas(16) quat
     {
         quat() noexcept;
         explicit quat(no_init_t) noexcept;

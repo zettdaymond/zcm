@@ -9,7 +9,6 @@ endif()
 option(ZCM_ENABLE_TESTS "Build tests" ON)
 option(ZCM_ENABLE_COVERAGE_IN_DEBUG "Build code coverage report" ON)
 option(ZCM_GENERATE_BENCHMARK "Generate benchmark code" OFF)
-option(ZCM_ENABLE_SWIZZLE "Enable GLSL-style swizzling support" ON)
 
 
 # CHeck that we may enable code coverage
@@ -69,10 +68,6 @@ set_target_properties(zcm
 )
 
 #-------------------
-
-if(NOT ZCM_ENABLE_SWIZZLE)
-    target_compile_definitions(zcm PUBLIC ZCM_DISABLE_SWIZZLE)
-endif()
 
 if (NOT ${CMAKE_BUILD_TYPE} MATCHES Debug)
     target_compile_definitions(zcm PUBLIC ZCM_RELEASE_BUILD)

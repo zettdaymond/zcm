@@ -9,14 +9,14 @@
 #include <zcm/mat4.hpp>
 #include <zcm/quat.hpp>
 
-zcm::vec3 zcm::eulerAngles(const zcm::quat &x) noexcept
+zcm::vec3 zcm_vectorcall zcm::eulerAngles(zcm::quat x) noexcept
 {
     return { pitch(x),
              yaw(x),
              roll(x) };
 }
 
-float zcm::pitch(const zcm::quat &q) noexcept
+float zcm_vectorcall zcm::pitch(zcm::quat q) noexcept
 {
     const float y = 2.0f * (q.y * q.z + q.w * q.x);
     const float x = q.w * q.w - q.x * q.x - q.y * q.y + q.z * q.z;
@@ -27,17 +27,17 @@ float zcm::pitch(const zcm::quat &q) noexcept
     return atan(y, x);
 }
 
-float zcm::yaw(const zcm::quat &q) noexcept
+float zcm_vectorcall zcm::yaw(zcm::quat q) noexcept
 {
     return asin(clamp(-2.0f * (q.x * q.z - q.w * q.y), -1.0f, 1.0f));
 }
 
-float zcm::roll(const zcm::quat &q) noexcept
+float zcm_vectorcall zcm::roll(zcm::quat q) noexcept
 {
     return atan(2.0f * (q.x * q.y + q.w * q.z), q.w * q.w + q.x * q.x - q.y * q.y - q.z * q.z);
 }
 
-zcm::mat3 zcm::mat3_cast(const zcm::quat &q) noexcept
+zcm::mat3 zcm_vectorcall zcm::mat3_cast(zcm::quat q) noexcept
 {
     mat3 Result{no_init_t{}};
     auto qxx(q.x * q.x);
@@ -64,7 +64,7 @@ zcm::mat3 zcm::mat3_cast(const zcm::quat &q) noexcept
     return Result;
 }
 
-zcm::mat4 zcm::mat4_cast(const zcm::quat &q) noexcept
+zcm::mat4 zcm_vectorcall zcm::mat4_cast(zcm::quat q) noexcept
 {
     return mat4(mat3_cast(q));
 }
@@ -138,7 +138,7 @@ zcm::quat zcm::quatLookAtRH(const zcm::vec3 &direction, const zcm::vec3 &up) noe
     return quat_cast(Result);
 }
 
-zcm::quat zcm::conjugate(const zcm::quat &x) noexcept
+zcm::quat zcm_vectorcall zcm::conjugate(zcm::quat x) noexcept
 {
     return { +x.w,
              -x.x,
@@ -146,12 +146,12 @@ zcm::quat zcm::conjugate(const zcm::quat &x) noexcept
              -x.z };
 }
 
-zcm::quat zcm::inverse(const zcm::quat &x) noexcept
+zcm::quat zcm_vectorcall zcm::inverse(zcm::quat x) noexcept
 {
     return conjugate(x) / dot(x, x);
 }
 
-zcm::quat zcm::lerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
+zcm::quat zcm_vectorcall zcm::lerp(zcm::quat x, zcm::quat y, float t) noexcept
 {
     // Lerp is only defined in [0, 1]
     assert(t >= 0.0f);
@@ -160,12 +160,12 @@ zcm::quat zcm::lerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
     return x * (1.0f - t) + (y * t);
 }
 
-zcm::quat zcm::nlerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
+zcm::quat zcm_vectorcall zcm::nlerp(zcm::quat x, zcm::quat y, float t) noexcept
 {
     return normalize(lerp(x, y, t));
 }
 
-zcm::quat zcm::slerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
+zcm::quat zcm_vectorcall zcm::slerp(zcm::quat x, zcm::quat y, float t) noexcept
 {
     quat z = y;
 
@@ -192,7 +192,7 @@ zcm::quat zcm::slerp(const zcm::quat &x, const zcm::quat &y, float t) noexcept
     }
 }
 
-zcm::vec3 zcm::axis(const zcm::quat &q) noexcept
+zcm::vec3 zcm_vectorcall zcm::axis(zcm::quat q) noexcept
 {
     auto tmp1 = 1.0f - q.w * q.w;
     if(tmp1 <= 0.0f)
@@ -202,7 +202,7 @@ zcm::vec3 zcm::axis(const zcm::quat &q) noexcept
     return vec3(q.x * tmp2, q.y * tmp2, q.z * tmp2);
 }
 
-float zcm::angle(const zcm::quat &q) noexcept
+float zcm_vectorcall zcm::angle(zcm::quat q) noexcept
 {
     return acos(q.w) * 2.0f;
 }
@@ -213,7 +213,7 @@ zcm::quat zcm::angleAxis(float angle, zcm::vec3 axis) noexcept
     return quat(cos(angle * 0.5f), axis * s);
 }
 
-zcm::quat zcm::rotate(const zcm::quat &q, float angle, const zcm::vec3 &axis) noexcept
+zcm::quat zcm_vectorcall zcm::rotate(zcm::quat q, float angle, const zcm::vec3 &axis) noexcept
 {
     auto norm_axis = normalize(axis);
     auto rq = angleAxis(angle, norm_axis);

@@ -31,7 +31,7 @@ zcm::vec3 zcm::abs(const zcm::vec3& x) noexcept
     return { zcm::abs(x.x), zcm::abs(x.y), zcm::abs(x.z) };
 }
 
-zcm::vec4 zcm::abs(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::abs(zcm::vec4 x) noexcept
 {
     return { zcm::abs(x.x), zcm::abs(x.y), zcm::abs(x.z), zcm::abs(x.w) };
 }
@@ -75,7 +75,7 @@ zcm::vec3 zcm::ceil(const zcm::vec3& x) noexcept
     return { zcm::ceil(x.x), zcm::ceil(x.y), zcm::ceil(x.z) };
 }
 
-zcm::vec4 zcm::ceil(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::ceil(zcm::vec4 x) noexcept
 {
     return { zcm::ceil(x.x), zcm::ceil(x.y), zcm::ceil(x.z), zcm::ceil(x.w) };
 }
@@ -99,7 +99,7 @@ zcm::vec3 zcm::clamp(const zcm::vec3& x, const zcm::vec3& minVal, const zcm::vec
     return min(max(x, minVal), maxVal);
 }
 
-zcm::vec4 zcm::clamp(const zcm::vec4& x, const zcm::vec4& minVal, const zcm::vec4& maxVal) noexcept
+zcm::vec4 zcm_vectorcall zcm::clamp(zcm::vec4 x, zcm::vec4 minVal, zcm::vec4 maxVal) noexcept
 {
     return min(max(x, minVal), maxVal);
 }
@@ -143,7 +143,7 @@ zcm::vec3 zcm::floor(const zcm::vec3& x) noexcept
     return { zcm::floor(x.x), zcm::floor(x.y), zcm::floor(x.z) };
 }
 
-zcm::vec4 zcm::floor(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::floor(zcm::vec4 x) noexcept
 {
     return { zcm::floor(x.x), zcm::floor(x.y), zcm::floor(x.z), zcm::floor(x.w) };
 }
@@ -167,7 +167,7 @@ zcm::vec3 zcm::fma(const zcm::vec3 &a, const zcm::vec3 &b, const zcm::vec3 &c) n
     return {fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z)};
 }
 
-zcm::vec4 zcm::fma(const zcm::vec4 &a, const zcm::vec4 &b, const zcm::vec4 &c) noexcept
+zcm::vec4 zcm_vectorcall zcm::fma(zcm::vec4 a, zcm::vec4 b, zcm::vec4 c) noexcept
 {
     return {fma(a.x, b.x, c.x), fma(a.y, b.y, c.y), fma(a.z, b.z, c.z), fma(a.w, b.w, c.w)};
 }
@@ -191,7 +191,7 @@ zcm::vec3 zcm::fract(const zcm::vec3& x) noexcept
     return x - floor(x);
 }
 
-zcm::vec4 zcm::fract(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::fract(zcm::vec4 x) noexcept
 {
     return x - floor(x);
 }
@@ -215,7 +215,7 @@ zcm::vec3 zcm::max(const zcm::vec3& x, const zcm::vec3& y) noexcept
     return { zcm::max(x.x, y.x), zcm::max(x.y, y.y), zcm::max(x.z, y.z) };
 }
 
-zcm::vec4 zcm::max(const zcm::vec4& x, const zcm::vec4& y) noexcept
+zcm::vec4 zcm_vectorcall zcm::max(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { zcm::max(x.x, y.x), zcm::max(x.y, y.y), zcm::max(x.z, y.z), zcm::max(x.w, y.w) };
 }
@@ -259,7 +259,7 @@ zcm::vec3 zcm::min(const zcm::vec3& x, const zcm::vec3& y) noexcept
     return { zcm::min(x.x, y.x), zcm::min(x.y, y.y), zcm::min(x.z, y.z) };
 }
 
-zcm::vec4 zcm::min(const zcm::vec4& x, const zcm::vec4& y) noexcept
+zcm::vec4 zcm_vectorcall zcm::min(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { zcm::min(x.x, y.x), zcm::min(x.y, y.y), zcm::min(x.z, y.z), zcm::min(x.w, y.w) };
 }
@@ -303,7 +303,7 @@ zcm::vec3 zcm::mod(const zcm::vec3& x, const zcm::vec3& y) noexcept
     return { zcm::mod(x.x, y.x), zcm::mod(x.y, y.y), zcm::mod(x.z, y.z) };
 }
 
-zcm::vec4 zcm::mod(const zcm::vec4& x, const zcm::vec4& y) noexcept
+zcm::vec4 zcm_vectorcall zcm::mod(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { zcm::mod(x.x, y.x), zcm::mod(x.y, y.y), zcm::mod(x.z, y.z), zcm::mod(x.w, y.w) };
 }
@@ -318,7 +318,7 @@ zcm::vec3 zcm::mod(const zcm::vec3 &x, float y) noexcept
     return { zcm::mod(x.x, y), zcm::mod(x.y, y), zcm::mod(x.z, y) };
 }
 
-zcm::vec4 zcm::mod(const zcm::vec4 &x, float y) noexcept
+zcm::vec4 zcm_vectorcall zcm::mod(zcm::vec4 x, float y) noexcept
 {
     return { zcm::mod(x.x, y), zcm::mod(x.y, y), zcm::mod(x.z, y), zcm::mod(x.w, y) };
 }
@@ -342,7 +342,7 @@ zcm::vec3 zcm::round(const zcm::vec3& x) noexcept
     return { zcm::round(x.x), zcm::round(x.y), zcm::round(x.z)};
 }
 
-zcm::vec4 zcm::round(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::round(zcm::vec4 x) noexcept
 {
     return { zcm::round(x.x), zcm::round(x.y), zcm::round(x.z), zcm::round(x.w) };
 }
@@ -366,7 +366,7 @@ zcm::vec3 zcm::roundEven(const zcm::vec3& x) noexcept
     return { zcm::roundEven(x.x), zcm::roundEven(x.y), zcm::roundEven(x.z)};
 }
 
-zcm::vec4 zcm::roundEven(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::roundEven(zcm::vec4 x) noexcept
 {
     return { zcm::roundEven(x.x), zcm::roundEven(x.y), zcm::roundEven(x.z), zcm::roundEven(x.w) };
 }
@@ -396,7 +396,7 @@ zcm::vec3 zcm::sign(const zcm::vec3& x) noexcept
     return { zcm::sign(x.x), zcm::sign(x.y), zcm::sign(x.z)};
 }
 
-zcm::vec4 zcm::sign(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::sign(zcm::vec4 x) noexcept
 {
     return { zcm::sign(x.x), zcm::sign(x.y), zcm::sign(x.z), zcm::sign(x.w) };
 }
@@ -442,7 +442,7 @@ zcm::vec3 zcm::signNotZero(const zcm::vec3 &x) noexcept
     return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z) };
 }
 
-zcm::vec4 zcm::signNotZero(const zcm::vec4 &x) noexcept
+zcm::vec4 zcm_vectorcall zcm::signNotZero(zcm::vec4 x) noexcept
 {
     return { signNotZero(x.x), signNotZero(x.y), signNotZero(x.z), signNotZero(x.w) };
 }
@@ -487,7 +487,7 @@ zcm::vec3 zcm::trunc(const zcm::vec3& x) noexcept
     return { zcm::trunc(x.x), zcm::trunc(x.y), zcm::trunc(x.z)};
 }
 
-zcm::vec4 zcm::trunc(const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::trunc(zcm::vec4 x) noexcept
 {
     return { zcm::trunc(x.x), zcm::trunc(x.y), zcm::trunc(x.z), zcm::trunc(x.w) };
 }
@@ -515,7 +515,7 @@ zcm::vec3 zcm::smoothstep(const zcm::vec3& edge0, const zcm::vec3& edge1, const 
 }
 
 
-zcm::vec4 zcm::smoothstep(const zcm::vec4& edge0, const zcm::vec4& edge1, const zcm::vec4& x) noexcept
+zcm::vec4 zcm_vectorcall zcm::smoothstep(zcm::vec4 edge0, zcm::vec4 edge1, zcm::vec4 x) noexcept
 {
     vec4 const tmp(clamp((x - edge0) / (edge1 - edge0), 0.0f, 1.0f));
     return tmp * tmp * (3.f - 2.f * tmp);
@@ -540,7 +540,7 @@ zcm::vec3 zcm::step(const zcm::vec3 &edge, const zcm::vec3 & t) noexcept
     return { step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z) };
 }
 
-zcm::vec4 zcm::step(const zcm::vec4 &edge, const zcm::vec4 & t) noexcept
+zcm::vec4 zcm_vectorcall zcm::step(zcm::vec4 edge, zcm::vec4 t) noexcept
 {
     return { step(edge.x, t.x), step(edge.y, t.y), step(edge.z, t.z), step(edge.w, t.w) };
 }
@@ -567,7 +567,7 @@ zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, const zcm::vec3 &t) n
              mix(x.z, y.z, t.z) };
 }
 
-zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::vec4 &t) noexcept
+zcm::vec4 zcm_vectorcall zcm::mix(zcm::vec4 x, zcm::vec4 y, zcm::vec4 t) noexcept
 {
     return { mix(x.x, y.x, t.x),
              mix(x.y, y.y, t.y),
@@ -589,7 +589,7 @@ zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, float t) noexcept
              mix(x.z, y.z, t) };
 }
 
-zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, float t) noexcept
+zcm::vec4 zcm_vectorcall zcm::mix(zcm::vec4 x, zcm::vec4 y, float t) noexcept
 {
     return { mix(x.x, y.x, t),
              mix(x.y, y.y, t),
@@ -618,7 +618,7 @@ zcm::vec3 zcm::mix(const zcm::vec3 &x, const zcm::vec3 &y, const zcm::bvec3 &t) 
              mix(x.z, y.z, t.z) };
 }
 
-zcm::vec4 zcm::mix(const zcm::vec4 &x, const zcm::vec4 &y, const zcm::bvec4 &t) noexcept
+zcm::vec4 zcm_vectorcall zcm::mix(zcm::vec4 x, zcm::vec4 y, const zcm::bvec4 &t) noexcept
 {
     return { mix(x.x, y.x, t.x),
              mix(x.y, y.y, t.y),
@@ -645,7 +645,7 @@ zcm::bvec3 zcm::isinf(const zcm::vec3 &x) noexcept
     return { isinf(x.x), isinf(x.y), isinf(x.z) };
 }
 
-zcm::bvec4 zcm::isinf(const zcm::vec4 &x) noexcept
+zcm::bvec4 zcm_vectorcall zcm::isinf(zcm::vec4 x) noexcept
 {
     return { isinf(x.x), isinf(x.y), isinf(x.z), isinf(x.w) };
 }
@@ -674,7 +674,7 @@ zcm::bvec3 zcm::isnan(const zcm::vec3 &x) noexcept
     return { isnan(x.x), isnan(x.y), isnan(x.z) };
 }
 
-zcm::bvec4 zcm::isnan(const zcm::vec4 &x) noexcept
+zcm::bvec4 zcm_vectorcall zcm::isnan(zcm::vec4 x) noexcept
 {
     return { isnan(x.x), isnan(x.y), isnan(x.z), isnan(x.w) };
 }
@@ -698,7 +698,7 @@ zcm::bvec3 zcm::lessThan(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
     return { x.x < y.x, x.y < y.y, x.z < y.z };
 }
 
-zcm::bvec4 zcm::lessThan(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::lessThan(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x < y.x, x.y < y.y, x.z < y.z, x.w < y.w };
 }
@@ -717,7 +717,7 @@ zcm::bvec3 zcm::lessThanEqual(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
     return { x.x <= y.x, x.y <= y.y, x.z <= y.z };
 }
 
-zcm::bvec4 zcm::lessThanEqual(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::lessThanEqual(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x <= y.x, x.y <= y.y, x.z <= y.z, x.w <= y.w };
 }
@@ -736,7 +736,7 @@ zcm::bvec3 zcm::greaterThan(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
     return { x.x > y.x, x.y > y.y, x.z > y.z };
 }
 
-zcm::bvec4 zcm::greaterThan(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::greaterThan(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x > y.x, x.y > y.y, x.z > y.z, x.w > y.w };
 }
@@ -755,7 +755,7 @@ zcm::bvec3 zcm::greaterThanEqual(const zcm::vec3 &x, const zcm::vec3 &y) noexcep
     return { x.x >= y.x, x.y >= y.y, x.z >= y.z };
 }
 
-zcm::bvec4 zcm::greaterThanEqual(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::greaterThanEqual(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x >= y.x, x.y >= y.y, x.z >= y.z, x.w >= y.w };
 }
@@ -774,7 +774,7 @@ zcm::bvec3 zcm::equal(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
     return { x.x == y.x, x.y == y.y, x.z == y.z };
 }
 
-zcm::bvec4 zcm::equal(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::equal(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x == y.x, x.y == y.y, x.z == y.z, x.w == y.w };
 }
@@ -817,7 +817,7 @@ zcm::bvec3 zcm::notEqual(const zcm::vec3 &x, const zcm::vec3 &y) noexcept
     return { x.x != y.x, x.y != y.y, x.z != y.z };
 }
 
-zcm::bvec4 zcm::notEqual(const zcm::vec4 &x, const zcm::vec4 &y) noexcept
+zcm::bvec4 zcm_vectorcall zcm::notEqual(zcm::vec4 x, zcm::vec4 y) noexcept
 {
     return { x.x != y.x, x.y != y.y, x.z != y.z, x.w != y.w };
 }

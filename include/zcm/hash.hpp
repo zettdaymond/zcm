@@ -1,6 +1,9 @@
 #pragma once
 
+#include <zcm/detail/vectorcall.hpp>
 #include <functional>
+#include <zcm/vec4.hpp>
+#include <zcm/quat.hpp>
 
 namespace zcm {
 
@@ -30,8 +33,8 @@ namespace zcm {
     size_t hash(const ivec4&) noexcept;
     size_t hash(const vec2&) noexcept;
     size_t hash(const vec3&) noexcept;
-    size_t hash(const vec4&) noexcept;
-    size_t hash(const quat&) noexcept;
+    size_t zcm_vectorcall hash(vec4) noexcept;
+    size_t zcm_vectorcall hash(quat) noexcept;
     size_t hash(const mat2&) noexcept;
     size_t hash(const mat3&) noexcept;
     size_t hash(const mat4&) noexcept;
@@ -114,7 +117,7 @@ namespace std {
     template<>
     struct hash<zcm::vec4>
     {
-        size_t operator()(const zcm::vec4& v) const noexcept
+        size_t operator()(zcm::vec4 v) const noexcept
         {
     	    return zcm::hash(v);
         }
@@ -123,7 +126,7 @@ namespace std {
     template<>
     struct hash<zcm::quat>
     {
-        size_t operator()(const zcm::quat& v) const noexcept
+        size_t operator()(zcm::quat v) const noexcept
         {
     	    return zcm::hash(v);
         }

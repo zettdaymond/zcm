@@ -43,7 +43,7 @@ size_t zcm::hash(const zcm::vec3 &v) noexcept
     return (((hx) << (sizeof(unsigned) * 8)) | hy) ^ ((hz) << (sizeof(unsigned) * 4));
 }
 
-size_t zcm::hash(const zcm::vec4 &v) noexcept
+size_t zcm_vectorcall zcm::hash(zcm::vec4 v) noexcept
 {
     auto hx = float_hash(v.x);
     auto hy = float_hash(v.y);
@@ -52,7 +52,7 @@ size_t zcm::hash(const zcm::vec4 &v) noexcept
     return (((hx) << (sizeof(unsigned) * 8)) | hy) ^ ((hz) << (sizeof(unsigned) * 4)) ^ hw;
 }
 
-size_t zcm::hash(const zcm::quat &v) noexcept
+size_t zcm_vectorcall zcm::hash(zcm::quat v) noexcept
 {
     auto hx = float_hash(v.x);
     auto hy = float_hash(v.y);
