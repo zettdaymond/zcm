@@ -48,6 +48,13 @@ struct scalar_accessor_2
 };
 
 
+template<typename T, int index>
+T format_as(const scalar_accessor_2<T, index> &a)
+{
+    return static_cast<T>(a);
+}
+
+
 template <typename T, int index>
 struct scalar_accessor_2i : public scalar_accessor_2<T, index>
 {
@@ -70,6 +77,12 @@ struct scalar_accessor_2i : public scalar_accessor_2<T, index>
         scalar_accessor_2<T,index>::_data[index] >>= s;
     }
 };
+
+template<typename T, int index>
+T format_as(const scalar_accessor_2i<T, index> &a)
+{
+    return static_cast<T>(a);
+}
 
 #ifndef ZCM_RELEASE_BUILD
 
@@ -120,6 +133,12 @@ struct shuffle_accessor_2
         return V{_data[indices]...};
     }
 };
+
+template<typename T, typename V, int... indices>
+V format_as(const shuffle_accessor_2<T, V, indices...> &a)
+{
+    return static_cast<V>(a);
+}
 
 #ifndef ZCM_RELEASE_BUILD
 
