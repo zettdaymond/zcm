@@ -23,7 +23,15 @@ namespace zcm {
     mat3 inverse(const mat3& m) noexcept;
     mat4 inverse(const mat4& m) noexcept;
 
+    mat2 adjugate(const mat2& m) noexcept;
+    mat3 adjugate(const mat3& m) noexcept;
+    mat4 adjugate(const mat4& m) noexcept;
+
     mat2 inverseTranspose(const mat2& m) noexcept;
     mat3 inverseTranspose(const mat3& m) noexcept;
     mat4 inverseTranspose(const mat4& m) noexcept;
+
+    mat2 adjugateTranspose(const mat2& m) noexcept;
+    mat3 adjugateTranspose(const mat3& m) noexcept;
+    mat4 adjugateTranspose(const mat4& m) noexcept;
 }
